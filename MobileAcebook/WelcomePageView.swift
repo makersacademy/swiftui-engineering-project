@@ -38,16 +38,16 @@ struct WelcomePageView: View {
                         readyToNavigate = true
                     } label: {
                         Text("Sign Up")
-                            .foregroundColor(Color("Gunmetal"))
+                            .foregroundColor(Color("Magnolia"))
                     }
                 }
+                .buttonStyle(.borderedProminent)
+                .tint(Color("Magenta"))
                 .navigationDestination(isPresented: $readyToNavigate) {
                     SignupPageView().navigationBarBackButtonHidden(true)
                 }
             }
         }
-        
-        Spacer()
     }
 }
 
