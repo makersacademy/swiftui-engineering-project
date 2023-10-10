@@ -9,6 +9,10 @@ import SwiftUI
 
 struct SignupPageView: View {
     @State private var readyToNavigate : Bool = false
+    @State private var UserEmail: String = ""
+    @State private var UserPassword: String = ""
+    @State private var UserUsername: String = ""
+    @State private var UserPicture: String = ""
     
     var body: some View {
         NavigationStack {
@@ -23,20 +27,66 @@ struct SignupPageView: View {
                     
                     Spacer()
                     
-                    Button {
-                        readyToNavigate = true
-                    } label: {
-                        Text("Sign Up")
-                            .foregroundColor(Color("Gunmetal"))
+                    VStack{
+                        Image("MageBook-logo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 200, height: 200)
+                            .accessibilityIdentifier("MageBook-logo")
+                    }
+                    
+                    VStack {
+                        TextField("Enter your email address", text: $UserEmail)
+                            .padding()
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .frame(width: 350)
+                        SecureField("Enter your password", text: $UserPassword)
+                            .padding()
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .frame(width: 350)
+                        TextField("Enter your username", text: $UserUsername)
+                            .padding()
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .frame(width: 350)
+                        TextField("Profile Picture", text: $UserPicture)
+                            .padding()
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .frame(width: 350)
+                        
+                        
+                        HStack{
+                            Spacer()
+                            Button("Sign up") {
+                                readyToNavigate = true
+                                // TODO: sign up logic
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .cornerRadius(20)
+                            .frame(width: 150, height: 50)
+                            .padding(.trailing, 90)
+                            .tint(Color("Olivine"))
+                        }
+                    }
+                    .frame(width: 500)
+                    
+                    Spacer()
+                    HStack{
+                        Text("Already have an account?")
+                        Button {
+                            readyToNavigate = true
+                        } label: {
+                            Text("Click here to login")
+                                .foregroundColor(Color("Magenta"))
+                        }
                     }
                 }
-                .navigationDestination(isPresented: $readyToNavigate) {
-                    WelcomePageView().navigationBarBackButtonHidden(true)
+            }.navigationDestination(isPresented: $readyToNavigate) {
+                    loginView().navigationBarBackButtonHidden(true)
                 }
             }
         }
     }
-}
+
 
 
 struct SignupPageView_Previews: PreviewProvider {
