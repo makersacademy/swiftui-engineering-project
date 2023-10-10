@@ -11,7 +11,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
         // Logic to call the backend API for signing up
         return true // placeholder
     }
-    func login(user: User) -> String {
+    func login(user: User) -> Bool {
         
         var request = URLRequest(url: URL(string: "http://localhost:8080/tokens")!)
         request.httpMethod = "POST"
@@ -39,7 +39,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
         } catch {
             print("Error encoding user object: \(error)")
         }
-        return "test"
+        return true
 //
     }
     
