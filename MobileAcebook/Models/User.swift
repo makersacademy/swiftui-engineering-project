@@ -6,6 +6,6 @@
 //
 
 public struct User {
-    let username: String
-    let password: String
+    var email: String
+    var password: String
 }
