@@ -10,53 +10,87 @@ import SwiftUI
 struct loginView: View {
     @State private var UserEmail: String = ""
     @State private var UserPassword: String = ""
+    @State private var readyToNavigate : Bool = false
     
     var body: some View {
-        VStack{
-            VStack{
-                Text("Login")
-                    .bold().font(.largeTitle)
-                    .padding(.top, 50)
-            }
-            Spacer()
-            VStack{
-                Image("MageBook-logo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 200, height: 200)
-                    .accessibilityIdentifier("MageBook-logo")
-            }
-            Spacer()
-            VStack{
-                TextField("Enter your email address", text: $UserEmail)
-                    .padding()
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(width: 350)
-                SecureField("Enter your password", text: $UserPassword)
-                    .padding()
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(width: 350)
-                HStack{
+        NavigationStack {
+            ZStack {
+                Color("Magnolia")
+                    .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                VStack{
+                    VStack{
+                        Text("Login")
+                            .bold().font(.largeTitle)
+                            .padding(.top, 50)
+                            .foregroundColor(Color("Gunmetal"))
+                    }
                     Spacer()
-                    Button("Login") {
-                                            // TODO: sign up logic
-                                        }
-                                        .buttonStyle(.borderedProminent)
-                                        .cornerRadius(20)
-                                        .frame(width: 150, height: 50)
-                                        .padding(.trailing, 90)
-                                    }
-                                }
-                                .frame(width: 500)
-            Text("Sign up here")
-                .foregroundColor(.blue)
+                    VStack{
+                        Image("MageBook-logo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 300, height: 200)
+                            .accessibilityIdentifier("MageBook-logo")
+                            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                    }
+                    Spacer()
+                    VStack{
+                        Text("Welcome back!")
+                            .bold()
+                            .font(.title3)
+                            .foregroundColor(Color("Gunmetal"))
+                        VStack {
+                            TextField("Enter your email address", text: $UserEmail)
+                            
+                                .padding(.bottom, 0)
+                                .padding(.top)
+                                .padding(.horizontal)
+                            
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .frame(width: 280, height: 90)
+                            SecureField("Enter your password", text: $UserPassword)
+                                .padding(.bottom)
+                                .padding()
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .frame(width: 280, height: 90)
+                            
+                            
+                        }.background(Color("Magenta"))
+                            .cornerRadius(20)
+                        HStack{
+                            Spacer()
+                            Button("Login") {
+                                // TODO: sign up logic
                             }
-            .padding(.bottom, 50)
+                            .buttonStyle(.borderedProminent)
+                            .tint(.primary)
+                            .cornerRadius(20)
+                            .frame(width: 100, height: 50)
+                            .padding(.trailing, 90)
+                            
+                            
+                        }
+                    }
+                    .frame(width: 500)
+                    Spacer()
+                    VStack {
+                        Button {
+                            readyToNavigate = true
+                        } label: {
+                            Text("Sign up here")
+                                .foregroundColor(Color("Gunmetal"))
+                        }
+//                        .padding(.bottom, 50)
+                        
+                    }
+                }
+            }.navigationDestination(isPresented: $readyToNavigate) {
+                SignupPageView().navigationBarBackButtonHidden(true)
+            }
         }
     }
 
-struct LoginPageView_Previews: PreviewProvider {
-    static var previews: some View {
-        loginView()
-    }
+}
+#Preview {
+    loginView()
 }
