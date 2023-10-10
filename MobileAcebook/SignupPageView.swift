@@ -46,8 +46,10 @@ struct SignupPageView: View {
             if password != password2 {
                 Text("Passwords must match!").foregroundStyle(.red)
             }
-            Button(action: submitUser) {
-                Text("Submit")
+            if password == password2 {
+                Button(action: submitUser) {
+                    Text("Submit")
+                }
             }
         }
     }
