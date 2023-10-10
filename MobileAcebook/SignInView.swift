@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct SignInView: View {
-    @State private var username: String = ""
+    @State private var email: String = ""
     @State private var password: String = ""
+    private var service = AuthenticationService()
+    
     
     var body: some View {
         NavigationView{
@@ -20,7 +22,7 @@ struct SignInView: View {
                     .frame(width: 200, height: 200)
                     .accessibilityIdentifier("makers-logo")
                 Text("Welcome back!")
-                        TextField("Username", text:  $username)
+                        TextField("Email", text:  $email)
                             .padding()
                             .foregroundColor(.black)
                             .frame(width: 303, height: 36)
@@ -45,7 +47,12 @@ struct SignInView: View {
                             .inset(by: 0.5)
                             .stroke(Color(red: 0.16, green: 0.16, blue: 0.16).opacity(0.5), lineWidth: 1)
                             )
-                NavigationLink("Sign In", destination: FeedView())
+                Button("Sign in") {
+                    service.signIn(email:email, password: password) { (token, err) in
+                        print(err.debugDescription)
+                    }
+                }
+//                NavigationLink("Sign In", destination: FeedView())
             }
         }
     }
