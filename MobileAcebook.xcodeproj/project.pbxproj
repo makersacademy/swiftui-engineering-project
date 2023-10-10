@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		185902772AD4449A0072BFE6 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185902762AD4449A0072BFE6 /* SignInView.swift */; };
+		18755DB92AD44EA200EBD67D /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18755DB82AD44EA200EBD67D /* FeedView.swift */; };
+		18755DBB2AD4509000EBD67D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18755DBA2AD4509000EBD67D /* SignUpView.swift */; };
 		AE5D85B02AC8A221009680C6 /* MobileAcebookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85AF2AC8A221009680C6 /* MobileAcebookApp.swift */; };
 		AE5D85B42AC8A224009680C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE5D85B32AC8A224009680C6 /* Assets.xcassets */; };
 		AE5D85B72AC8A224009680C6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE5D85B62AC8A224009680C6 /* Preview Assets.xcassets */; };
@@ -41,6 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18034D252AD55C4A00B34CC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		185902762AD4449A0072BFE6 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		18755DB82AD44EA200EBD67D /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		18755DBA2AD4509000EBD67D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		AE5D85AC2AC8A221009680C6 /* MobileAcebook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileAcebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE5D85AF2AC8A221009680C6 /* MobileAcebookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileAcebookApp.swift; sourceTree = "<group>"; };
 		AE5D85B32AC8A224009680C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -108,6 +115,7 @@
 		AE5D85AE2AC8A221009680C6 /* MobileAcebook */ = {
 			isa = PBXGroup;
 			children = (
+				18034D252AD55C4A00B34CC3 /* Info.plist */,
 				AE5D85E42AC9B060009680C6 /* Protocols */,
 				AE5D85DF2AC9AF83009680C6 /* Models */,
 				AE5D85DD2AC9AF72009680C6 /* Services */,
@@ -115,7 +123,9 @@
 				AE5D85B32AC8A224009680C6 /* Assets.xcassets */,
 				AE5D85B52AC8A224009680C6 /* Preview Content */,
 				AE5D85D92AC8A337009680C6 /* WelcomePageView.swift */,
-				C7D8387C2AD43DC900C4BBC1 /* SignupPageView.swift */,
+				185902762AD4449A0072BFE6 /* SignInView.swift */,
+				18755DB82AD44EA200EBD67D /* FeedView.swift */,
+				18755DBA2AD4509000EBD67D /* SignUpView.swift */,
 			);
 			path = MobileAcebook;
 			sourceTree = "<group>";
@@ -311,10 +321,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE5D85E12AC9AFA9009680C6 /* AuthenticationService.swift in Sources */,
+<<<<<<< HEAD
 				C78022B72AD5770900D8A925 /* SignupPageService.swift in Sources */,
+=======
+				18755DB92AD44EA200EBD67D /* FeedView.swift in Sources */,
+>>>>>>> ee045b2765b27fdd712f8f5194d511d3b539f325
 				AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */,
 				AE5D85B02AC8A221009680C6 /* MobileAcebookApp.swift in Sources */,
+				18755DBB2AD4509000EBD67D /* SignUpView.swift in Sources */,
 				AE5D85E82AC9B29A009680C6 /* User.swift in Sources */,
+				185902772AD4449A0072BFE6 /* SignInView.swift in Sources */,
 				AE5D85DA2AC8A337009680C6 /* WelcomePageView.swift in Sources */,
 				C7D8387D2AD43DC900C4BBC1 /* SignupPageView.swift in Sources */,
 			);
@@ -479,6 +495,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MobileAcebook/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MobileAcebook/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -507,6 +524,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MobileAcebook/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MobileAcebook/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
