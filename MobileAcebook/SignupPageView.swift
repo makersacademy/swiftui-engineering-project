@@ -13,26 +13,11 @@ struct SignupPageView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var password2: String = ""
-    @State private var avatar: String = ""
+    @State private var avatar: String? = nil
     
     func submitUser() -> Void {
-        var request = URLRequest(url: URL(string: "http://127.0.0.1:8080/users")!)
-        request.httpMethod = "POST"
-        
-        var user = User(email: email, username: username, password: password)
-        print(user)
-        
-        let jsonEncoder = JSONEncoder()
-        let jsonResultData = try? jsonEncoder.encode(user)
-        
-        print(jsonResultData)
-        
-        request.httpBody = jsonResultData
-        
-        print(request.httpBody)
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-        }
-        task.resume()
+        let signupService = SignupService(email: email, username: username, password: password, password2: password2, avatar: avatar)
+        signupService.createAccount()
     }
     
     var body: some View {
@@ -43,20 +28,23 @@ struct SignupPageView: View {
                     TextField(
                         "Username",
                         text: $username
-                    )
+                    ).autocapitalization(.none)
                     TextField(
                         "Email address",
                         text: $email
-                    )
+                    ).autocapitalization(.none)
                     SecureInputView(
                         "Password",
                         text: $password
-                    )
+                    ).textContentType(.oneTimeCode)
                     SecureInputView(
                         "Re-enter Password",
                         text: $password2
-                    )
+                    ).textContentType(.oneTimeCode)
                 }
+            }
+            if password != password2 {
+                Text("Passwords must match!").foregroundStyle(.red)
             }
             Button(action: submitUser) {
                 Text("Submit")

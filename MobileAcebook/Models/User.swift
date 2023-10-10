@@ -10,4 +10,5 @@ public struct User: Codable {
     let email: String
     let username: String
     let password: String
+    let avatar: String?
 }
