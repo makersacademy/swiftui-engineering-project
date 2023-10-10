@@ -23,7 +23,7 @@
 		AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E52AC9B077009680C6 /* AuthenticationServiceProtocol.swift */; };
 		AE5D85E82AC9B29A009680C6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E72AC9B29A009680C6 /* User.swift */; };
 		C78022B72AD5770900D8A925 /* SignupPageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78022B62AD5770900D8A925 /* SignupPageService.swift */; };
-		C7D8387D2AD43DC900C4BBC1 /* SignupPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D8387C2AD43DC900C4BBC1 /* SignupPageView.swift */; };
+		C78022C02AD5AFBF00D8A925 /* SignupPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78022BF2AD5AFBF00D8A925 /* SignupPageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +64,7 @@
 		AE5D85E52AC9B077009680C6 /* AuthenticationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceProtocol.swift; sourceTree = "<group>"; };
 		AE5D85E72AC9B29A009680C6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C78022B62AD5770900D8A925 /* SignupPageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPageService.swift; sourceTree = "<group>"; };
+		C78022BF2AD5AFBF00D8A925 /* SignupPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupPageView.swift; sourceTree = "<group>"; };
 		C7D8387C2AD43DC900C4BBC1 /* SignupPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +100,7 @@
 				AE5D85BF2AC8A224009680C6 /* MobileAcebookTests */,
 				AE5D85C92AC8A224009680C6 /* MobileAcebookUITests */,
 				AE5D85AD2AC8A221009680C6 /* Products */,
+				C78022BC2AD5AEEA00D8A925 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -126,6 +128,7 @@
 				185902762AD4449A0072BFE6 /* SignInView.swift */,
 				18755DB82AD44EA200EBD67D /* FeedView.swift */,
 				18755DBA2AD4509000EBD67D /* SignUpView.swift */,
+				C78022BF2AD5AFBF00D8A925 /* SignupPageView.swift */,
 			);
 			path = MobileAcebook;
 			sourceTree = "<group>";
@@ -188,6 +191,14 @@
 				AE5D85E52AC9B077009680C6 /* AuthenticationServiceProtocol.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		C78022BC2AD5AEEA00D8A925 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				C7D8387C2AD43DC900C4BBC1 /* SignupPageView.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,18 +332,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE5D85E12AC9AFA9009680C6 /* AuthenticationService.swift in Sources */,
-<<<<<<< HEAD
 				C78022B72AD5770900D8A925 /* SignupPageService.swift in Sources */,
-=======
 				18755DB92AD44EA200EBD67D /* FeedView.swift in Sources */,
->>>>>>> ee045b2765b27fdd712f8f5194d511d3b539f325
+				C78022C02AD5AFBF00D8A925 /* SignupPageView.swift in Sources */,
 				AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */,
 				AE5D85B02AC8A221009680C6 /* MobileAcebookApp.swift in Sources */,
 				18755DBB2AD4509000EBD67D /* SignUpView.swift in Sources */,
 				AE5D85E82AC9B29A009680C6 /* User.swift in Sources */,
 				185902772AD4449A0072BFE6 /* SignInView.swift in Sources */,
 				AE5D85DA2AC8A337009680C6 /* WelcomePageView.swift in Sources */,
-				C7D8387D2AD43DC900C4BBC1 /* SignupPageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
