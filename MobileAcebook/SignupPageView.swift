@@ -23,7 +23,6 @@ struct SignupPageView: View {
     var body: some View {
         VStack{
             Text("Sign-up")
-            NavigationView {
                 List {
                     TextField(
                         "Username",
@@ -42,15 +41,18 @@ struct SignupPageView: View {
                         text: $password2
                     ).textContentType(.oneTimeCode)
                 }
-            }
             if password != password2 {
                 Text("Passwords must match!").foregroundStyle(.red)
-            }
-            if password == password2 {
+            } else if password.count < 8 {
+                Text("Passwords must have a length of 8 or more").foregroundStyle(.red)
+            } else if password.lowercased() == password {
+                Text("Passwords must hava a capital letter").foregroundStyle(.red)
+            } else {
                 Button(action: submitUser) {
                     Text("Submit")
                 }
             }
+               
         }
     }
 }

@@ -38,6 +38,8 @@ class SignupService {
         request.httpBody = jsonResultData
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            print(response)
         }
         task.resume()
     }

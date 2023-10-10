@@ -10,7 +10,6 @@ import SwiftUI
 struct WelcomePageView: View {
     var body: some View {
         ZStack {
-            NavigationStack() {
                 VStack {
                     Spacer()
 
@@ -34,7 +33,6 @@ struct WelcomePageView: View {
                     }
                     
                     Spacer()
-                }
             }
         }
     }
