@@ -1,13 +1,13 @@
 //
-//  WelcomePageView.swift
+//  SignupPageView.swift
 //  MobileAcebook
 //
-//  Created by Josué Estévez Fernández on 30/09/2023.
+//  Created by Emily Cowan on 09/10/2023.
 //
 
 import SwiftUI
 
-struct WelcomePageView: View {
+struct SignupPageView: View {
     @State private var readyToNavigate : Bool = false
     
     var body: some View {
@@ -16,21 +16,10 @@ struct WelcomePageView: View {
                 Color("Magnolia")
                     .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                 VStack {
-                    Spacer()
-                    
-                    Text("Welcome to Magebook!")
+                    Text("Create Account")
                         .font(.largeTitle)
                         .foregroundColor(Color("Gunmetal"))
-                        .padding(.bottom, 20)
-                        .accessibilityIdentifier("welcomeText")
-                    
-                    Spacer()
-                    
-                    Image("makers-logo")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200, height: 200)
-                        .accessibilityIdentifier("makers-logo")
+                        .multilineTextAlignment(.center)
                     
                     Spacer()
                     
@@ -42,18 +31,16 @@ struct WelcomePageView: View {
                     }
                 }
                 .navigationDestination(isPresented: $readyToNavigate) {
-                    SignupPageView().navigationBarBackButtonHidden(true)
+                    WelcomePageView().navigationBarBackButtonHidden(true)
                 }
             }
         }
-        
-        Spacer()
     }
 }
 
-struct WelcomePageView_Previews: PreviewProvider {
+
+struct SignupPageView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomePageView()
+        SignupPageView()
     }
 }
-
