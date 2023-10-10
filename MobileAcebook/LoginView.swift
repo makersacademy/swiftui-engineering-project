@@ -10,7 +10,8 @@ import SwiftUI
 struct loginView: View {
     @State private var UserEmail: String = ""
     @State private var UserPassword: String = ""
-    @State private var readyToNavigate : Bool = false
+    @State private var signupReadyToNavigate : Bool = false
+    @State private var postsReadyToNavigate : Bool = false
     
     var body: some View {
         NavigationStack {
@@ -60,6 +61,7 @@ struct loginView: View {
                         HStack{
                             Spacer()
                             Button("Login") {
+                                postsReadyToNavigate = true
                                 // TODO: sign up logic
                             }
                             .buttonStyle(.borderedProminent)
@@ -75,7 +77,7 @@ struct loginView: View {
                     Spacer()
                     VStack {
                         Button {
-                            readyToNavigate = true
+                            signupReadyToNavigate = true
                         } label: {
                             Text("Sign up here")
                                 .foregroundColor(Color("Gunmetal"))
@@ -84,8 +86,10 @@ struct loginView: View {
                         
                     }
                 }
-            }.navigationDestination(isPresented: $readyToNavigate) {
+            }.navigationDestination(isPresented: $signupReadyToNavigate) {
                 SignupPageView().navigationBarBackButtonHidden(true)
+            }.navigationDestination(isPresented: $postsReadyToNavigate) {
+                PostsPageView()
             }
         }
     }
