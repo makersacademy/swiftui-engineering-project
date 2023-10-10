@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct WelcomePageView: View {
-    @State private var readyToNavigate : Bool = false
+    @State private var readyToNavigateSignUp : Bool = false
+    @State private var readyToNavigateLogIn : Bool = false
     
     var body: some View {
         NavigationStack {
@@ -34,16 +35,28 @@ struct WelcomePageView: View {
                     
                     Spacer()
                     
-                    Button {
-                        readyToNavigate = true
-                    } label: {
-                        Text("Sign Up")
-                            .foregroundColor(Color("Gunmetal"))
+                    
+                    HStack {
+                        Button {
+                            readyToNavigateSignUp = true
+                        } label: {
+                            Text("Sign Up")
+                                .foregroundColor(Color("Gunmetal"))
+                        }
+                        Button {
+                            readyToNavigateLogIn = true
+                        } label: {
+                            Text("Log In")
+                                .foregroundColor(Color("Gunmetal"))
+                        }
                     }
-                }
-                .navigationDestination(isPresented: $readyToNavigate) {
+                .navigationDestination(isPresented: $readyToNavigateSignUp) {
                     SignupPageView().navigationBarBackButtonHidden(true)
                 }
+                
+                }.navigationDestination(isPresented: $readyToNavigateLogIn) {
+                    loginView().navigationBarBackButtonHidden(true)
+            }
             }
         }
         
