@@ -8,12 +8,25 @@
 import SwiftUI
 
 struct FeedView: View {
-    
+    private var service = FeedService()
+    @State var posts = [Post]()
     var body: some View {
-        if UserDefaults.standard.string(forKey: "token") != nil {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-        } else {
-            Text("Please login")
+        List(posts, id: \._id) { post in
+            Text(post.message)
+        }
+        .onAppear {
+            
+            guard var token = UserDefaults.standard.string(forKey: "token") else {
+                return
+            }
+                
+            service.getAllPosts(token: token) { (posts, err) in
+                guard var posts = posts else {
+                    // handle error
+                    return
+                }
+                self.posts = posts.posts
+            }
         }
     }
 }
