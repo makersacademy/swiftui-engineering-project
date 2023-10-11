@@ -58,12 +58,12 @@ struct SignupPageView: View {
                             Spacer()
                             Button("Sign up") {
                                 readyToNavigate = true
-                                signUp(username: UserUsername, email: UserEmail, password: UserPassword, avatar: UserPicture) {
+                                signUpp(username: UserUsername, email: UserEmail, password: UserPassword, avatar: UserPicture) {
                                     result in switch result {
                                     case .success:
                                         print("Successful Signup")
                                     case .failure(let error):
-                                        print("Signup Failed: \(error.localizedDescription)")
+                                        print("Signup failed: \(error.localizedDescription)")
                                     }
                                 }
                             }
