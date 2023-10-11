@@ -39,13 +39,13 @@ struct LogInView: View {
                     
                     Spacer()
                     LabeledContent {
-                        TextField("Email", text: $userModel.email)
+                        TextField("Email", text: $userModel.email).textInputAutocapitalization(.never)
                     } label: {
                         Text("Email")
                     }.onChange(of: userModel.email, perform: onEmailInputChanged)
                     
                     LabeledContent {
-                        TextField("Password", text: $userModel.password)
+                        TextField("Password", text: $userModel.password).textInputAutocapitalization(.never)
                     } label: {
                         Text("Password")
                     }.onChange(of: userModel.password, perform: onPasswordInputChanged)
@@ -62,7 +62,7 @@ struct LogInView: View {
                     }
                     .accessibilityIdentifier("LoginButton")
                     
-                    NavigationLink(destination: WelcomePageView(), isActive: $loggedIn) { EmptyView() }
+                    NavigationLink(destination: WelcomePageView().navigationBarBackButtonHidden(true), isActive: $loggedIn) { EmptyView() }
                     
                     Button("Sign Up") {
                         // TODO: sign up logic
