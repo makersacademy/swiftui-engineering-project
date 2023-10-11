@@ -10,6 +10,8 @@ import SwiftUI
 struct PostsView: View {
     @State private var authenticationService = AuthenticationService()
     @State private var post_content: String = ""
+    @EnvironmentObject var token: Token
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -54,6 +56,6 @@ struct PostsView: View {
 
 struct PostsView_Previews: PreviewProvider {
   static var previews: some View {
-    PostsView()
+      PostsView()
   }
 }

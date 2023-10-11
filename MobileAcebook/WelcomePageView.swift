@@ -7,6 +7,7 @@
 
 import SwiftUI
 struct WelcomePageView: View {
+    let token = Token()
   var body: some View {
     NavigationView {
       ZStack {
@@ -27,7 +28,7 @@ struct WelcomePageView: View {
             .accessibilityIdentifier("makers-logo")
           Spacer()
             
-          NavigationLink("Sign Up", destination: SignUpView())
+          NavigationLink("Sign Up", destination: SignUpView().environmentObject(token))
           .accessibilityIdentifier("signUpButton")
             
           Spacer()

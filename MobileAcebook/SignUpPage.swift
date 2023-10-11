@@ -12,6 +12,8 @@ struct SignUpView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var SignedUp = false
+    @EnvironmentObject var token: Token
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -31,16 +33,13 @@ struct SignUpView: View {
                 
                 Button(action: {
                     let user = User(email: email, password: password)
-                    let response = authenticationService.signUp(user: user)
-                    if response == true {
-                        SignedUp = true
-                    }
+                    SignedUp = authenticationService.signUp(user: user)
                 }) {
                     Text("SignUp")
                 }
                 .accessibilityIdentifier("SignUpButton")
                 
-                NavigationLink(destination: WelcomePageView(), isActive: $SignedUp) { EmptyView() }
+                NavigationLink(destination: PostsView().environmentObject(token), isActive: $SignedUp) { EmptyView() }
                 
                 Spacer()
             }
