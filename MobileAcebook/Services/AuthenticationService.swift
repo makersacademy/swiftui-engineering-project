@@ -7,6 +7,11 @@
 import Foundation
 
 class AuthenticationService: AuthenticationServiceProtocol {
+    var userToken: String?
+  
+    
+
+    
     func signUp(user: User) -> Bool {
         // Logic to call the backend API for signing up
         return true // placeholder
@@ -25,6 +30,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 // Handling the response data, if any
                 var isSuccess = false
+                var token: String? = nil
 
                 if let data = data {
                     do {
@@ -34,9 +40,15 @@ class AuthenticationService: AuthenticationServiceProtocol {
                         if let message = jsonResponse?["message"] as? String, message == "OK" {
                             // If the response message is "Email not found", login is unsuccessful
                             isSuccess = true
+                            if let token = jsonResponse?["token"] as? String {
+                                                        // Store the token in a variable
+                                self.userToken = token
+                                print(self.userToken)
+                                                    }
                         }
+                        
                     } catch {
-                        // Handle JSON parsing errors, if any
+                                   // Handle JSON parsing errors, if any
                         print("Error parsing JSON: \(error)")
                     }
                 }
@@ -52,7 +64,6 @@ class AuthenticationService: AuthenticationServiceProtocol {
             completion(false) // Calling the completion handler with false in case of an error
         }
     }
-
     
     
 //    func login(user: User) -> Bool {
