@@ -26,6 +26,8 @@
 		AE5D85E82AC9B29A009680C6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E72AC9B29A009680C6 /* User.swift */; };
 		C78022B72AD5770900D8A925 /* SignupPageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78022B62AD5770900D8A925 /* SignupPageService.swift */; };
 		C78022C02AD5AFBF00D8A925 /* SignupPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78022BF2AD5AFBF00D8A925 /* SignupPageView.swift */; };
+		C79576042AD6B10900BBD088 /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79576032AD6B10900BBD088 /* FeedService.swift */; };
+		C79576062AD6B1E900BBD088 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79576052AD6B1E900BBD088 /* Posts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		AE5D85E72AC9B29A009680C6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C78022B62AD5770900D8A925 /* SignupPageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPageService.swift; sourceTree = "<group>"; };
 		C78022BF2AD5AFBF00D8A925 /* SignupPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupPageView.swift; sourceTree = "<group>"; };
+		C79576032AD6B10900BBD088 /* FeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
+		C79576052AD6B1E900BBD088 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		C7D8387C2AD43DC900C4BBC1 /* SignupPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,8 +135,8 @@
 				AE5D85D92AC8A337009680C6 /* WelcomePageView.swift */,
 				185902762AD4449A0072BFE6 /* SignInView.swift */,
 				18755DB82AD44EA200EBD67D /* FeedView.swift */,
-				18755DBA2AD4509000EBD67D /* SignUpView.swift */,
 				C78022BF2AD5AFBF00D8A925 /* SignupPageView.swift */,
+				18755DBA2AD4509000EBD67D /* SignUpView.swift */,
 			);
 			path = MobileAcebook;
 			sourceTree = "<group>";
@@ -169,6 +173,7 @@
 			children = (
 				AE5D85E02AC9AFA9009680C6 /* AuthenticationService.swift */,
 				C78022B62AD5770900D8A925 /* SignupPageService.swift */,
+				C79576032AD6B10900BBD088 /* FeedService.swift */,
 				322FA2F32AD6B21F00DB3C70 /* CreatePostPage.swift */,
 			);
 			path = Services;
@@ -186,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				AE5D85E72AC9B29A009680C6 /* User.swift */,
+				C79576052AD6B1E900BBD088 /* Posts.swift */,
 				322FA2F52AD6C83700DB3C70 /* Post.swift */,
 			);
 			path = Models;
@@ -345,6 +351,8 @@
 				C78022C02AD5AFBF00D8A925 /* SignupPageView.swift in Sources */,
 				AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */,
 				AE5D85B02AC8A221009680C6 /* MobileAcebookApp.swift in Sources */,
+				C79576042AD6B10900BBD088 /* FeedService.swift in Sources */,
+				C79576062AD6B1E900BBD088 /* Posts.swift in Sources */,
 				18755DBB2AD4509000EBD67D /* SignUpView.swift in Sources */,
 				AE5D85E82AC9B29A009680C6 /* User.swift in Sources */,
 				185902772AD4449A0072BFE6 /* SignInView.swift in Sources */,

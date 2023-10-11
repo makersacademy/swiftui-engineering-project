@@ -11,7 +11,9 @@ struct FeedView: View {
     
     @State var postTextField: String = ""
     @State var postArray: [String] = []
-    
+    private var service = FeedService()
+    @State var posts = [Post]()
+  
     var body: some View {
         TextField("Write a post", text: $postTextField)
         .padding()
@@ -27,6 +29,22 @@ struct FeedView: View {
         }, label: {
             Text("Post")
         })
+        List(posts, id: \._id) { post in
+            Text(post.message)
+        }
+        .onAppear {
+            
+            guard var token = UserDefaults.standard.string(forKey: "token") else {
+                return
+            }
+                
+            service.getAllPosts(token: token) { (posts, err) in
+                guard var posts = posts else {
+                    // handle error
+                    return
+                }
+                self.posts = posts.posts
+            }
     }
     
     func createPost() {
@@ -34,8 +52,8 @@ struct FeedView: View {
     }
 }
 
-struct FeedView_Previews: PreviewProvider {
-    static var previews: some View {
-        FeedView()
-    }
-}
+//struct FeedView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FeedView()
+//    }
+//}

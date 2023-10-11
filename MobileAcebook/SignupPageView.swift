@@ -98,11 +98,11 @@ struct SignupPageView: View {
     }
 }
 
-struct SignupPageView_Previews: PreviewProvider {
-    static var previews: some View {
-        SignupPageView()
-    }
-}
+//struct SignupPageView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SignupPageView()
+//    }
+//}
 
 struct SecureInputView: View {
     

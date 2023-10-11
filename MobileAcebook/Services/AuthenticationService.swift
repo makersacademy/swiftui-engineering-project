@@ -31,7 +31,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
         }
         
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        print(request.debug())
+//        print(request.debug())
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
