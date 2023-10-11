@@ -10,28 +10,40 @@ import SwiftUI
 struct WelcomePageView: View {
     var body: some View {
         ZStack {
-            VStack {
-                Spacer()
-
-                Text("Welcome to Acebook!")
-                    .font(.largeTitle)
-                    .padding(.bottom, 20)
-                    .accessibilityIdentifier("welcomeText")
-
-                Spacer()
-
-                Image("makers-logo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 200, height: 200)
-                    .accessibilityIdentifier("makers-logo")
-                
-                Spacer()
-
-                Button("Sign Up") {
-                    // TODO: sign up logic
+            
+            NavigationView {
+                VStack {
+                    
+                    Spacer()
+                    
+                    Text("Welcome to Acebook!")
+                        .font(.largeTitle)
+                        .padding(.bottom, 20)
+                        .accessibilityIdentifier("welcomeText")
+                    
+                    Spacer()
+                    
+                    Image("makers-logo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                        .accessibilityIdentifier("makers-logo")
+                    
+                    Spacer()
+                    
+                    Button("Sign Up") {
+                        // TODO: sign up logic
+                    }
+                    .accessibilityIdentifier("signUpButton")
+                    
+                    NavigationLink(destination: LogInView()) {
+                        Text("Login")
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(Color.white)
+                            .cornerRadius(10)
+                    }
                 }
-                .accessibilityIdentifier("signUpButton")
                 
                 Spacer()
             }
