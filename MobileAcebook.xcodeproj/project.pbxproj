@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		185902772AD4449A0072BFE6 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185902762AD4449A0072BFE6 /* SignInView.swift */; };
+		18755DB92AD44EA200EBD67D /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18755DB82AD44EA200EBD67D /* FeedView.swift */; };
+		18755DBB2AD4509000EBD67D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18755DBA2AD4509000EBD67D /* SignUpView.swift */; };
+		322FA2F42AD6B21F00DB3C70 /* CreatePostPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322FA2F32AD6B21F00DB3C70 /* CreatePostPage.swift */; };
+		322FA2F62AD6C83700DB3C70 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322FA2F52AD6C83700DB3C70 /* Post.swift */; };
 		AE5D85B02AC8A221009680C6 /* MobileAcebookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85AF2AC8A221009680C6 /* MobileAcebookApp.swift */; };
 		AE5D85B42AC8A224009680C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE5D85B32AC8A224009680C6 /* Assets.xcassets */; };
 		AE5D85B72AC8A224009680C6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE5D85B62AC8A224009680C6 /* Preview Assets.xcassets */; };
@@ -19,6 +24,8 @@
 		AE5D85E32AC9AFD2009680C6 /* MockAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E22AC9AFD2009680C6 /* MockAuthenticationService.swift */; };
 		AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E52AC9B077009680C6 /* AuthenticationServiceProtocol.swift */; };
 		AE5D85E82AC9B29A009680C6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E72AC9B29A009680C6 /* User.swift */; };
+		C78022B72AD5770900D8A925 /* SignupPageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78022B62AD5770900D8A925 /* SignupPageService.swift */; };
+		C78022C02AD5AFBF00D8A925 /* SignupPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78022BF2AD5AFBF00D8A925 /* SignupPageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +46,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18034D252AD55C4A00B34CC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		185902762AD4449A0072BFE6 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		18755DB82AD44EA200EBD67D /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		18755DBA2AD4509000EBD67D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		322FA2F32AD6B21F00DB3C70 /* CreatePostPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostPage.swift; sourceTree = "<group>"; };
+		322FA2F52AD6C83700DB3C70 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		AE5D85AC2AC8A221009680C6 /* MobileAcebook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileAcebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE5D85AF2AC8A221009680C6 /* MobileAcebookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileAcebookApp.swift; sourceTree = "<group>"; };
 		AE5D85B32AC8A224009680C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -54,6 +67,9 @@
 		AE5D85E22AC9AFD2009680C6 /* MockAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthenticationService.swift; sourceTree = "<group>"; };
 		AE5D85E52AC9B077009680C6 /* AuthenticationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceProtocol.swift; sourceTree = "<group>"; };
 		AE5D85E72AC9B29A009680C6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C78022B62AD5770900D8A925 /* SignupPageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPageService.swift; sourceTree = "<group>"; };
+		C78022BF2AD5AFBF00D8A925 /* SignupPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupPageView.swift; sourceTree = "<group>"; };
+		C7D8387C2AD43DC900C4BBC1 /* SignupPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +104,7 @@
 				AE5D85BF2AC8A224009680C6 /* MobileAcebookTests */,
 				AE5D85C92AC8A224009680C6 /* MobileAcebookUITests */,
 				AE5D85AD2AC8A221009680C6 /* Products */,
+				C78022BC2AD5AEEA00D8A925 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,6 +121,7 @@
 		AE5D85AE2AC8A221009680C6 /* MobileAcebook */ = {
 			isa = PBXGroup;
 			children = (
+				18034D252AD55C4A00B34CC3 /* Info.plist */,
 				AE5D85E42AC9B060009680C6 /* Protocols */,
 				AE5D85DF2AC9AF83009680C6 /* Models */,
 				AE5D85DD2AC9AF72009680C6 /* Services */,
@@ -111,6 +129,10 @@
 				AE5D85B32AC8A224009680C6 /* Assets.xcassets */,
 				AE5D85B52AC8A224009680C6 /* Preview Content */,
 				AE5D85D92AC8A337009680C6 /* WelcomePageView.swift */,
+				185902762AD4449A0072BFE6 /* SignInView.swift */,
+				18755DB82AD44EA200EBD67D /* FeedView.swift */,
+				18755DBA2AD4509000EBD67D /* SignUpView.swift */,
+				C78022BF2AD5AFBF00D8A925 /* SignupPageView.swift */,
 			);
 			path = MobileAcebook;
 			sourceTree = "<group>";
@@ -146,6 +168,8 @@
 			isa = PBXGroup;
 			children = (
 				AE5D85E02AC9AFA9009680C6 /* AuthenticationService.swift */,
+				C78022B62AD5770900D8A925 /* SignupPageService.swift */,
+				322FA2F32AD6B21F00DB3C70 /* CreatePostPage.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -162,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				AE5D85E72AC9B29A009680C6 /* User.swift */,
+				322FA2F52AD6C83700DB3C70 /* Post.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -172,6 +197,14 @@
 				AE5D85E52AC9B077009680C6 /* AuthenticationServiceProtocol.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		C78022BC2AD5AEEA00D8A925 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				C7D8387C2AD43DC900C4BBC1 /* SignupPageView.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,10 +337,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				322FA2F42AD6B21F00DB3C70 /* CreatePostPage.swift in Sources */,
 				AE5D85E12AC9AFA9009680C6 /* AuthenticationService.swift in Sources */,
+				C78022B72AD5770900D8A925 /* SignupPageService.swift in Sources */,
+				322FA2F62AD6C83700DB3C70 /* Post.swift in Sources */,
+				18755DB92AD44EA200EBD67D /* FeedView.swift in Sources */,
+				C78022C02AD5AFBF00D8A925 /* SignupPageView.swift in Sources */,
 				AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */,
 				AE5D85B02AC8A221009680C6 /* MobileAcebookApp.swift in Sources */,
+				18755DBB2AD4509000EBD67D /* SignUpView.swift in Sources */,
 				AE5D85E82AC9B29A009680C6 /* User.swift in Sources */,
+				185902772AD4449A0072BFE6 /* SignInView.swift in Sources */,
 				AE5D85DA2AC8A337009680C6 /* WelcomePageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -471,6 +511,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MobileAcebook/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MobileAcebook/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -499,6 +540,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MobileAcebook/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MobileAcebook/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
