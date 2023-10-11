@@ -8,9 +8,27 @@
 import SwiftUI
 
 struct FeedView: View {
+    
+    @State var postTextField: String = ""
+    @State var postArray: [String] = []
     private var service = FeedService()
     @State var posts = [Post]()
+  
     var body: some View {
+        TextField("Write a post", text: $postTextField)
+        .padding()
+        .foregroundColor(.black)
+        .frame(width: 303, height: 36)
+        .background(.white)
+        .cornerRadius(6)
+        .overlay(RoundedRectangle(cornerRadius: 6)
+        .inset(by: 0.5)
+        .stroke(Color(red: 0.16, green: 0.16, blue: 0.16).opacity(0.5), lineWidth: 1))
+        Button(action: {
+            createPost()
+        }, label: {
+            Text("Post")
+        })
         List(posts, id: \._id) { post in
             Text(post.message)
         }
@@ -27,7 +45,10 @@ struct FeedView: View {
                 }
                 self.posts = posts.posts
             }
-        }
+    }
+    
+    func createPost() {
+        postArray.append(postTextField)
     }
 }
 
