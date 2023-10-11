@@ -62,7 +62,7 @@ struct LogInView: View {
                     }
                     .accessibilityIdentifier("LoginButton")
                     
-                    NavigationLink(destination: WelcomePageView().navigationBarBackButtonHidden(true), isActive: $loggedIn) { EmptyView() }
+                    NavigationLink(destination: PostsView().navigationBarBackButtonHidden(true), isActive: $loggedIn) { EmptyView() }
                     
                     Button("Sign Up") {
                         // TODO: sign up logic
