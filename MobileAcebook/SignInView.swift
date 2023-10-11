@@ -53,6 +53,7 @@ struct SignInView: View {
             Button("Sign in") {
                 service.signIn(email: email, password: password) { (receivedToken, err) in
                     if let token = receivedToken {
+                        self.token = token
                         UserDefaults.standard.set(token, forKey: "token")
                         loginStatus = "Login successful"
                     } else {
