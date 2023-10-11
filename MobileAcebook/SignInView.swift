@@ -13,7 +13,7 @@ struct SignInView: View {
     @State private var token: String? = nil
     private var service = AuthenticationService()
     @State private var loginStatus: String = ""
-
+    
     var body: some View {
         VStack {
             Image("makers-logo")
@@ -53,7 +53,7 @@ struct SignInView: View {
             Button("Sign in") {
                 service.signIn(email: email, password: password) { (receivedToken, err) in
                     if let token = receivedToken {
-                        self.token = token
+                        UserDefaults.standard.set(token, forKey: "token")
                         loginStatus = "Login successful"
                     } else {
                         // No token received, check for user existence
@@ -70,7 +70,7 @@ struct SignInView: View {
             .opacity(token == nil ? 1.0 : 0.5)
             
             NavigationLink("",
-                destination: FeedView(),
+                           destination: FeedView(),
                 isActive: Binding<Bool>(
                     get: { self.token != nil },
                     set: { _ in }
