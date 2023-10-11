@@ -52,9 +52,10 @@ struct LogInView: View {
                     
                     
                     Button(action: {
-                        var response = authenticationService.login(user: userModel)
-                        if response == true {
-                            loggedIn = true
+                        var response = authenticationService.login(user: userModel) { isSuccess in
+                            if isSuccess {
+                                loggedIn = true
+                            }
                         }
                     }) {
                         Text("Login")
