@@ -8,22 +8,23 @@
 import SwiftUI
 
 class CreatePost {
-    let title: String
-    let content: String
+    let image: String
+    let message: String
     
-    init(title: String, content: String) {
-        self.title = title
-        self.content = content
+    init(image: String, message: String) {
+        self.image = image
+        self.message = message
     }
     
-    func CreatePost() -> Void {
+    func newPost(token: String) -> Void {
         var request = URLRequest(url: URL(string: "http://127.0.0.1:8080/posts")!)
         
         request.httpMethod = "POST"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
-        let postData = ["title": title, "content": content]
+        let postData = CreateNewPost(message: message, publicID: image)
         
-        guard let jsonResultData = try? JSONSerialization.data(withJSONObject: postData) else {
+        guard let jsonResultData = try? JSONEncoder().encode(postData) else {
             print("data not found")
             return
         }

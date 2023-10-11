@@ -13,6 +13,7 @@ struct FeedView: View {
     @State var postArray: [String] = []
     private var service = FeedService()
     @State var posts = [Post]()
+    @State var token: String = ""
   
     var body: some View {
         TextField("Write a post", text: $postTextField)
@@ -24,11 +25,13 @@ struct FeedView: View {
             .overlay(RoundedRectangle(cornerRadius: 6)
                 .inset(by: 0.5)
                 .stroke(Color(red: 0.16, green: 0.16, blue: 0.16).opacity(0.5), lineWidth: 1))
+                
         Button(action: {
-            createPost()
+            createNewPost(token: token)
         }, label: {
             Text("Post")
         })
+        
         List(posts, id: \._id) { post in
             Text(post.message)
         }
@@ -47,8 +50,10 @@ struct FeedView: View {
             }
         }
     }
-    func createPost() {
-        postArray.append(postTextField)
+    
+    func createNewPost(token: String) {
+        let post = CreatePost(image: "", message: postTextField)
+        post.newPost(token: token)
     }
 }
 

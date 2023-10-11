@@ -9,7 +9,7 @@
 
 import Foundation
 
-public struct NewPost: Codable {
+public struct CreateNewPost: Codable {
     let message: String
-    let image: String
+    let publicID: String
 }
