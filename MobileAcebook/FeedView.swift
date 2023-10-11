@@ -13,8 +13,7 @@ struct FeedView: View {
     @State var postArray: [String] = []
     private var service = FeedService()
     @State var posts = [Post]()
-    @State var token: String = ""
-  
+    
     var body: some View {
         TextField("Write a post", text: $postTextField)
             .padding()
@@ -27,7 +26,7 @@ struct FeedView: View {
                 .stroke(Color(red: 0.16, green: 0.16, blue: 0.16).opacity(0.5), lineWidth: 1))
                 
         Button(action: {
-            createNewPost(token: token)
+            createNewPost()
         }, label: {
             Text("Post")
         })
@@ -51,7 +50,10 @@ struct FeedView: View {
         }
     }
     
-    func createNewPost(token: String) {
+    func createNewPost() {
+        guard var token = UserDefaults.standard.string(forKey: "token") else {
+            return
+        }
         let post = CreatePost(image: "", message: postTextField)
         post.newPost(token: token)
     }

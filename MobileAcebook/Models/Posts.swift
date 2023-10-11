@@ -16,8 +16,7 @@ public struct Post: Codable {
     let comments: Int
     let _id: String
     let message: String
-    let user: String
+    let createdBy: String
     let createdAt: String
-    let updatedAt: String
 }
 
