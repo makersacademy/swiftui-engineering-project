@@ -22,25 +22,59 @@ struct SignupPageView: View {
     
     var body: some View {
         VStack{
+            Image("makers-logo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 200, height: 200)
+                .accessibilityIdentifier("makers-logo")
             Text("Sign-up")
-                List {
-                    TextField(
-                        "Username",
-                        text: $username
-                    ).autocapitalization(.none)
-                    TextField(
-                        "Email address",
-                        text: $email
-                    ).autocapitalization(.none)
-                    SecureInputView(
-                        "Password",
-                        text: $password
-                    ).textContentType(.oneTimeCode)
-                    SecureInputView(
-                        "Re-enter Password",
-                        text: $password2
-                    ).textContentType(.oneTimeCode)
-                }
+            TextField(
+                "Username",
+                text: $username
+                )
+            .padding()
+            .foregroundColor(.black)
+            .frame(width: 303, height: 36)
+            .background(.white)
+            .cornerRadius(6)
+            .overlay(RoundedRectangle(cornerRadius: 6)
+            .inset(by: 0.5)
+            .stroke(Color(red: 0.16, green: 0.16, blue: 0.16).opacity(0.5), lineWidth: 1))
+            TextField(
+                "Email address",
+                text: $email)
+            .padding()
+            .foregroundColor(.black)
+            .frame(width: 303, height: 36)
+            .background(.white)
+            .cornerRadius(6)
+            .overlay(RoundedRectangle(cornerRadius: 6)
+            .inset(by: 0.5)
+            .stroke(Color(red: 0.16, green: 0.16, blue: 0.16).opacity(0.5), lineWidth: 1))
+            SecureInputView(
+                "Password",
+                text: $password
+            )
+            .padding()
+            .foregroundColor(.black)
+            .frame(width: 303, height: 36)
+            .background(.white)
+            .cornerRadius(6)
+            .overlay(RoundedRectangle(cornerRadius: 6)
+            .inset(by: 0.5)
+            .stroke(Color(red: 0.16, green: 0.16, blue: 0.16).opacity(0.5), lineWidth: 1))
+            SecureInputView(
+                "Re-enter Password",
+                text: $password2
+            )
+            .padding()
+            .foregroundColor(.black)
+            .frame(width: 303, height: 36)
+            .background(.white)
+            .cornerRadius(6)
+            .overlay(RoundedRectangle(cornerRadius: 6)
+            .inset(by: 0.5)
+            .stroke(Color(red: 0.16, green: 0.16, blue: 0.16).opacity(0.5), lineWidth: 1))
             if password != password2 {
                 Text("Passwords must match!").foregroundStyle(.red)
             } else if password.count < 8 {
@@ -48,10 +82,17 @@ struct SignupPageView: View {
             } else if password.lowercased() == password {
                 Text("Passwords must hava a capital letter").foregroundStyle(.red)
             } else {
-                Button(action: submitUser) {
+                NavigationLink(destination: SignInView()) {
                     Text("Submit")
+                    
+                }.simultaneousGesture(TapGesture().onEnded {
+                    submitUser()
+                })
+                
+                    
                 }
-            }
+             
+        
                
         }
     }
