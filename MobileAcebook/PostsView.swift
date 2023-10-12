@@ -11,7 +11,7 @@ struct PostsView: View {
     @EnvironmentObject var token: Token
     @State private var authenticationService = AuthenticationService()
     @State private var post_content: String = ""
-    @State private var posts_array: Array<Post> = []
+    @State private var posts_array: Array<String> = []
     @State private var loggedIn = false
     
     var body: some View {
@@ -39,7 +39,7 @@ struct PostsView: View {
                     .padding()
                 
                 Button(action: {
-                    authenticationService.createPost(post: Post(id: "usbenwokrbm", message: post_content), token: token)
+                    authenticationService.createPost(post: Post(message: post_content), token: token)
                 }) {
                     Text("Create Post")
                 }
@@ -62,11 +62,7 @@ struct PostsView: View {
                 }
                 .accessibilityIdentifier("PostsButton")
                 
-                List(posts_array) { post in
-                                Text(post.message)
-                            }
-                            .navigationBarTitle("Posts")
-               
+                Text("\(posts_array.joined(separator: " "))")
                 
                 Spacer()
                 

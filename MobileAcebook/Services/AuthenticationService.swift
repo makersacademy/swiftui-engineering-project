@@ -9,7 +9,7 @@ import SwiftUI
 class AuthenticationService: AuthenticationServiceProtocol {
     
     var userToken: String = ""
-    var posts_array: Array<Post> = []
+    var posts_array: Array<String> = []
     
     func signUp(user: User) -> Bool {
         var request = URLRequest(url: URL(string: "http://127.0.0.1:8080/users")!)
@@ -116,9 +116,8 @@ class AuthenticationService: AuthenticationServiceProtocol {
                                 if let postDictionary = post as? [String: Any] {
                                     // Access the "message" key and print its value
                                     if let message = postDictionary["message"] as? String {
-                                        let this_post = Post(id: postDictionary["id"] as! String, message: message)
                                         print("Message: \(message)")
-                                        self.posts_array.append(this_post)
+                                        self.posts_array.append("\n " + message)
                                     }
                                 }
                             }

@@ -5,7 +5,6 @@
 //  Created by Jenny Wark on 11/10/2023.
 //
 
-public struct Post: Identifiable{
-    public var id: String
+public struct Post{
     let message: String
 }
