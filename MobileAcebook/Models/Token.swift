@@ -8,5 +8,5 @@
 import SwiftUI
 
 class Token: ObservableObject {
-    @Published var content: String = "no token set"
+    @Published var content = "no token set"
 }

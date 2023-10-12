@@ -7,8 +7,9 @@
 import SwiftUI
 
 class AuthenticationService: AuthenticationServiceProtocol {
-    @EnvironmentObject var token: Token
-    var userToken: String?
+    
+    var userToken: String = ""
+    var posts_array: Array<Post> = []
     
     func signUp(user: User) -> Bool {
         var request = URLRequest(url: URL(string: "http://127.0.0.1:8080/users")!)
@@ -24,57 +25,53 @@ class AuthenticationService: AuthenticationServiceProtocol {
         }
         task.resume()
         return true
-        }
+    }
     
     func login(user: User, completion: @escaping (Bool) -> Void) {
-            var request = URLRequest(url: URL(string: "http://localhost:8080/tokens")!)
-            request.httpMethod = "POST"
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-            let jsonEncoder = JSONEncoder()
-            do {
-                let jsonData = try jsonEncoder.encode(user)
-                request.httpBody = jsonData
-
-                let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-                    // Handling the response data, if any
-                    var isSuccess = false
-
-                    if let data = data {
-                        do {
-                            let jsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                            print("Response: \(jsonResponse)")
-
-                            if let message = jsonResponse?["message"] as? String, message == "OK" {
-                                // If the response message is "Email not found", login is unsuccessful
-                                isSuccess = true
-                                if let userToken = jsonResponse?["token"] as? String {
-                                                            // Store the token in a variable
-//                                    self.userToken = token
-//                                    print("My token is \(self.userToken)")
-                                    self.token.content = jsonResponse?["token"] as! String
-                                                        }
+        var request = URLRequest(url: URL(string: "http://localhost:8080/tokens")!)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let jsonEncoder = JSONEncoder()
+        do {
+            let jsonData = try jsonEncoder.encode(user)
+            request.httpBody = jsonData
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                // Handling the response data, if any
+                var isSuccess = false
+                
+                if let data = data {
+                    do {
+                        let jsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                        
+                        if let message = jsonResponse?["message"] as? String, message == "OK" {
+                            // If the response message is "Email not found", login is unsuccessful
+                            isSuccess = true
+                            if let token = jsonResponse?["token"] as? String {
+                                // Store the token in a variable
+                                self.userToken = token
+                                //                                print("3")
                             }
-                            
-                        } catch {
-                                       // Handle JSON parsing errors, if any
-                            print("Error parsing JSON: \(error)")
                         }
+                    } catch {
+                        // Handle JSON parsing errors, if any
+                        print("Error parsing JSON: \(error)")
                     }
-
-                    // Calling the completion handler with the login result (true for successful, false for unsuccessful)
-                    completion(isSuccess)
                 }
-
-                task.resume()
-            } catch {
-                // Handle encoding errors, if any
-                print("Error encoding user object: \(error)")
-                completion(false) // Calling the completion handler with false in case of an error
+                // Calling the completion handler with the login result (true for successful, false for unsuccessful)
+                completion(isSuccess)
+                //                print("5")
             }
+            task.resume()
+        } catch {
+            // Handle encoding errors, if any
+            print("Error encoding user object: \(error)")
+            completion(false) // Calling the completion handler with false in case of an error
+            //            print("5")
         }
+        //        print("1")
+    }
     
-    func createPost(post: Post) -> Void {
+    func createPost(post: Post, token: Token) -> Void {
         print("Bearer \(token.content)")
         var request = URLRequest(url: URL(string: "http://127.0.0.1:8080/posts")!)
         request.httpMethod = "POST"
@@ -82,7 +79,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         request.httpBody = jsonData
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Bearer \(self.userToken)", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \(token.content)", forHTTPHeaderField: "Authorization")
         let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
             if error != nil {
                 print("I've got an error")
@@ -91,17 +88,66 @@ class AuthenticationService: AuthenticationServiceProtocol {
         task.resume()
     }
     
-//    func allPosts -> Void { // -> Array<Post>
-//        let url = URL(string: "http://127.0.0.1:8080/posts")!
-//        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-//            if let data = data {
-//                do {
+    func allPosts(token: Token, completion: @escaping (Bool) -> Void) { // -> Array<Post>
+        posts_array = []
+        var request = URLRequest(url: URL(string: "http://127.0.0.1:8080/posts")!)
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(token.content)", forHTTPHeaderField: "Authorization")
+        do {
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                var isSuccess = false
+                print("my token is: ", token.content)
+                if let data = data {
+                    do {
+                        let jsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+//                        print("my json message is: ", jsonResponse)
+
+                            // If the response message is "Email not found", login is unsuccessful
+                            if let token = jsonResponse?["token"] as? String {
+                                isSuccess = true
+                                // Store the token in a variable
+                                self.userToken = token
+                                print("my new token is: ", token)
+                            }
+                        if let posts = jsonResponse?["posts"] as? Array<Any> {
+                                // Store the token in a variable
+                            for post in posts {
+                                // Check if the current post is a dictionary
+                                if let postDictionary = post as? [String: Any] {
+                                    // Access the "message" key and print its value
+                                    if let message = postDictionary["message"] as? String {
+                                        let this_post = Post(id: postDictionary["id"] as! String, message: message)
+                                        print("Message: \(message)")
+                                        self.posts_array.append(this_post)
+                                    }
+                                }
+                            }
+//                                for post in jsonResponse?["posts"]{
+////                                    self.posts_array.append(post["message"])
+//                                    
+//                                }
+                            }
+                        
+                    } catch {
+                        // Handle JSON parsing errors, if any
+                        print("Error parsing JSON: \(error)")
+                    }
+                }
+                // Calling the completion handler with the login result (true for successful, false for unsuccessful)
+                completion(isSuccess)
+            }
+            task.resume()
+            print("my task is ", task)
+        }
+    }
+}
+                    
+                    
 //                    let jsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
 //                    print("Response: \(jsonResponse)")
 //                    
 //                    if let posts = jsonResponse?["posts"] as? String, posts == "OK" {
-//                        // If the response message is "Email not found", login is unsuccessful
-//                        
+//                        print("Posts are: ", posts)
 //                    }
 //                } catch {
 //                    // Handle JSON parsing errors, if any
@@ -110,7 +156,8 @@ class AuthenticationService: AuthenticationServiceProtocol {
 //            }
 //        }
 //        task.resume()
+//        return "one \n two \n three"
 //    }
-    
-}
+//    
+//}
 

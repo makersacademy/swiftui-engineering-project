@@ -7,7 +7,6 @@
 
 import SwiftUI
 struct WelcomePageView: View {
-    let token = Token()
   var body: some View {
     NavigationView {
       ZStack {
@@ -26,10 +25,12 @@ struct WelcomePageView: View {
             .scaledToFit()
             .frame(width: 200, height: 200)
             .accessibilityIdentifier("makers-logo")
-          Spacer()
             
-          NavigationLink("Sign Up", destination: SignUpView().environmentObject(token))
+          NavigationLink("Sign Up", destination: SignUpView())
           .accessibilityIdentifier("signUpButton")
+            
+            NavigationLink("Log In", destination: LogInView())
+            .accessibilityIdentifier("logInButton")
             
           Spacer()
 
@@ -41,6 +42,5 @@ struct WelcomePageView: View {
 
 struct WelcomePageView_Previews: PreviewProvider {
   static var previews: some View {
-    WelcomePageView()
-  }
+    WelcomePageView()  }
 }

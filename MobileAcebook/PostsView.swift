@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct PostsView: View {
+    @EnvironmentObject var token: Token
     @State private var authenticationService = AuthenticationService()
     @State private var post_content: String = ""
-    @EnvironmentObject var token: Token
+    @State private var posts_array: Array<Post> = []
+    @State private var loggedIn = false
     
     var body: some View {
         NavigationView {
@@ -37,7 +39,7 @@ struct PostsView: View {
                     .padding()
                 
                 Button(action: {
-                    authenticationService.createPost(post: Post(message: post_content))
+                    authenticationService.createPost(post: Post(id: "usbenwokrbm", message: post_content), token: token)
                 }) {
                     Text("Create Post")
                 }
@@ -45,7 +47,26 @@ struct PostsView: View {
                 
                 Spacer()
                 
-//                let Posts = authenticationService.allPosts
+                Button(action: {
+                    authenticationService.allPosts(token: token) { isSuccess in
+                        if isSuccess {
+                            loggedIn = true
+                        }
+//                            print("4")
+                        self.token.content = authenticationService.userToken
+                        posts_array = authenticationService.posts_array
+                    }
+//                        print("2")
+                }) {
+                    Text("Show posts")
+                }
+                .accessibilityIdentifier("PostsButton")
+                
+                List(posts_array) { post in
+                                Text(post.message)
+                            }
+                            .navigationBarTitle("Posts")
+               
                 
                 Spacer()
                 
@@ -56,6 +77,6 @@ struct PostsView: View {
 
 struct PostsView_Previews: PreviewProvider {
   static var previews: some View {
-      PostsView()
+      PostsView().environmentObject(Token())
   }
 }
