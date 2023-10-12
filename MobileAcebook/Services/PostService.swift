@@ -26,7 +26,6 @@ func createPost(newPost: CreatePost, completion: @escaping (Result<Void, Error>)
         completion(.failure(NSError(domain: "", code: 400, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
         return
     }
-    print("Valid URL: \(url)") // TEMPORARY (for debugging)
         
         // Establish a new POST request
         var request = URLRequest(url: url)  // Create a URL request object
@@ -37,17 +36,14 @@ func createPost(newPost: CreatePost, completion: @escaping (Result<Void, Error>)
         // Try converting the post object into JSON data
         if let jsonData = try? encoder.encode(newPost) {
             request.httpBody = jsonData // Set the JSON data as the request's body
-            print(UserDefaults.standard)
+
             // Check for valid token in UserDefaults
             if let token = UserDefaults.standard.string(forKey: "user-token") {
-                
-                print("user-token \(token)")
                 request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             } else {
                 completion(.failure(AppError.authenticationError))
             }
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type") // Set the request's content type header
-            print("converted swift to json request: ", request)  // TEMPORARY (for debugging)
             
             // Create a data task that will handle the request and the server's response (asynchonous)
             let createPostTask = URLSession.shared.dataTask(with: request) { (data, response, error) in

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct PostsPageView: View {
     @State private var userToken = UserDefaults.standard.string(forKey: "user-token")
+    @State private var newPostMessage: String = ""
+
     
     var body: some View {
         ScrollView {
@@ -28,25 +30,34 @@ struct PostsPageView: View {
                 }
                 Spacer()
                 
-                // Create Post button
-                HStack{
-                    Spacer()
-                    Button("Create post") {
-                        let newPost = CreatePost(message: "First new post!")
-                        createPost(newPost: newPost) { result in
-                            switch result {
-                            case .success:
-                                print("New post created!")
-                            case .failure(let error):
-                                print("New post not created: \(error.localizedDescription)")
+                // Create post field and button
+                VStack{
+                    TextField("Scribe a message here...", text: $newPostMessage)
+                        .padding(5)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .frame(width: 300)
+                    HStack {
+                        Spacer()
+                        ZStack {
+                            Button("Post", systemImage: "wand.and.stars") {
+                                let newPost = CreatePost(message: newPostMessage)
+                                createPost(newPost: newPost) { result in
+                                    switch result {
+                                    case .success:
+                                        print("New post created")
+                                        newPostMessage = ""
+                                    case .failure(let error):
+                                        print("New post not created: \(error.localizedDescription)")
+                                    }
+                                }
                             }
+                            .buttonStyle(.borderedProminent)
+                            .cornerRadius(20)
+                            .tint(Color("Olivine"))
                         }
+                        .frame(width: 110) // Set the width of the container
+                        .padding(.trailing, 90)
                     }
-                    .buttonStyle(.borderedProminent)
-                    .cornerRadius(20)
-                    .frame(width: 150, height: 50)
-                    .padding(.trailing, 90)
-                    .tint(Color("Olivine"))
                 }
             }
             .frame(width: 500)
