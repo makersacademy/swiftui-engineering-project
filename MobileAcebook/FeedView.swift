@@ -9,6 +9,9 @@ import SwiftUI
 
 struct FeedView: View {
     
+    let config = CLDConfiguration(cloudName: "CLOUD_NAME", apiKEY: "API_KEY")
+    let cloudinary = CLDCLoudinary(configuration: config)
+    
     @State var postTextField: String = ""
     @State var postArray: [String] = []
     private var service = FeedService()
