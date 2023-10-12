@@ -8,15 +8,11 @@
 import Foundation
 
 // Custom error type to return token authentication error message
-enum AppError: Error {
-    case authenticationError
-    var localizedDescription: String {
-        switch self {
-        case.authenticationError:
-            return "Authentication failed. Token not recognised."
-        }
-    }
+struct AppError: LocalizedError {
+    let errorDescription: String?
+    static let authenticationError = AppError(errorDescription: "Authentication failed. Token not recognised.") // 'static' defines a shared instance, reusable across the rest of the code
 }
+
 
 // Get all posts function
 
@@ -41,9 +37,11 @@ func createPost(newPost: CreatePost, completion: @escaping (Result<Void, Error>)
         // Try converting the post object into JSON data
         if let jsonData = try? encoder.encode(newPost) {
             request.httpBody = jsonData // Set the JSON data as the request's body
-            
+            print(UserDefaults.standard)
             // Check for valid token in UserDefaults
             if let token = UserDefaults.standard.string(forKey: "user-token") {
+                
+                print("user-token \(token)")
                 request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             } else {
                 completion(.failure(AppError.authenticationError))
@@ -51,7 +49,7 @@ func createPost(newPost: CreatePost, completion: @escaping (Result<Void, Error>)
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type") // Set the request's content type header
             print("converted swift to json request: ", request)  // TEMPORARY (for debugging)
             
-            // Create a data task that will handle the request and the server's response
+            // Create a data task that will handle the request and the server's response (asynchonous)
             let createPostTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 if let error = error {              // Check for errors in the response
                     completion(.failure(error))

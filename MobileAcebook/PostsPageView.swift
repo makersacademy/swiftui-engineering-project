@@ -29,7 +29,7 @@ struct PostsPageView: View {
                 HStack{
                     Spacer()
                     Button("Create post") {
-                        var newPost = CreatePost(message: "First new post!")
+                        let newPost = CreatePost(message: "First new post!")
                         createPost(newPost: newPost) { result in
                             switch result {
                             case .success:
