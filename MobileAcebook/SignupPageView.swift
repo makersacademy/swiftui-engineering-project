@@ -60,7 +60,15 @@ struct SignupPageView: View {
                             Spacer()
                             Button("Sign up") {
                                 readyToNavigate = true
-                                if isValidEmailAddr(strToValidate: UserEmail) && isPasswordValid(password: UserPassword) {
+                                if !isValidEmailAddr(strToValidate: UserEmail) {
+                                    AlertMessage = "Please enter a valid email address"
+                                    ShowAlert = true
+                                }
+                                else if !isPasswordValid(password: UserPassword) {
+                                    AlertMessage = "Password must contain at least one uppercase letter, one lowercase letter, one special character, one number and be at least 8 characters long"
+                                    ShowAlert = true
+                                }
+                                else {
                                     signUp(username: UserUsername, email: UserEmail, password: UserPassword, avatar: UserPicture) {
                                         result in switch result {
                                         case .success:
@@ -75,12 +83,13 @@ struct SignupPageView: View {
                                             }
                                         }
                                     }
-                                } else {
-                                    AlertMessage = "Please enter valid email address"
-                                    ShowAlert = true
-                                    print("Please enter valid email address")
+//                                } else {
+//                                    AlertMessage = "Your signup was unsuccessful"
+//                                    ShowAlert = true
+//                                    print("Your signup was unsuccessful")
                                 }
                             }
+                
                             .alert(isPresented: $ShowAlert) {
                                 Alert(title: Text("Signup Status"), message: Text(AlertMessage), dismissButton: .default(Text("Ok")))
                             }
