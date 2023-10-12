@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PostsPageView: View {
+    @State private var userToken = UserDefaults.standard.string(forKey: "user-token")
+    
     var body: some View {
         ScrollView {
             VStack{
@@ -22,6 +24,7 @@ struct PostsPageView: View {
                         .font(.title2)
                         .fontWeight(.bold)
                         .padding(.trailing, 115)
+                    
                 }
                 Spacer()
                 

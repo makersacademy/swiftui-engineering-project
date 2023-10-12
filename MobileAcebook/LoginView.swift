@@ -12,6 +12,7 @@ struct loginView: View {
     @State private var UserPassword: String = ""
     @State private var signupReadyToNavigate : Bool = false
     @State private var postsReadyToNavigate : Bool = false
+     
     
     var body: some View {
         NavigationStack {
@@ -46,9 +47,9 @@ struct loginView: View {
                                 .padding(.bottom, 0)
                                 .padding(.top)
                                 .padding(.horizontal)
-                            
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .frame(width: 280, height: 90)
+                                .textInputAutocapitalization(.never)
                             SecureField("Enter your password", text: $UserPassword)
                                 .padding(.bottom)
                                 .padding()
@@ -61,8 +62,16 @@ struct loginView: View {
                         HStack{
                             Spacer()
                             Button("Login") {
-                                postsReadyToNavigate = true
-                                // TODO: sign up logic
+                                // do the post request here to tokens, wait till its done and then navigate to the posts page after pressing login button
+                                loginAsync(email: UserEmail, password: UserPassword){
+                                    result in switch result {
+                                    case .success:
+                                        print("Successful login")
+                                        postsReadyToNavigate = true
+                                    case .failure(let error):
+                                        print("Login failed: \(error.localizedDescription)")
+                                    }
+                                }
                             }
                             .buttonStyle(.borderedProminent)
                             .tint(.primary)
@@ -95,6 +104,8 @@ struct loginView: View {
     }
 
 }
-#Preview {
-    loginView()
+struct LoginPageView_Previews: PreviewProvider {
+    static var previews: some View {
+        loginView()
+    }
 }
