@@ -7,7 +7,7 @@
 
 import Foundation
 
-func signUpp(username: String, email: String, password: String, avatar: String?, completion: @escaping (Result<Void, Error>) -> Void ) {
+func signUp(username: String, email: String, password: String, avatar: String?, completion: @escaping (Result<Void, Error>) -> Void ) {
     if let url = URL(string: "http://127.0.0.1:8080/users") {
         print("Valid URL: \(url)")
         

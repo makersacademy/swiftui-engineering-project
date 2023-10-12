@@ -58,7 +58,7 @@ struct SignupPageView: View {
                             Spacer()
                             Button("Sign up") {
                                 readyToNavigate = true
-                                signUpp(username: UserUsername, email: UserEmail, password: UserPassword, avatar: UserPicture) {
+                                signUp(username: UserUsername, email: UserEmail, password: UserPassword, avatar: UserPicture) {
                                     result in switch result {
                                     case .success:
                                         print("Successful Signup")
