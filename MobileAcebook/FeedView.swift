@@ -6,11 +6,9 @@
 //
 
 import SwiftUI
+import Cloudinary
 
 struct FeedView: View {
-    
-    let config = CLDConfiguration(cloudName: "CLOUD_NAME", apiKEY: "API_KEY")
-    let cloudinary = CLDCLoudinary(configuration: config)
     
     @State var postTextField: String = ""
     @State var postArray: [String] = []
@@ -18,6 +16,8 @@ struct FeedView: View {
     @State var posts = [Post]()
     
     var body: some View {
+//        let config = CLDConfiguration(cloudName: "CLOUD_NAME", apiKey: "API_KEY")
+//        let cloudinary = CLDCloudinary(configuration: config)
         TextField("Write a post", text: $postTextField)
             .padding()
             .foregroundColor(.black)

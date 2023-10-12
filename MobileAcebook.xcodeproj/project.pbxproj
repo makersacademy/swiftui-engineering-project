@@ -24,6 +24,7 @@
 		AE5D85E32AC9AFD2009680C6 /* MockAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E22AC9AFD2009680C6 /* MockAuthenticationService.swift */; };
 		AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E52AC9B077009680C6 /* AuthenticationServiceProtocol.swift */; };
 		AE5D85E82AC9B29A009680C6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E72AC9B29A009680C6 /* User.swift */; };
+		C77940672AD8051B00632EFF /* Cloudinary in Frameworks */ = {isa = PBXBuildFile; productRef = C77940662AD8051B00632EFF /* Cloudinary */; };
 		C78022B72AD5770900D8A925 /* SignupPageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78022B62AD5770900D8A925 /* SignupPageService.swift */; };
 		C78022C02AD5AFBF00D8A925 /* SignupPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78022BF2AD5AFBF00D8A925 /* SignupPageView.swift */; };
 		C79576042AD6B10900BBD088 /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79576032AD6B10900BBD088 /* FeedService.swift */; };
@@ -81,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C77940672AD8051B00632EFF /* Cloudinary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,6 +231,9 @@
 			dependencies = (
 			);
 			name = MobileAcebook;
+			packageProductDependencies = (
+				C77940662AD8051B00632EFF /* Cloudinary */,
+			);
 			productName = MobileAcebook;
 			productReference = AE5D85AC2AC8A221009680C6 /* MobileAcebook.app */;
 			productType = "com.apple.product-type.application";
@@ -301,6 +306,9 @@
 				Base,
 			);
 			mainGroup = AE5D85A32AC8A221009680C6;
+			packageReferences = (
+				C77940652AD8051B00632EFF /* XCRemoteSwiftPackageReference "cloudinary_ios" */,
+			);
 			productRefGroup = AE5D85AD2AC8A221009680C6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -679,6 +687,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C77940652AD8051B00632EFF /* XCRemoteSwiftPackageReference "cloudinary_ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/cloudinary/cloudinary_ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C77940662AD8051B00632EFF /* Cloudinary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C77940652AD8051B00632EFF /* XCRemoteSwiftPackageReference "cloudinary_ios" */;
+			productName = Cloudinary;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AE5D85A42AC8A221009680C6 /* Project object */;
 }
