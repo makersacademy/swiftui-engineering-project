@@ -66,7 +66,9 @@ struct SignupPageView: View {
                                         case .success:
                                             print("Successful Signup")
                                         case .failure(let error):
-                                            print("Signup failed: \(error.localizedDescription)")
+                                                        AlertMessage = "Signup failed: \(error.localizedDescription)"
+                                                        ShowAlert = true
+
                                         }
                                     }
                                 } else {
