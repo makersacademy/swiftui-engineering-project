@@ -6,42 +6,53 @@
 //
 
 import SwiftUI
+
 struct WelcomePageView: View {
-
-  var body: some View {
-    NavigationView {
-      ZStack {
-        VStack {
-          Spacer()
+    var body: some View {
+        ZStack {
             
-          Text("Welcome to Acebook!")
-            .font(.largeTitle)
-            .padding(.bottom, 20)
-            .accessibilityIdentifier("welcomeText")
-            
-          Spacer()
-            
-          Image("makers-logo")
-            .resizable()
-            .scaledToFit()
-            .frame(width: 200, height: 200)
-            .accessibilityIdentifier("makers-logo")
-            
-          NavigationLink("Sign Up", destination: SignUpView())
-          .accessibilityIdentifier("signUpButton")
-            
-            NavigationLink("Log In", destination: LogInView())
-            .accessibilityIdentifier("logInButton")
-            
-          Spacer()
-
+            NavigationView {
+                VStack {
+                    
+                    Spacer()
+                    
+                    Text("Welcome to Acebook!")
+                        .font(.largeTitle)
+                        .padding(.bottom, 20)
+                        .accessibilityIdentifier("welcomeText")
+                    
+                    Spacer()
+                    
+                    Image("makers-logo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                        .accessibilityIdentifier("makers-logo")
+                    
+                    Spacer()
+                    
+                    Button("Sign Up") {
+                        // TODO: sign up logic
+                    }
+                    .accessibilityIdentifier("signUpButton")
+                    
+                    NavigationLink(destination: LogInView()) {
+                        Text("Login")
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(Color.white)
+                            .cornerRadius(10)
+                    }
+                }
+                
+                Spacer()
+            }
         }
-      }
     }
-  }
 }
 
 struct WelcomePageView_Previews: PreviewProvider {
-  static var previews: some View {
-    WelcomePageView()  }
+    static var previews: some View {
+        WelcomePageView()
+    }
 }
