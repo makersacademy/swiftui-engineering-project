@@ -13,6 +13,8 @@ struct SignupPageView: View {
     @State private var UserPassword: String = ""
     @State private var UserUsername: String = ""
     @State private var UserPicture: String = ""
+    @State private var ShowAlert: Bool = false
+    @State private var AlertMessage: String = ""
     
     var body: some View {
         NavigationStack {
@@ -68,8 +70,13 @@ struct SignupPageView: View {
                                         }
                                     }
                                 } else {
+                                    AlertMessage = "Please enter valid email address"
+                                    ShowAlert = true
                                     print("Please enter valid email address")
                                 }
+                            }
+                            .alert(isPresented: $ShowAlert) {
+                                Alert(title: Text("Signup Status"), message: Text(AlertMessage), dismissButton: .default(Text("Ok")))
                             }
                         }
                         
