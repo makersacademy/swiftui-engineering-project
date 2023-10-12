@@ -7,36 +7,53 @@
 
 import Foundation
 
+// Custom error type to return token authentication error message
+enum AppError: Error {
+    case authenticationError
+    var localizedDescription: String {
+        switch self {
+        case.authenticationError:
+            return "Authentication failed. Token not recognised."
+        }
+    }
+}
+
 // Get all posts function
 
 
 
 
-// Create new post function (using CreatePost data model)
+// New post function (using CreatePost data model)
 func createPost(newPost: CreatePost, completion: @escaping (Result<Void, Error>) -> Void) {
     // Try converting the string into a URL
-    if let url = URL(string: "http://127.0.0.1:8080/posts") {
-        print("Valid URL: \(url)") // Print the validated URL
+    guard let url = URL(string: "http://127.0.0.1:8080/posts") else {
+        completion(.failure(NSError(domain: "", code: 400, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+        return
+    }
+    print("Valid URL: \(url)") // TEMPORARY (for debugging)
         
-        // Create a URL request object
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST" // Set the HTTP method to POST
+        // Establish a new POST request
+        var request = URLRequest(url: url)  // Create a URL request object
+        request.httpMethod = "POST"         // Set the HTTP method to POST
         
-        // Create post object to represent the post data to be sent to the server
-        let postData = newPost
-        
-        // Create encoder object for encoding post data to JSON with encoder protocol
+        // Convert new post object into JSON data using JSONEncoder
         let encoder = JSONEncoder()
         // Try converting the post object into JSON data
         if let jsonData = try? encoder.encode(newPost) {
             request.httpBody = jsonData // Set the JSON data as the request's body
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type") // Set the request's content type header.
+            
+            // Check for valid token in UserDefaults
+            if let token = UserDefaults.standard.string(forKey: "user-token") {
+                request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            } else {
+                completion(.failure(AppError.authenticationError))
+            }
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type") // Set the request's content type header
             print("converted swift to json request: ", request)  // TEMPORARY (for debugging)
             
             // Create a data task that will handle the request and the server's response
             let createPostTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
-                // Check for errors in the response
-                if let error = error {
+                if let error = error {              // Check for errors in the response
                     completion(.failure(error))
                     return
                 }
@@ -48,16 +65,13 @@ func createPost(newPost: CreatePost, completion: @escaping (Result<Void, Error>)
                     return
                 }
                 
-                // If all is well, complete the request successfully
+                // Closure (executed when network request completes successfully)
                 completion(.success(()))
             }
-            createPostTask.resume() // Start the data task
+            createPostTask.resume() // Start the 'create post' data task
         } else {
-            // Handle error where the post data couldn't be serialized into JSON
+            // Handle error where the post data couldn't be encoded into JSON
             completion(.failure(NSError(domain: "", code: 400, userInfo: [NSLocalizedDescriptionKey: "Failed to encode post data to JSON"])))
         }
-    } else {
-        // Handle the error where the URL couldn't be created.
-        completion(.failure(NSError(domain: "", code: 400, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
     }
-}
+
