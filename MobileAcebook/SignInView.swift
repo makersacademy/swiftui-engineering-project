@@ -11,6 +11,7 @@ struct SignInView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var token: String? = nil
+    @State private var isSecured: Bool = true
     private var service = AuthenticationService()
     @State private var loginStatus: String = ""
     
@@ -33,10 +34,22 @@ struct SignInView: View {
                         .inset(by: 0.5)
                         .stroke(Color(red: 0.16, green: 0.16, blue: 0.16).opacity(0.5), lineWidth: 1)
                 )
-            SecureField(
-                "Password",
-                text: $password
-            )
+            ZStack(alignment: .trailing) {
+                        Group {
+                            if isSecured {
+                                SecureField("Password", text: $password)
+                            } else {
+                                TextField("Password", text: $password)
+                            }
+                        }.padding(.trailing, 32)
+
+                        Button(action: {
+                            isSecured.toggle()
+                        }) {
+                            Image(systemName: isSecured ? "eye.slash" : "eye")
+                                .accentColor(.gray)
+                        }
+                    }
             .padding()
             .foregroundColor(.black)
             .frame(width: 303, height: 36)
@@ -66,9 +79,15 @@ struct SignInView: View {
                     }
                 }
             }
-            .padding()
             .disabled(token != nil)
             .opacity(token == nil ? 1.0 : 0.5)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 12)
+            .background(Color.black)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .font(.body)
+            .frame(width: 120, height: 80)
             
             NavigationLink("",
                            destination: FeedView(),
