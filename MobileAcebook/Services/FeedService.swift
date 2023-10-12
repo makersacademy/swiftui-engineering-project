@@ -25,17 +25,12 @@ class FeedService {
                 completion(nil, error)
                 return
             }
-            print("data1\(data)")
-            print("response1\(response)")
-            print("error1\(error)")
             
             if let data = data {
                 if let posts = try?
                     JSONDecoder().decode(Posts.self, from: data) {
-                    print("posts\(posts)")
                     completion(posts, nil)
                 } else {
-                    print("error2\(error)")
                     completion(nil, NSError(domain: "Invalid data", code: 500, userInfo: nil))
                 }
             }
