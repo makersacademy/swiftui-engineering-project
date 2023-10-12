@@ -21,6 +21,7 @@
 		AE5D85E32AC9AFD2009680C6 /* MockAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E22AC9AFD2009680C6 /* MockAuthenticationService.swift */; };
 		AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E52AC9B077009680C6 /* AuthenticationServiceProtocol.swift */; };
 		AE5D85E82AC9B29A009680C6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E72AC9B29A009680C6 /* User.swift */; };
+		EB0DEEAC2AD7FAF0000E8735 /* UserAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0DEEAB2AD7FAF0000E8735 /* UserAuthentication.swift */; };
 		EB946FF12AD4505400954465 /* SignupPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB946FF02AD4505400954465 /* SignupPageView.swift */; };
 		EBC0901A2AD6CC140099FF2D /* UserRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECCE0252AD6B2D500663DE3 /* UserRequestService.swift */; };
 /* End PBXBuildFile section */
@@ -60,6 +61,7 @@
 		AE5D85E22AC9AFD2009680C6 /* MockAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthenticationService.swift; sourceTree = "<group>"; };
 		AE5D85E52AC9B077009680C6 /* AuthenticationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceProtocol.swift; sourceTree = "<group>"; };
 		AE5D85E72AC9B29A009680C6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		EB0DEEAB2AD7FAF0000E8735 /* UserAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthentication.swift; sourceTree = "<group>"; };
 		EB946FF02AD4505400954465 /* SignupPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPageView.swift; sourceTree = "<group>"; };
 		FECCE0252AD6B2D500663DE3 /* UserRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,6 +160,7 @@
 			children = (
 				AE5D85E02AC9AFA9009680C6 /* AuthenticationService.swift */,
 				FECCE0252AD6B2D500663DE3 /* UserRequestService.swift */,
+				EB0DEEAB2AD7FAF0000E8735 /* UserAuthentication.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB0DEEAC2AD7FAF0000E8735 /* UserAuthentication.swift in Sources */,
 				AE5D85E12AC9AFA9009680C6 /* AuthenticationService.swift in Sources */,
 				4FEDA1822AD57F8B00C98381 /* LoginView.swift in Sources */,
 				AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */,

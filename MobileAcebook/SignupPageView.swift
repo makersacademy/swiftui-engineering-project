@@ -58,22 +58,28 @@ struct SignupPageView: View {
                             Spacer()
                             Button("Sign up") {
                                 readyToNavigate = true
-                                signUp(username: UserUsername, email: UserEmail, password: UserPassword, avatar: UserPicture) {
-                                    result in switch result {
-                                    case .success:
-                                        print("Successful Signup")
-                                    case .failure(let error):
-                                        print("Signup failed: \(error.localizedDescription)")
+                                if isValidEmailAddr(strToValidate: UserEmail) {
+                                    signUp(username: UserUsername, email: UserEmail, password: UserPassword, avatar: UserPicture) {
+                                        result in switch result {
+                                        case .success:
+                                            print("Successful Signup")
+                                        case .failure(let error):
+                                            print("Signup failed: \(error.localizedDescription)")
+                                        }
                                     }
+                                } else {
+                                    print("Please enter valid email address")
                                 }
                             }
-                            .buttonStyle(.borderedProminent)
-                            .cornerRadius(20)
-                            .frame(width: 150, height: 50)
-                            .padding(.trailing, 90)
-                            .tint(Color("Olivine"))
                         }
+                        
+                        .buttonStyle(.borderedProminent)
+                        .cornerRadius(20)
+                        .frame(width: 150, height: 50)
+                        .padding(.trailing, 90)
+                        .tint(Color("Olivine"))
                     }
+                    
                     .frame(width: 500)
                     
                     Spacer()
@@ -87,12 +93,12 @@ struct SignupPageView: View {
                         }
                     }
                 }
+            }
             }.navigationDestination(isPresented: $readyToNavigate) {
                     loginView().navigationBarBackButtonHidden(true)
                 }
             }
         }
-    }
 
 
 
