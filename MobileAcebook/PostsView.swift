@@ -13,7 +13,7 @@ struct PostsView: View {
     @State private var post_content: String = ""
     @State private var posts_array: Array<String> = []
     @State private var loggedIn = false
-    
+
     var body: some View {
         NavigationView {
             VStack {

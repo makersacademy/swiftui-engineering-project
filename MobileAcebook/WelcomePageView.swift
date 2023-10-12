@@ -7,6 +7,7 @@
 
 import SwiftUI
 struct WelcomePageView: View {
+
   var body: some View {
     NavigationView {
       ZStack {
