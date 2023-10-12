@@ -30,9 +30,8 @@ class FeedService {
             print("error1\(error)")
             
             if let data = data {
-                let decoder = JSONDecoder()
                 if let posts = try?
-                    decoder.decode(Posts.self, from: data) {
+                    JSONDecoder().decode(Posts.self, from: data) {
                     print("posts\(posts)")
                     completion(posts, nil)
                 } else {
