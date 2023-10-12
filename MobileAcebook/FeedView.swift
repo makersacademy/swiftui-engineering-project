@@ -27,6 +27,17 @@ struct FeedView: View {
                 
         Button(action: {
             createNewPost()
+            guard var token = UserDefaults.standard.string(forKey: "token") else {
+                return
+            }
+            service.getAllPosts(token: token) { (posts, err) in
+                guard var posts = posts else {
+                    // handle error
+                    return
+                }
+                self.posts = posts.posts
+            }
+            
         }, label: {
             Text("Post")
         })
