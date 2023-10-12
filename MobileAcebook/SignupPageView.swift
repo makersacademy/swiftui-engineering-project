@@ -60,15 +60,19 @@ struct SignupPageView: View {
                             Spacer()
                             Button("Sign up") {
                                 readyToNavigate = true
-                                if isValidEmailAddr(strToValidate: UserEmail) {
+                                if isValidEmailAddr(strToValidate: UserEmail) && isPasswordValid(password: UserPassword) {
                                     signUp(username: UserUsername, email: UserEmail, password: UserPassword, avatar: UserPicture) {
                                         result in switch result {
                                         case .success:
                                             print("Successful Signup")
                                         case .failure(let error):
-                                                        AlertMessage = "Signup failed: \(error.localizedDescription)"
-                                                        ShowAlert = true
-
+                                            if let nsError = error as? NSError, nsError.code == 409 {
+                                                AlertMessage = "Email already exists"
+                                                ShowAlert = true
+                                            } else {
+                                                AlertMessage = "Signup failed: \(error.localizedDescription)"
+                                                ShowAlert = true
+                                            }
                                         }
                                     }
                                 } else {
@@ -81,6 +85,7 @@ struct SignupPageView: View {
                                 Alert(title: Text("Signup Status"), message: Text(AlertMessage), dismissButton: .default(Text("Ok")))
                             }
                         }
+                            
                         
                         .buttonStyle(.borderedProminent)
                         .cornerRadius(20)
