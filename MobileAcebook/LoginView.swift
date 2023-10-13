@@ -12,7 +12,9 @@ struct loginView: View {
     @State private var UserPassword: String = ""
     @State private var signupReadyToNavigate : Bool = false
     @State private var postsReadyToNavigate : Bool = false
-     
+    @State private var ShowAlert: Bool = false
+    @State private var AlertMessage: String = ""
+    
     
     var body: some View {
         NavigationStack {
@@ -70,8 +72,25 @@ struct loginView: View {
                                         postsReadyToNavigate = true
                                     case .failure(let error):
                                         print("Login failed: \(error.localizedDescription)")
+                                        if let nsError = error as? NSError, nsError.code == 401 {
+                                            AlertMessage = "🧙‍♀️ You shall not pass! Email address not found!"
+                                            ShowAlert = true
+                                            print("I have run - email not found")
+                                        }
+                                        else if let nsError = error as? NSError, nsError.code == 402 {
+                                            AlertMessage = "🧙‍♀️ You shall not pass! Your password is incorrect!"
+                                            ShowAlert = true
+                                            print("I have run - password not found")
+                                        }
+                                        else{
+                                            AlertMessage = "Sign in failed: \(error.localizedDescription)"
+                                            ShowAlert = true
+                                            
+                                        }
                                     }
+                                    
                                 }
+                                
                             }
                             .buttonStyle(.borderedProminent)
                             .tint(.primary)
@@ -81,31 +100,34 @@ struct loginView: View {
                             
                             
                         }
-                    }
-                    .frame(width: 500)
-                    Spacer()
-                    VStack {
-                        Button {
-                            signupReadyToNavigate = true
-                        } label: {
-                            Text("Sign up here")
-                                .foregroundColor(Color("Gunmetal"))
+                        .alert(isPresented: $ShowAlert) {
+                            Alert(title: Text("Signup Status"), message: Text(AlertMessage), dismissButton: .default(Text("OK")))
                         }
-//                        .padding(.bottom, 50)
-                        
+                        .frame(width: 500)
+                        Spacer()
+                        VStack {
+                            Button {
+                                signupReadyToNavigate = true
+                            } label: {
+                                Text("Sign up here")
+                                    .foregroundColor(Color("Gunmetal"))
+                            }
+                            //                        .padding(.bottom, 50)
+                            
+                        }
                     }
+                }.navigationDestination(isPresented: $signupReadyToNavigate) {
+                    SignupPageView().navigationBarBackButtonHidden(true)
+                }.navigationDestination(isPresented: $postsReadyToNavigate) {
+                    PostsPageView()
                 }
-            }.navigationDestination(isPresented: $signupReadyToNavigate) {
-                SignupPageView().navigationBarBackButtonHidden(true)
-            }.navigationDestination(isPresented: $postsReadyToNavigate) {
-                PostsPageView()
             }
         }
+        
     }
-
-}
-struct LoginPageView_Previews: PreviewProvider {
-    static var previews: some View {
-        loginView()
+    struct LoginPageView_Previews: PreviewProvider {
+        static var previews: some View {
+            loginView()
+        }
     }
 }
