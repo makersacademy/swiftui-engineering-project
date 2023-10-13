@@ -63,29 +63,141 @@ struct PostsPageView: View {
             .frame(width: 500)
 
                 
-                VStack{
-                    Image("mage-hat-80s")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200, height: 200)
-                        .padding(20)
-                    }
+            ZStack{
+                Rectangle()
+                    .foregroundColor(Color("Magenta"))
+                    .frame(width: 370, height: 338)
+                    .background(Color(red: 0.9, green: 0.93, blue: 0.98))
+                    .cornerRadius(40)
+                VStack {
+                    Rectangle()
+                        .foregroundColor(Color(""))
+                        .frame(width: 350, height: 268)
+                        .background(
+                            Image("buffycast")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 350, height: 268)
+                                .clipped()
+                        )
+                        .background(.white)
+                        .cornerRadius(30)
+                    Text("Squad pic 🧛")
+                        .fontWeight(.medium)
+                        .font(.title3)
+                        .foregroundColor(.black)
+                }
+            }
+     
+            
                     
-                VStack{
-                    Image("mage-hat-80s")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200, height: 200)
-                        .padding(20)
-                    }
+            ZStack{
+                Rectangle()
+                    .foregroundColor(Color("Magenta"))
+                    .frame(width: 370, height: 338)
+                    .background(Color(red: 0.9, green: 0.93, blue: 0.98))
+                    .cornerRadius(40)
+                VStack {
+                    Rectangle()
+                        .foregroundColor(Color(""))
+                        .frame(width: 350, height: 268)
+                        .background(
+                            Image("Gandalf-2")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 350, height: 268)
+                                .clipped()
+                        )
+                        .background(.white)
+                        .cornerRadius(30)
+                    Text("I literally wasn't late though 🤬")
+                        .fontWeight(.medium)
+                        .font(.title3)
+                        .foregroundColor(.black)
+                    
+                        
+                }
+            }
                 
-                VStack{
-                    Image("mage-hat-80s")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200, height: 200)
-                        .padding(20)
-                    }
+            ZStack{
+                Rectangle()
+                    .foregroundColor(Color("Magenta"))
+                    .frame(width: 370, height: 338)
+                    .background(Color(red: 0.9, green: 0.93, blue: 0.98))
+                    .cornerRadius(40)
+                VStack {
+                    Rectangle()
+                        .foregroundColor(Color(""))
+                        .frame(width: 350, height: 268)
+                        .background(
+                            Image("gale")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 350, height: 268)
+                                .clipped()
+                        )
+                        .background(.white)
+                        .cornerRadius(30)
+                    Text("Mystra snapped this lol ")
+                        .fontWeight(.medium)
+                        .font(.title3)
+                        .foregroundColor(.black)
+                }
+            }
+            
+            ZStack{
+                Rectangle()
+                    .foregroundColor(Color("Magenta"))
+                    .frame(width: 370, height: 338)
+                    .background(Color(red: 0.9, green: 0.93, blue: 0.98))
+                    .cornerRadius(40)
+                VStack {
+                    Rectangle()
+                        .foregroundColor(Color(""))
+                        .frame(width: 350, height: 268)
+                        .background(
+                            Image("ron")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 350, height: 268)
+                                .clipped()
+                        )
+                        .background(.white)
+                        .cornerRadius(30)
+                    Text("Not me, not Hermione, YOU!")
+                        .fontWeight(.medium)
+                        .font(.title3)
+                        .foregroundColor(.black)
+                }
+            }
+            
+            ZStack{
+                Rectangle()
+                    .foregroundColor(Color("Magenta"))
+                    .frame(width: 370, height: 338)
+                    .background(Color(red: 0.9, green: 0.93, blue: 0.98))
+                    .cornerRadius(40)
+                VStack {
+                    Rectangle()
+                        .foregroundColor(Color(""))
+                        .frame(width: 350, height: 268)
+                        .background(
+                            Image("salem")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 350, height: 268)
+                                .clipped()
+                        )
+                        .background(.white)
+                        .cornerRadius(30)
+                    Text("👻")
+                        .fontWeight(.medium)
+                        .font(.title3)
+                        .foregroundColor(.black)
+                }
+            }
+
+
             }
         }
     }
