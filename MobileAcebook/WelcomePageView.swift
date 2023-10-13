@@ -20,7 +20,6 @@ struct WelcomePageView: View {
                     Spacer()
                     
                     Text("Welcome to")
-//                        .bold().italic().font(.system(size: 46, weight: .semibold, design: .rounded))
                         .font(.system(size: 46, weight: .semibold, design: .rounded))
                         .italic()
                         .foregroundColor(Color("Gunmetal"))
