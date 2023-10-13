@@ -13,6 +13,8 @@ struct SignupPageView: View {
     @State private var UserPassword: String = ""
     @State private var UserUsername: String = ""
     @State private var UserPicture: String = ""
+    @State private var ShowAlert: Bool = false
+    @State private var AlertMessage: String = ""
     
     var body: some View {
         NavigationStack {
@@ -36,19 +38,19 @@ struct SignupPageView: View {
                     }
                     
                     VStack {
-                        TextField("Enter your email address", text: $UserEmail)
+                        TextField("🔮 Enter your email address", text: $UserEmail)
                             .padding()
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .frame(width: 350)
-                        SecureField("Enter your password", text: $UserPassword)
+                        SecureField("🧹 Enter your password", text: $UserPassword)
                             .padding()
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .frame(width: 350)
-                        TextField("Enter your username", text: $UserUsername)
+                        TextField("✨ Enter your username", text: $UserUsername)
                             .padding()
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .frame(width: 350)
-                        TextField("Profile Picture", text: $UserPicture)
+                        TextField("🧙‍♂️ Profile Picture", text: $UserPicture)
                             .padding()
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .frame(width: 350)
@@ -58,22 +60,45 @@ struct SignupPageView: View {
                             Spacer()
                             Button("Sign up") {
                                 readyToNavigate = true
-                                signUp(username: UserUsername, email: UserEmail, password: UserPassword, avatar: UserPicture) {
-                                    result in switch result {
-                                    case .success:
-                                        print("Successful Signup")
-                                    case .failure(let error):
-                                        print("Signup failed: \(error.localizedDescription)")
+                                if !isValidEmailAddr(strToValidate: UserEmail) {
+                                    AlertMessage = "🧙‍♀️ You shall not pass! Please enter a valid email address"
+                                    ShowAlert = true
+                                }
+                                else if !isPasswordValid(password: UserPassword) {
+                                    AlertMessage = "🧙‍♀️ You shall not pass! Password must contain at least one uppercase letter, one lowercase letter, one special character, one number and be at least 8 characters long"
+                                    ShowAlert = true
+                                }
+                                else {
+                                    signUp(username: UserUsername, email: UserEmail, password: UserPassword, avatar: UserPicture) {
+                                        result in switch result {
+                                        case .success:
+                                            print("Successful Signup")
+                                        case .failure(let error):
+                                            if let nsError = error as? NSError, nsError.code == 409 {
+                                                AlertMessage = "🧙‍♀️ You shall not pass! Email already exists"
+                                                ShowAlert = true
+                                            } else {
+                                                AlertMessage = "Signup failed: \(error.localizedDescription)"
+                                                ShowAlert = true
+                                            }
+                                        }
                                     }
                                 }
                             }
-                            .buttonStyle(.borderedProminent)
-                            .cornerRadius(20)
-                            .frame(width: 150, height: 50)
-                            .padding(.trailing, 90)
-                            .tint(Color("Olivine"))
+                
+                            .alert(isPresented: $ShowAlert) {
+                                Alert(title: Text("Signup Status"), message: Text(AlertMessage), dismissButton: .default(Text("OK")))
+                            }
                         }
+                            
+                        
+                        .buttonStyle(.borderedProminent)
+                        .cornerRadius(20)
+                        .frame(width: 150, height: 50)
+                        .padding(.trailing, 90)
+                        .tint(Color("Olivine"))
                     }
+                    
                     .frame(width: 500)
                     
                     Spacer()
@@ -87,12 +112,12 @@ struct SignupPageView: View {
                         }
                     }
                 }
+            }
             }.navigationDestination(isPresented: $readyToNavigate) {
                     loginView().navigationBarBackButtonHidden(true)
                 }
             }
         }
-    }
 
 
 
