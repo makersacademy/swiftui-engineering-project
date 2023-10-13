@@ -7,6 +7,7 @@
 import Foundation
 import SwiftUI
 import Combine
+
 struct LogInView: View {
   @EnvironmentObject var token: Token
   @State private var userModel = User(email: "", password: "")
@@ -22,21 +23,29 @@ struct LogInView: View {
     NavigationView {
       ZStack {
         VStack {
+            
           Image("makers-logo")
             .resizable()
             .scaledToFit()
             .frame(width: 200, height: 200)
             .accessibilityIdentifier("makers-logo")
+            
           LabeledContent {
             TextField("Email", text: $userModel.email).textInputAutocapitalization(.never)
           } label: {
             Text("Email")
           }.onChange(of: userModel.email, perform: onEmailInputChanged)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+            
           LabeledContent {
-            TextField("Password", text: $userModel.password).textInputAutocapitalization(.never)
+              SecureField("Password", text: $userModel.password).textInputAutocapitalization(.never)
           } label: {
             Text("Password")
           }.onChange(of: userModel.password, perform: onPasswordInputChanged)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+            
           Button(action: {
             authenticationService.login(user: userModel) { isSuccess in
               if isSuccess {
@@ -51,16 +60,14 @@ struct LogInView: View {
           }
           .accessibilityIdentifier("LoginButton")
           NavigationLink(destination: PostsView().navigationBarBackButtonHidden(true), isActive: $loggedIn) { EmptyView() }
-          Button("Sign Up") {
-            // TODO: sign up logic
-          }
+          NavigationLink("Sign Up", destination: SignUpView().navigationBarBackButtonHidden(true))
           .accessibilityIdentifier("signUpButton")
+          }
+          Spacer()
+          }
         }
-        Spacer()
       }
     }
-  }
-}
   struct LogInView_Previews: PreviewProvider {
     static var previews: some View {
       LogInView().environmentObject(Token())

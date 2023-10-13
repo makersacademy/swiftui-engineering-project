@@ -5,6 +5,7 @@
 // Created by Jenny Wark on 11/10/2023.
 //
 import SwiftUI
+
 struct PostsView: View {
   @EnvironmentObject var token: Token
   @State private var authenticationService = AuthenticationService()
@@ -15,20 +16,24 @@ struct PostsView: View {
     NavigationView {
       VStack {
         Spacer()
+          
         Text("Posts")
           .font(.largeTitle)
           .padding(.bottom, 20)
           .accessibilityIdentifier("welcomeText")
         Spacer()
+          
         Image("makers-logo")
           .resizable()
           .scaledToFit()
           .frame(width: 200, height: 200)
           .accessibilityIdentifier("makers-logo")
         Spacer()
+          
         TextField("Write a post", text: $post_content)
           .textFieldStyle(RoundedBorderTextFieldStyle())
           .padding()
+          
         Button(action: {
           authenticationService.createPost(post: Post(message: post_content), token: token)
         }) {
@@ -36,6 +41,7 @@ struct PostsView: View {
         }
         .accessibilityIdentifier("CreatePostButton")
         Spacer()
+          
         Button(action: {
           authenticationService.allPosts(token: token) { isSuccess in
             if isSuccess {
@@ -52,6 +58,14 @@ struct PostsView: View {
         .accessibilityIdentifier("PostsButton")
         Text("\(posts_array.joined(separator: " "))")
         Spacer()
+          
+        NavigationLink(destination: WelcomePageView()) {
+          Text("Logout")
+              .padding()
+              .background(Color.blue)
+              .foregroundColor(Color.white)
+              .cornerRadius(10)
+          }
       }
     }
  }

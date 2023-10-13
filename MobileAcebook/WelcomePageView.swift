@@ -6,7 +6,8 @@
 //
 import SwiftUI
 struct WelcomePageView: View {
- var body: some View {
+  @EnvironmentObject var token: Token
+var body: some View {
   NavigationView {
    ZStack {
        Color.blue
@@ -41,10 +42,10 @@ struct WelcomePageView: View {
         
      NavigationLink("Sign Up", destination: SignUpView())
      .accessibilityIdentifier("signUpButton")
-//     .foregroundColor(.white)
-//     .frame(width: 300, height: 50)
-//     .background(Color.blue)
-//     .cornerRadius(10)
+     .foregroundColor(.white)
+     .frame(width: 300, height: 50)
+     .background(Color.blue)
+     .cornerRadius(10)
 
      Spacer()
     }
@@ -53,6 +54,6 @@ struct WelcomePageView: View {
  }
 }
 struct WelcomePageView_Previews: PreviewProvider {
- static var previews: some View {
-  WelcomePageView() }
+    static var previews: some View {
+        WelcomePageView().environmentObject(Token()) }
 }
