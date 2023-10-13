@@ -18,22 +18,21 @@ struct loginView: View {
         NavigationStack {
             ZStack {
                 Color("Magnolia")
-                    .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                    .edgesIgnoringSafeArea(.all)
                 VStack{
                     VStack{
                         Text("Login")
-                            .bold().font(.largeTitle)
+                            .bold().font(.system(size: 46, weight: .semibold, design: .rounded))
                             .padding(.top, 50)
                             .foregroundColor(Color("Gunmetal"))
                     }
                     Spacer()
                     VStack{
-                        Image("MageBook-logo")
+                        Image("mage-hat-80s")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 300, height: 200)
                             .accessibilityIdentifier("MageBook-logo")
-                            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                     }
                     Spacer()
                     VStack{
@@ -74,7 +73,8 @@ struct loginView: View {
                                 }
                             }
                             .buttonStyle(.borderedProminent)
-                            .tint(.primary)
+                            //.tint(.primary)
+                            .tint(Color("Olivine"))
                             .cornerRadius(20)
                             .frame(width: 100, height: 50)
                             .padding(.trailing, 90)
@@ -91,7 +91,7 @@ struct loginView: View {
                             Text("Sign up here")
                                 .foregroundColor(Color("Gunmetal"))
                         }
-//                        .padding(.bottom, 50)
+                        //                        .padding(.bottom, 50)
                         
                     }
                 }

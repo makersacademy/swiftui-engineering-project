@@ -19,19 +19,27 @@ struct WelcomePageView: View {
                 VStack {
                     Spacer()
                     
-                    Text("Welcome to Magebook!")
-                        .font(.largeTitle)
+                    Text("Welcome to")
+//                        .bold().italic().font(.system(size: 46, weight: .semibold, design: .rounded))
+                        .font(.system(size: 46, weight: .semibold, design: .rounded))
+                        .italic()
+                        .foregroundColor(Color("Gunmetal"))
+                        .padding(.bottom, 10)
+                        .accessibilityIdentifier("welcomeText")
+                    Text("Magebook!")
+                        .bold().font(.system(size: 46, weight: .semibold, design: .rounded))
                         .foregroundColor(Color("Gunmetal"))
                         .padding(.bottom, 20)
                         .accessibilityIdentifier("welcomeText")
                     
                     Spacer()
                     
-                    Image("makers-logo")
+                    Image("mage-hat-80s")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 200, height: 200)
-                        .accessibilityIdentifier("makers-logo")
+                        .padding(.bottom, 40)
+                        .accessibilityIdentifier("MageBook-logo")
                     
                     Spacer()
                     
