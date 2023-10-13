@@ -16,7 +16,7 @@ struct PostsPageView: View {
         ScrollView {
             VStack{
                 HStack{
-                    Image("MageBook-logo")
+                    Image("mage-hat-80s")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 100.0, height: 100)
@@ -64,16 +64,28 @@ struct PostsPageView: View {
 
                 
                 VStack{
-                    Image("MageBook-logo")
-                }
+                    Image("mage-hat-80s")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                        .padding(20)
+                    }
+                    
+                VStack{
+                    Image("mage-hat-80s")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                        .padding(20)
+                    }
                 
                 VStack{
-                    Image("MageBook-logo")
-                }
-                
-                VStack{
-                    Image("MageBook-logo")
-                }
+                    Image("mage-hat-80s")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                        .padding(20)
+                    }
             }
         }
     }

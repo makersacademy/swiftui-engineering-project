@@ -30,31 +30,39 @@ struct SignupPageView: View {
                     Spacer()
                     
                     VStack{
-                        Image("MageBook-logo")
+                        Image("mage-hat-80s")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 200, height: 200)
                             .accessibilityIdentifier("MageBook-logo")
                     }
+                    Spacer()
                     
                     VStack {
-                        TextField("🔮 Enter your email address", text: $UserEmail)
-                            .padding()
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .frame(width: 350)
-                        SecureField("🧹 Enter your password", text: $UserPassword)
-                            .padding()
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .frame(width: 350)
-                        TextField("✨ Enter your username", text: $UserUsername)
-                            .padding()
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .frame(width: 350)
-                        TextField("🧙‍♂️ Profile Picture", text: $UserPicture)
-                            .padding()
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .frame(width: 350)
+                        VStack{
+                            TextField("🔮 Enter your email address", text: $UserEmail)
+                                .padding() 
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .frame(width: 350)
+                                .textInputAutocapitalization(.never)
+                            SecureField("🧹 Enter your password", text: $UserPassword)
+                                .padding()
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .frame(width: 350)
+                                .textInputAutocapitalization(.never)
+                            TextField("✨ Enter your username", text: $UserUsername)
+                                .padding()
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .frame(width: 350)
+                                .textInputAutocapitalization(.never)
+                            TextField("🧙‍♂️ Profile Picture", text: $UserPicture)
+                                .padding()
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .frame(width: 350)
+                        }.background(Color("Magenta"))
+                            .cornerRadius(20)
                         
+                            
                         
                         HStack{
                             Spacer()
@@ -94,7 +102,7 @@ struct SignupPageView: View {
                         
                         .buttonStyle(.borderedProminent)
                         .cornerRadius(20)
-                        .frame(width: 150, height: 50)
+                        .frame(width: 435, height: 50)
                         .padding(.trailing, 90)
                         .tint(Color("Olivine"))
                     }
