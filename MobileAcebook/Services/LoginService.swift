@@ -58,6 +58,7 @@ func loginAsync(email: String, password: String, completion: @escaping(Result<Vo
     } else {
         completion(.failure(NSError(domain: "", code: 400, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
     }
+    
 }
 
 
