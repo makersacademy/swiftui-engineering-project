@@ -60,6 +60,9 @@ struct LogInView: View {
           }
           .accessibilityIdentifier("LoginButton")
           NavigationLink(destination: PostsView().navigationBarBackButtonHidden(true), isActive: $loggedIn) { EmptyView() }
+            
+        Text("\(authenticationService.error_message)").foregroundColor(.red) 
+            
           NavigationLink("Sign Up", destination: SignUpView().navigationBarBackButtonHidden(true))
           .accessibilityIdentifier("signUpButton")
           }

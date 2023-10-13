@@ -6,23 +6,65 @@
 //
 import SwiftUI
 class AuthenticationService: AuthenticationServiceProtocol {
+    
+    
+    
   var userToken: String = ""
   var posts_array: Array<String> = []
-  func signUp(user: User) -> Bool {
-    var request = URLRequest(url: URL(string: "http://127.0.0.1:8080/users")!)
-    request.httpMethod = "POST"
-    let json: [String: Any] = ["email": user.email, "password": user.password]
-    let jsonData = try? JSONSerialization.data(withJSONObject: json)
-    request.httpBody = jsonData
-    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
-      if error != nil {
-        print("I've got an error")
-      }
+  var error_message = ""
+    
+    func signUp(user: User) -> Bool {
+        return true
     }
-    task.resume()
-    return true
-  }
+    
+    func register(user: User, completion: @escaping (Bool) -> Void) {
+      var request = URLRequest(url: URL(string: "http://localhost:8080/users")!)
+      request.httpMethod = "POST"
+      request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      let jsonEncoder = JSONEncoder()
+      do {
+        let jsonData = try jsonEncoder.encode(user)
+        request.httpBody = jsonData
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+          // Handling the response data, if any
+          var isSuccess = false
+          
+          if let data = data {
+            do {
+              let jsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+              if let message = jsonResponse?["message"] as? String, message == "OK" {
+                // If the response message is "Email not found", login is unsuccessful
+                isSuccess = true
+                if let token = jsonResponse?["token"] as? String {
+                  // Store the token in a variable
+                  self.userToken = token
+                  //                print("3")
+                }
+              }
+                else {
+                    self.error_message = (jsonResponse?["message"] as? String)!
+                    print(self.error_message)
+                }
+            } catch {
+              // Handle JSON parsing errors, if any
+              print("Error parsing JSON: \(error)")
+            }
+          }
+            
+          // Calling the completion handler with the login result (true for successful, false for unsuccessful)
+          completion(isSuccess)
+          //        print("5")
+        }
+        task.resume()
+      } catch {
+        // Handle encoding errors, if any
+        print("Error encoding user object: \(error)")
+        completion(false) // Calling the completion handler with false in case of an error
+        //      print("5")
+      }
+      //    print("1")
+    }
+    
   func login(user: User, completion: @escaping (Bool) -> Void) {
     var request = URLRequest(url: URL(string: "http://localhost:8080/tokens")!)
     request.httpMethod = "POST"
@@ -46,6 +88,10 @@ class AuthenticationService: AuthenticationServiceProtocol {
                 //                print("3")
               }
             }
+              else {
+                  self.error_message = (jsonResponse?["message"] as? String)!
+                  print(self.error_message)
+              }
           } catch {
             // Handle JSON parsing errors, if any
             print("Error parsing JSON: \(error)")
@@ -64,6 +110,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
     }
     //    print("1")
   }
+    
   func createPost(post: Post, token: Token) -> Void {
     print("Bearer \(token.content)")
     var request = URLRequest(url: URL(string: "http://127.0.0.1:8080/posts")!)
@@ -112,10 +159,6 @@ class AuthenticationService: AuthenticationServiceProtocol {
                   }
                 }
               }
-//                for post in jsonResponse?["posts"]{
-////                  self.posts_array.append(post["message"])
-//
-//                }
               }
           } catch {
             // Handle JSON parsing errors, if any

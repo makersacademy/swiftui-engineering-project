@@ -54,19 +54,24 @@ struct SignUpView: View {
                   Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
                       .padding(.trailing, 8)
               }
-          }      
+          }    
           
-
+          Text("\(authenticationService.error_message)").foregroundColor(.red)          
+          
           Button(action: {
-              let user = User(email: email, password: password)
-              let response = authenticationService.signUp(user: user)
-              if response == true {
+              authenticationService.register(user: User(email: email, password: password)) { isSuccess in
+              if isSuccess {
                   SignedUp = true
               }
+//              print("4")
+              self.token.content = authenticationService.userToken
+            }
+//            print("2")
           }) {
-              Text("SignUp")
+            Text("SignUp")
           }
           .accessibilityIdentifier("SignUpButton")
+          
           NavigationLink(destination: LogInView().environmentObject(token).navigationBarBackButtonHidden(true), isActive: $SignedUp) { EmptyView() }
           Spacer()
         }
