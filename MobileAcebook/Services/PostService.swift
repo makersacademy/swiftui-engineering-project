@@ -29,11 +29,11 @@ func createPost(newPost: CreatePost, completion: @escaping (Result<Void, Error>)
         
         // Establish a new POST request
         var request = URLRequest(url: url)  // Create a URL request object
-        request.httpMethod = "POST"         // Set the HTTP method to POST
+        request.httpMethod = "POST"
         
         // Convert new post object into JSON data using JSONEncoder
         let encoder = JSONEncoder()
-        // Try converting the post object into JSON data
+
         if let jsonData = try? encoder.encode(newPost) {
             request.httpBody = jsonData // Set the JSON data as the request's body
 
@@ -43,7 +43,7 @@ func createPost(newPost: CreatePost, completion: @escaping (Result<Void, Error>)
             } else {
                 completion(.failure(AppError.authenticationError))
             }
-                request.setValue("application/json", forHTTPHeaderField: "Content-Type") // Set the request's content type header
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type") 
             
             // Create a data task that will handle the request and the server's response (asynchonous)
             let createPostTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
