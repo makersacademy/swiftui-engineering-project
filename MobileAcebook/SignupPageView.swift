@@ -38,19 +38,19 @@ struct SignupPageView: View {
                     }
                     
                     VStack {
-                        TextField("Enter your email address", text: $UserEmail)
+                        TextField("🔮 Enter your email address", text: $UserEmail)
                             .padding()
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .frame(width: 350)
-                        SecureField("Enter your password", text: $UserPassword)
+                        SecureField("🧹 Enter your password", text: $UserPassword)
                             .padding()
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .frame(width: 350)
-                        TextField("Enter your username", text: $UserUsername)
+                        TextField("✨ Enter your username", text: $UserUsername)
                             .padding()
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .frame(width: 350)
-                        TextField("Profile Picture", text: $UserPicture)
+                        TextField("🧙‍♂️ Profile Picture", text: $UserPicture)
                             .padding()
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .frame(width: 350)
@@ -61,11 +61,11 @@ struct SignupPageView: View {
                             Button("Sign up") {
                                 readyToNavigate = true
                                 if !isValidEmailAddr(strToValidate: UserEmail) {
-                                    AlertMessage = "Please enter a valid email address"
+                                    AlertMessage = "🧙‍♀️ You shall not pass! Please enter a valid email address"
                                     ShowAlert = true
                                 }
                                 else if !isPasswordValid(password: UserPassword) {
-                                    AlertMessage = "Password must contain at least one uppercase letter, one lowercase letter, one special character, one number and be at least 8 characters long"
+                                    AlertMessage = "🧙‍♀️ You shall not pass! Password must contain at least one uppercase letter, one lowercase letter, one special character, one number and be at least 8 characters long"
                                     ShowAlert = true
                                 }
                                 else {
@@ -75,7 +75,7 @@ struct SignupPageView: View {
                                             print("Successful Signup")
                                         case .failure(let error):
                                             if let nsError = error as? NSError, nsError.code == 409 {
-                                                AlertMessage = "Email already exists"
+                                                AlertMessage = "🧙‍♀️ You shall not pass! Email already exists"
                                                 ShowAlert = true
                                             } else {
                                                 AlertMessage = "Signup failed: \(error.localizedDescription)"
@@ -83,15 +83,11 @@ struct SignupPageView: View {
                                             }
                                         }
                                     }
-//                                } else {
-//                                    AlertMessage = "Your signup was unsuccessful"
-//                                    ShowAlert = true
-//                                    print("Your signup was unsuccessful")
                                 }
                             }
                 
                             .alert(isPresented: $ShowAlert) {
-                                Alert(title: Text("Signup Status"), message: Text(AlertMessage), dismissButton: .default(Text("Ok")))
+                                Alert(title: Text("Signup Status"), message: Text(AlertMessage), dismissButton: .default(Text("OK")))
                             }
                         }
                             
