@@ -75,12 +75,10 @@ struct loginView: View {
                                         if let nsError = error as? NSError, nsError.code == 401 {
                                             AlertMessage = "🧙‍♀️ You shall not pass! Email address not found!"
                                             ShowAlert = true
-                                            print("I have run - email not found")
                                         }
                                         else if let nsError = error as? NSError, nsError.code == 402 {
                                             AlertMessage = "🧙‍♀️ You shall not pass! Your password is incorrect!"
                                             ShowAlert = true
-                                            print("I have run - password not found")
                                         }
                                         else{
                                             AlertMessage = "Sign in failed: \(error.localizedDescription)"
