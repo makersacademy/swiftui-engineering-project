@@ -33,6 +33,12 @@ struct WelcomePageView: View {
                 }
                 .accessibilityIdentifier("signUpButton")
                 
+                
+                Button("Login") {
+                    // TODO: sign up logic
+                }
+                .accessibilityIdentifier("loginButton")
+                
                 Spacer()
             }
         }
