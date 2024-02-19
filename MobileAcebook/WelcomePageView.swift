@@ -8,18 +8,24 @@
 import SwiftUI
 
 struct WelcomePageView: View {
+    
+    // remove these
+    @State private var isLoggedIn = true
+    @State private var showLoggedOutMessage = false
+    var authService = AuthenticationService()
+    
     var body: some View {
         ZStack {
             VStack {
                 Spacer()
-
+                
                 Text("Welcome to Acebook!")
                     .font(.largeTitle)
                     .padding(.bottom, 20)
                     .accessibilityIdentifier("welcomeText")
-
+                
                 Spacer()
-
+                
                 Image("makers-logo")
                     .resizable()
                     .scaledToFit()
@@ -27,27 +33,31 @@ struct WelcomePageView: View {
                     .accessibilityIdentifier("makers-logo")
                 
                 Spacer()
-
+                
                 Button("Sign Up") {
                     // TODO: sign up logic
                 }
                 .accessibilityIdentifier("signUpButton")
                 
+                // move this to the relevant pages !!
                 Button("Logout") {
-                    // TODO: logout logic
+                    authService.logout()
+                    // isLoggedIn = false
+                    showLoggedOutMessage = true
                 }
-                .accessibilityIdentifier("signUpButton")
-                
-                
+                .accessibilityIdentifier("logout")
                 
                 Spacer()
             }
+            .sheet(isPresented: $showLoggedOutMessage) {
+                LogoutMessageView()
+            }
         }
     }
-}
-
-struct WelcomePageView_Previews: PreviewProvider {
-    static var previews: some View {
-        WelcomePageView()
+    
+    struct WelcomePageView_Previews: PreviewProvider {
+        static var previews: some View {
+            WelcomePageView()
+        }
     }
 }
