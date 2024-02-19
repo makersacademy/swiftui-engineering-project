@@ -28,8 +28,9 @@ struct WelcomePageView: View {
                 
                 Spacer()
 
-                Button("Sign Up") {
-                    // TODO: sign up logic
+                NavigationView{
+                    NavigationLink(destination: SignUpPageView())
+                    { Text("Sign Up") }
                 }
                 .accessibilityIdentifier("signUpButton")
                 
