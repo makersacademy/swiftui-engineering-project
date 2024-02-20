@@ -7,7 +7,7 @@
 
 import Foundation
 
-func createUser3(user: User, completion: @escaping (Result<Data, Error>) -> Void) {
+func createUser(user: User, completion: @escaping (Result<Data, Error>) -> Void) {
   guard let url = URL(string: "http://127.0.0.1:8080/users") else {
       completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
       return

@@ -7,36 +7,40 @@
 import Foundation
 
 class AuthenticationService: AuthenticationServiceProtocol {
-  func signUp(user: User) -> Bool {
+    func signUp(user: User, completion: @escaping (Bool) -> Void) {
     var canSignUp = false
+      
+    let username = user.username
     let email = user.email
     let password = user.password
     let confPassword = user.confPassword
 
-    guard let unwrappedEmail = email else { return false }
-    guard let unwrappedPassword = password else { return false }
-    guard let unwrappedConfPassword = confPassword else { return false }
+    guard let unwrappedUsername = username, let unwrappedEmail = email, let unwrappedPassword = password, let unwrappedConfPassword = confPassword else {
+                completion(false)
+                return
+            }
 
     let validEmail = isEmailValid(unwrappedEmail)
     let passwordsMatch = doPasswordsMatch(unwrappedPassword, unwrappedConfPassword)
     let validPassword = isPasswordValid(unwrappedPassword)
+      
+    if validEmail && passwordsMatch && validPassword && unwrappedEmail != "" && unwrappedUsername != "" && unwrappedPassword != "" && unwrappedConfPassword != ""{
 
-    if validEmail && passwordsMatch && validPassword {
-
-      createUser3(user: user) {
+      createUser(user: user) {
         result in switch result {
         case .success(let data):
-          print("User has been created: \(data)")
+            print("User has been created: \(data)")
           canSignUp = true
+            print("ln 34, \(canSignUp)")
+            completion(canSignUp)
         case .failure(let error):
           print("Error creating user: \(error)")
           canSignUp = false
+            completion(canSignUp)
         }
       }
-
-      return canSignUp
     } else {
-      return canSignUp // alert or error message will go here
+      completion(false) // alert or error message will go here
     }
   }
 

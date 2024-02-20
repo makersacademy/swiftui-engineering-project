@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import PhotosUI
+import Cloudinary
 
 struct SignupPageView: View {
   @State private var username: String = ""
@@ -13,6 +15,9 @@ struct SignupPageView: View {
   @State private var password: String = ""
   @State private var confPassword: String = ""
 
+  @StateObject var imagePicker = ImagePicker()
+  @State private var uploadedImagePublicId: String?
+    
   @State private var navigateToFeedPage: Bool = false
 
   var body: some View {
@@ -42,16 +47,31 @@ struct SignupPageView: View {
               SecureField("Confirm Password", text:$confPassword)
             }
 
+            PhotosPicker(selection: $imagePicker.imageSelection) {
+                Text("Upload a photo")
+            }
+            .onChange(of: imagePicker.imageData) { imageData in
+                // This block is executed when image data is set in the ImagePicker
+                // You can update the uploadedImagePublicId here
+                if let imageData = imageData {
+                    imagePicker.uploadToCloudinary(data: imageData) { imagePublicId in
+                        uploadedImagePublicId = imagePublicId
+                    }
+                }
+            }
+            
+            
           Section {
 
             Button("Sign Up") {
-              let userInfo = User(username: username, email: email, password: password, confPassword: confPassword)
-              if AuthenticationService().signUp(user: userInfo) {
-                // generate token
-                navigateToFeedPage = true
-              } else{
-                navigateToFeedPage = false
-              }
+              let userInfo = User(username: username, email: email, password: password, confPassword: confPassword, avatar: uploadedImagePublicId)
+                AuthenticationService().signUp(user: userInfo) {
+                    canSignUp in if canSignUp {
+                        navigateToFeedPage = true
+                    } else {
+                        navigateToFeedPage = false
+                    }
+                }
             }.background(NavigationLink(destination: HomePageView(), isActive: $navigateToFeedPage){ EmptyView() })
           }
         }
