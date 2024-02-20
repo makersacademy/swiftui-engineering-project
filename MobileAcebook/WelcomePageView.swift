@@ -6,41 +6,64 @@
 //
 
 import SwiftUI
+import PhotosUI
+import Cloudinary
+
 
 struct WelcomePageView: View {
+    @StateObject var imagePicker = ImagePicker()
+    @State private var uploadedImagePublicId: String?
     var body: some View {
-        ZStack {
-            VStack {
-                Spacer()
-
-                Text("Welcome to Acebook!")
-                    .font(.largeTitle)
-                    .padding(.bottom, 20)
-                    .accessibilityIdentifier("welcomeText")
-
-                Spacer()
-
-                Image("makers-logo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 200, height: 200)
-                    .accessibilityIdentifier("makers-logo")
-                
-                Spacer()
-
-                Button("Sign Up") {
-                    // TODO: sign up logic
+        NavigationView {
+            ZStack {
+                VStack {
+                    Spacer()
+                    
+                    Text("Welcome to Acebook!")
+                        .font(.largeTitle)
+                        .padding(.bottom, 20)
+                        .accessibilityIdentifier("welcomeText")
+                    
+                    Spacer()
+                    
+                    Image("makers-logo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                        .accessibilityIdentifier("makers-logo")
+                    
+                    Spacer()
+                    
+                    Button("Sign Up") {
+                        // TODO: sign up logic
+                    }
+                    .accessibilityIdentifier("signUpButton")
+                    
+                    
+                    NavigationLink("user page", destination: UserPageView())
+                    
+                    PhotosPicker(selection: $imagePicker.imageSelection) {
+                        Text("upload a photo")
+                    }
+                    .onChange(of: imagePicker.imageData) { imageData in
+                                // This block is executed when image data is set in the ImagePicker
+                                // You can update the uploadedImagePublicId here
+                                if let imageData = imageData {
+                                    imagePicker.uploadToCloudinary(data: imageData) { imagePublicId in
+                                        uploadedImagePublicId = imagePublicId
+                                    }
+                                }
+                            }
+                        Spacer()
+                    
                 }
-                .accessibilityIdentifier("signUpButton")
-                
-                Spacer()
             }
         }
     }
-}
-
-struct WelcomePageView_Previews: PreviewProvider {
-    static var previews: some View {
-        WelcomePageView()
+    
+    struct WelcomePageView_Previews: PreviewProvider {
+        static var previews: some View {
+            WelcomePageView()
+        }
     }
 }
