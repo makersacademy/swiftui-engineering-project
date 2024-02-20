@@ -80,6 +80,8 @@ struct LoginPageView: View {
         .fullScreenCover(isPresented: $isAuthenticated) {
             // This will present the PostPageView when isAuthenticated becomes true
             //PostPageView()
+            
+            // temp button - will need moving/changing once pages are built
             Button("Logout") {
                        logout()
                    }
