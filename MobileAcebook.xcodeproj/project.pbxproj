@@ -19,6 +19,8 @@
 		AE5D85E32AC9AFD2009680C6 /* MockAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E22AC9AFD2009680C6 /* MockAuthenticationService.swift */; };
 		AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E52AC9B077009680C6 /* AuthenticationServiceProtocol.swift */; };
 		AE5D85E82AC9B29A009680C6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E72AC9B29A009680C6 /* User.swift */; };
+		C39C85A02B83B1D100EF560A /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39C859D2B83B19000EF560A /* SignUpView.swift */; };
+		C39C85A22B83BCD900EF560A /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39C85A12B83BCD900EF560A /* LogInView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,8 @@
 		AE5D85E22AC9AFD2009680C6 /* MockAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthenticationService.swift; sourceTree = "<group>"; };
 		AE5D85E52AC9B077009680C6 /* AuthenticationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceProtocol.swift; sourceTree = "<group>"; };
 		AE5D85E72AC9B29A009680C6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C39C859D2B83B19000EF560A /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		C39C85A12B83BCD900EF560A /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,8 @@
 				AE5D85DF2AC9AF83009680C6 /* Models */,
 				AE5D85DD2AC9AF72009680C6 /* Services */,
 				AE5D85AF2AC8A221009680C6 /* MobileAcebookApp.swift */,
+				C39C85A12B83BCD900EF560A /* LogInView.swift */,
+				C39C859D2B83B19000EF560A /* SignUpView.swift */,
 				AE5D85B32AC8A224009680C6 /* Assets.xcassets */,
 				AE5D85B52AC8A224009680C6 /* Preview Content */,
 				AE5D85D92AC8A337009680C6 /* WelcomePageView.swift */,
@@ -305,9 +311,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE5D85E12AC9AFA9009680C6 /* AuthenticationService.swift in Sources */,
+				C39C85A22B83BCD900EF560A /* LogInView.swift in Sources */,
 				AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */,
 				AE5D85B02AC8A221009680C6 /* MobileAcebookApp.swift in Sources */,
 				AE5D85E82AC9B29A009680C6 /* User.swift in Sources */,
+				C39C85A02B83B1D100EF560A /* SignUpView.swift in Sources */,
 				AE5D85DA2AC8A337009680C6 /* WelcomePageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

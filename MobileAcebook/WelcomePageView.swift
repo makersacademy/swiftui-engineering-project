@@ -1,10 +1,3 @@
-//
-//  WelcomePageView.swift
-//  MobileAcebook
-//
-//  Created by Josué Estévez Fernández on 30/09/2023.
-//
-
 import SwiftUI
 
 struct WelcomePageView: View {
@@ -44,3 +37,4 @@ struct WelcomePageView_Previews: PreviewProvider {
         WelcomePageView()
     }
 }
+
