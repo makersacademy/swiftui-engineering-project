@@ -1,4 +1,3 @@
-//
 //  CloudinaryImageView.swift
 //  MobileAcebook
 //
@@ -19,7 +18,7 @@ func cloudinaryImageView(cloudinary: CLDCloudinary, imagePath: String) -> some V
                         .frame(width: 100, height: 100)
                         .clipped()
                         .clipShape(Circle())
-                    
+
                 } placeholder: {
                     ProgressView() // Show a progress view while the image is loading
                 }

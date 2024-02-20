@@ -10,7 +10,7 @@ import Cloudinary
 struct CloudinaryConfig {
     static let cloudName = "dbhtb2iqe"
     static let secure = true
-    
+
     static var configuration: CLDConfiguration {
         return CLDConfiguration(cloudName: cloudName, secure: secure)
     }
