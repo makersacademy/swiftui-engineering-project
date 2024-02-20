@@ -1,11 +1,3 @@
-//
-//  LoginView.swift
-//  MobileAcebook
-//
-//  Created by Gabriela Ehrenbrink on 20/02/2024.
-//
-
-import Foundation
 import SwiftUI
 
 struct LoginPage: View {
@@ -14,18 +6,21 @@ struct LoginPage: View {
     @State private var wrongEmail = 0
     @State private var wrongPassword = 0
     @State private var isLoginSuccessful = false
+    @State private var showAlert = false
+    @State private var alertMessage = ""
+    @State private var shouldNavigate = false
     
     var authenticationService: AuthenticationService
-
     
     var body: some View {
         NavigationView {
-            ZStack{
+            ZStack {
                 Color(red: Double(67) / 255.0,
                       green: Double(100) / 255.0,
                       blue: Double(157) / 255.0
                 )
                 .ignoresSafeArea()
+                
                 VStack {
                     Text("Acebook")
                         .font(.system(size: 70))
@@ -45,47 +40,54 @@ struct LoginPage: View {
                         .cornerRadius(10)
                         .border(.red, width: CGFloat(wrongPassword))
                     
+//                    added code
                     NavigationLink(
-                        destination: SignupView(authenticationService: authenticationService),
-                        label: {
-                            Text("Sign Up")
-                        }
-                    )
-                    .accessibilityIdentifier("signUpButton")
+                            destination: FeedView(),
+                            isActive: $shouldNavigate
+                        ) {
+                            EmptyView()
+                                        }
                     
-                    Button("Login") {
+//                    added code
+                    Button(action: {
                         authenticateUser(email: email, password: password)
+                    }) {
+                        Text("Login")
+                            .foregroundColor(.white)
+                            .frame(width: 100, height: 50)
+                            .background(Color(red: Double((0x254778 & 0xFF0000) >> 16) / 255.0, green: Double((0x254778 & 0x00FF00) >> 8) / 255.0, blue: Double(0x254778 & 0x0000FF) / 255.0))
+                            .cornerRadius(10)
+                            .bold()
                     }
-                    .foregroundColor(.white)
-                    .frame(width: 100, height: 50)
-                    .background(Color(red: Double((0x254778 & 0xFF0000) >> 16) / 255.0, green: Double((0x254778 & 0x00FF00) >> 8) / 255.0, blue: Double(0x254778 & 0x0000FF) / 255.0))
-                    .cornerRadius(10)
-                    .bold()
-                    
-                    
                 }
-                
+                .navigationBarHidden(true)
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                }
             }
-            .navigationBarHidden(true)
+           
         }
-        
     }
+
     func authenticateUser(email: String, password: String) {
         authenticationService.LogIn(email: email, password: password) { success, error in
             if success {
-                // Authentication succeeded, you can navigate to the next screen or perform other actions
+                // Authentication succeeded, navigate to the FeedView
                 print("Authentication successful!")
+                shouldNavigate = true
             } else {
-                // Authentication failed, update UI accordingly (e.g., show an error message)
-                print("Authentication failed!")
+                // Authentication failed, show an error message
+                showAlert = true
+                alertMessage = "Authentication failed!"
+                print("Authentication Error")
             }
         }
     }
-    struct ContentView_Previews: PreviewProvider {
-        static var previews: some View {
-            LoginPage(authenticationService: AuthenticationService())
-        }
-    
-    }
+}
 
+
+struct LoginPage_Previews: PreviewProvider {
+    static var previews: some View {
+        LoginPage(authenticationService: AuthenticationService())
+    }
 }

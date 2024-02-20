@@ -8,16 +8,10 @@ import Foundation
 import SwiftUI
 
 struct FeedView: View {
-    let user: User // Assuming you have a User model or structure
+//    var user: User?
 
     var body: some View {
-        VStack {
-            Text("Welcome, \(user.username)")
-                .font(.title)
-                .padding()
-            
-            Text("Email: \(user.email)")
-                .padding()
-        }
+        // Your FeedView implementation here, using the user information as needed
+        Text("Welcome!")
     }
 }
