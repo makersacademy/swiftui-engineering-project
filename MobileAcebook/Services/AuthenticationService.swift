@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AuthenticationService: AuthenticationServiceProtocol {
+class AuthenticationService: AuthenticationServiceProtocol, ObservableObject {
     func signUp(user: User) -> Bool {
         // Logic to call the backend API for signing up
         return true // placeholder
@@ -15,6 +15,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
     
     func logout() {
         UserDefaults.standard.removeObject(forKey: "token")
-        UserDefaults.standard.setValue(false, forKey: "isLoggedIn") // may need to change this key
+        UserDefaults.standard.setValue(false, forKey: "isAuthenticated")
     }
+
 }
