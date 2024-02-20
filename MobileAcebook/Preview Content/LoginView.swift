@@ -13,9 +13,10 @@ struct LoginPage: View {
     @State private var password = ""
     @State private var wrongEmail = 0
     @State private var wrongPassword = 0
-    @State private var showingLoginScreen = false
+    @State private var isLoginSuccessful = false
     
-    var authenticationService: AuthenticationServiceProtocol
+    var authenticationService: AuthenticationService
+
     
     var body: some View {
         NavigationView {
@@ -44,6 +45,14 @@ struct LoginPage: View {
                         .cornerRadius(10)
                         .border(.red, width: CGFloat(wrongPassword))
                     
+                    NavigationLink(
+                        destination: SignupView(authenticationService: authenticationService),
+                        label: {
+                            Text("Sign Up")
+                        }
+                    )
+                    .accessibilityIdentifier("signUpButton")
+                    
                     Button("Login") {
                         authenticateUser(email: email, password: password)
                     }
@@ -62,7 +71,7 @@ struct LoginPage: View {
         
     }
     func authenticateUser(email: String, password: String) {
-        authenticationService.logIn(email: email, password: password) { success in
+        authenticationService.LogIn(email: email, password: password) { success, error in
             if success {
                 // Authentication succeeded, you can navigate to the next screen or perform other actions
                 print("Authentication successful!")
@@ -72,11 +81,11 @@ struct LoginPage: View {
             }
         }
     }
-    
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
             LoginPage(authenticationService: AuthenticationService())
         }
-    }
     
+    }
+
 }
