@@ -10,6 +10,8 @@ import SwiftUI
 struct WelcomePageView: View {
     @State private var isSignupViewPresented = false
     let authService = AuthenticationService()
+    let postService = PostService()
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -39,6 +41,14 @@ struct WelcomePageView: View {
                         }
                     )
                     .accessibilityIdentifier("signUpButton")
+                    
+                    NavigationLink(
+                        destination: NewsFeedView(postService: postService),
+                        label: {
+                            Text("News Feed")
+                        }
+                    )
+                    .accessibilityIdentifier("newsFeedButton")
                     
                     Spacer()
                 }

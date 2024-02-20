@@ -11,6 +11,9 @@
 		1377648A2B84E56700000843 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137764892B84E56700000843 /* SignupView.swift */; };
 		1377648C2B84E59900000843 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377648B2B84E59900000843 /* UserView.swift */; };
 		1377648E2B84ECF000000843 /* NewsFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377648D2B84ECF000000843 /* NewsFeedView.swift */; };
+		137764902B84EE0C00000843 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377648F2B84EE0C00000843 /* PostService.swift */; };
+		137764922B84F17900000843 /* NewsFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137764912B84F17900000843 /* NewsFeedViewModel.swift */; };
+		137764942B84F37200000843 /* PostServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137764932B84F37200000843 /* PostServiceProtocol.swift */; };
 		AE5D85B02AC8A221009680C6 /* MobileAcebookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85AF2AC8A221009680C6 /* MobileAcebookApp.swift */; };
 		AE5D85B42AC8A224009680C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE5D85B32AC8A224009680C6 /* Assets.xcassets */; };
 		AE5D85B72AC8A224009680C6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE5D85B62AC8A224009680C6 /* Preview Assets.xcassets */; };
@@ -47,6 +50,9 @@
 		137764892B84E56700000843 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		1377648B2B84E59900000843 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		1377648D2B84ECF000000843 /* NewsFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedView.swift; sourceTree = "<group>"; };
+		1377648F2B84EE0C00000843 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		137764912B84F17900000843 /* NewsFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedViewModel.swift; sourceTree = "<group>"; };
+		137764932B84F37200000843 /* PostServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostServiceProtocol.swift; sourceTree = "<group>"; };
 		AE5D85AC2AC8A221009680C6 /* MobileAcebook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileAcebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE5D85AF2AC8A221009680C6 /* MobileAcebookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileAcebookApp.swift; sourceTree = "<group>"; };
 		AE5D85B32AC8A224009680C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -157,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				AE5D85E02AC9AFA9009680C6 /* AuthenticationService.swift */,
+				1377648F2B84EE0C00000843 /* PostService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -174,6 +181,7 @@
 			children = (
 				AE5D85E72AC9B29A009680C6 /* User.swift */,
 				137764872B84E50B00000843 /* Post.swift */,
+				137764912B84F17900000843 /* NewsFeedViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -182,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				AE5D85E52AC9B077009680C6 /* AuthenticationServiceProtocol.swift */,
+				137764932B84F37200000843 /* PostServiceProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -317,10 +326,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1377648A2B84E56700000843 /* SignupView.swift in Sources */,
+				137764942B84F37200000843 /* PostServiceProtocol.swift in Sources */,
 				AE5D85E12AC9AFA9009680C6 /* AuthenticationService.swift in Sources */,
 				AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */,
 				1377648C2B84E59900000843 /* UserView.swift in Sources */,
+				137764922B84F17900000843 /* NewsFeedViewModel.swift in Sources */,
 				AE5D85B02AC8A221009680C6 /* MobileAcebookApp.swift in Sources */,
+				137764902B84EE0C00000843 /* PostService.swift in Sources */,
 				137764882B84E50B00000843 /* Post.swift in Sources */,
 				1377648E2B84ECF000000843 /* NewsFeedView.swift in Sources */,
 				AE5D85E82AC9B29A009680C6 /* User.swift in Sources */,
