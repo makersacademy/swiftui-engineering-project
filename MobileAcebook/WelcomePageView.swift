@@ -11,8 +11,10 @@ import Cloudinary
 
 
 struct WelcomePageView: View {
+    
     @StateObject var imagePicker = ImagePicker()
     @State private var uploadedImagePublicId: String?
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -34,10 +36,7 @@ struct WelcomePageView: View {
                     
                     Spacer()
                     
-                    Button("Sign Up") {
-                        // TODO: sign up logic
-                    }
-                    .accessibilityIdentifier("signUpButton")
+                    NavigationLink("Sign Up", destination: SignupPageView())
                     
                     
                     NavigationLink("user page", destination: UserPageView())
@@ -46,24 +45,23 @@ struct WelcomePageView: View {
                         Text("upload a photo")
                     }
                     .onChange(of: imagePicker.imageData) { imageData in
-                                // This block is executed when image data is set in the ImagePicker
-                                // You can update the uploadedImagePublicId here
-                                if let imageData = imageData {
-                                    imagePicker.uploadToCloudinary(data: imageData) { imagePublicId in
-                                        uploadedImagePublicId = imagePublicId
-                                    }
-                                }
+                        // This block is executed when image data is set in the ImagePicker
+                        // You can update the uploadedImagePublicId here
+                        if let imageData = imageData {
+                            imagePicker.uploadToCloudinary(data: imageData) { imagePublicId in
+                                uploadedImagePublicId = imagePublicId
                             }
-                        Spacer()
+                        }
+                    }
+                    Spacer()
                     
                 }
             }
         }
     }
-    
-    struct WelcomePageView_Previews: PreviewProvider {
-        static var previews: some View {
-            WelcomePageView()
-        }
+}
+struct WelcomePageView_Previews: PreviewProvider {
+    static var previews: some View {
+        WelcomePageView()
     }
 }
