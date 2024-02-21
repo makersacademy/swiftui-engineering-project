@@ -7,12 +7,10 @@ struct LoadingView: View {
 
         Spacer()
         
-        Image("makers-logo")
+        Image("logo-acebook")
                     .resizable()
-                    .renderingMode(.template)
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 200, height: 200)
-                    .foregroundColor(Color(UIColor(rgb: 0x4267B2))) 
+                    .frame(width: 80, height: 80)
                     .padding()
         
         Spacer()

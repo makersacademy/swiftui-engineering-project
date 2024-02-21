@@ -11,11 +11,10 @@ struct MediatorView: View {
             VStack {
                 LoadingView()
                     .onAppear {
-                        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
+                        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
                             self.isLoadingActive = true
                         }
                     }
-                    
                 NavigationLink(destination: LoginPage(authenticationService: AuthenticationService()), isActive: $isLoadingActive) {
                     EmptyView()
                 }
