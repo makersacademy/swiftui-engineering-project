@@ -79,17 +79,17 @@ struct LoginPageView: View {
         .navigationBarHidden(true)
         .fullScreenCover(isPresented: $isAuthenticated) {
             // This will present the PostPageView when isAuthenticated becomes true
-            //PostPageView()
+            NavigationTabView()
             
             // temp button - will need moving/changing once pages are built
-            Button("Logout") {
-                       logout()
-                   }
-                   .font(.headline)
-                   .foregroundColor(.white)
-                   .frame(width: 300, height: 50)
-                   .background(Color.red)
-                   .cornerRadius(15.0)
+//            Button("Logout") {
+//                       logout()
+//                   }
+//                   .font(.headline)
+//                   .foregroundColor(.white)
+//                   .frame(width: 300, height: 50)
+//                   .background(Color.red)
+//                   .cornerRadius(15.0)
         }
     }
     

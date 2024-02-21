@@ -8,29 +8,52 @@
 
 import SwiftUI
 
-
 struct NavigationTabView: View {
+    @State private var selectedTabIndex = 0 // keeps track of selected tab
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
-        TabView {
-            HomePageView()
-                .tabItem {
-                    Label("Home", systemImage: "house")
+        NavigationView {
+            VStack {
+                // Top bar with back and logout buttons
+                HStack {
+                    Button(action: {
+                        // Navigate back to previous page
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "arrow.backward.circle.fill")
+                            .foregroundColor(.black)
+                    }
+                    Spacer()
+                    Button(action: {
+                        // Add action for logout button
+                    }) {
+                        Text("Logout")
+                            .foregroundColor(.black)
+                    }
                 }
-            Text("Search")
-                .tabItem {
-
-                    Label("Search", systemImage: "magnifyingglass")
+                .padding()
+                
+                // Tab view content
+                TabView {
+                    PostPageView()
+                        .tabItem {
+                            Label("Home", systemImage: "house")
+                                .foregroundColor(.black) // Set color to black
+                        }
+                    CreatePostView()
+                        .tabItem {
+                            Label("Add Post", systemImage: "plus.bubble.fill")
+                                .foregroundColor(.black)
+                        }
+                    ProfilePageView()
+                        .tabItem {
+                            Label("Profile", systemImage: "person")
+                                .foregroundColor(.black)
+                        }
                 }
-            Text("Notification")
-                .tabItem {
-
-                    Label("Notification", systemImage: "bell")
-                }
-            Text("Profile")
-                .tabItem {
-
-                    Label("Profile", systemImage: "person")
-                }
+                .accentColor(.black)
+            }
         }
     }
 }
@@ -41,8 +64,3 @@ struct NavigationTabView_Previews: PreviewProvider {
     }
 }
 
-struct HomePageView: View {
-    var body: some View {
-        WelcomePageView()
-    }
-}
