@@ -79,11 +79,15 @@ struct HomePageView: View {
                         }
                         .padding()
                     }
-                    
-                    .onAppear {
-                        viewModel.fetchPosts()
-                    }
-                    
+
+                    .padding()
+                }
+                .navigationBarTitle("Home Page")
+                .navigationBarTitleDisplayMode(.inline) // Center the title
+                .onAppear {
+                    viewModel.loadApiToken()
+                    viewModel.fetchPosts()
+
                 }
             }
           
