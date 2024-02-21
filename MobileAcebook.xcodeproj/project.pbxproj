@@ -10,7 +10,6 @@
 		794202522B855ACB00C781CC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794202512B855ACB00C781CC /* LoadingView.swift */; };
 		794202542B855C0000C781CC /* MediatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794202532B855C0000C781CC /* MediatorView.swift */; };
 		799662132B83ABCA00B22FF5 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799662122B83ABCA00B22FF5 /* SignupView.swift */; };
-		799662192B84D0D000B22FF5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799662182B84D0D000B22FF5 /* LoginView.swift */; };
 		AE5D85B02AC8A221009680C6 /* MobileAcebookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85AF2AC8A221009680C6 /* MobileAcebookApp.swift */; };
 		AE5D85B42AC8A224009680C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE5D85B32AC8A224009680C6 /* Assets.xcassets */; };
 		AE5D85B72AC8A224009680C6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE5D85B62AC8A224009680C6 /* Preview Assets.xcassets */; };
@@ -46,7 +45,6 @@
 		794202512B855ACB00C781CC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		794202532B855C0000C781CC /* MediatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediatorView.swift; sourceTree = "<group>"; };
 		799662122B83ABCA00B22FF5 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
-		799662182B84D0D000B22FF5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		AE5D85AC2AC8A221009680C6 /* MobileAcebook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileAcebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE5D85AF2AC8A221009680C6 /* MobileAcebookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileAcebookApp.swift; sourceTree = "<group>"; };
 		AE5D85B32AC8A224009680C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 			children = (
 				AE5D85B62AC8A224009680C6 /* Preview Assets.xcassets */,
 				799662122B83ABCA00B22FF5 /* SignupView.swift */,
-				799662182B84D0D000B22FF5 /* LoginView.swift */,
 				794202512B855ACB00C781CC /* LoadingView.swift */,
 				794202532B855C0000C781CC /* MediatorView.swift */,
 			);
@@ -317,7 +314,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				799662132B83ABCA00B22FF5 /* SignupView.swift in Sources */,
-				799662192B84D0D000B22FF5 /* LoginView.swift in Sources */,
 				AE5D85E12AC9AFA9009680C6 /* AuthenticationService.swift in Sources */,
 				AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */,
 				AE5D85B02AC8A221009680C6 /* MobileAcebookApp.swift in Sources */,
