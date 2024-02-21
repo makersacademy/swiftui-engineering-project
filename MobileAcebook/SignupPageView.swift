@@ -16,7 +16,7 @@ struct SignupPageView: View {
   @State private var confPassword: String = ""
 
   @StateObject var imagePicker = ImagePicker()
-  @State private var uploadedImagePublicId: String?
+  @State private var uploadedImagePublicId: String = ""
     
   @State private var navigateToFeedPage: Bool = false
 
@@ -55,7 +55,11 @@ struct SignupPageView: View {
                 // You can update the uploadedImagePublicId here
                 if let imageData = imageData {
                     imagePicker.uploadToCloudinary(data: imageData) { imagePublicId in
-                        uploadedImagePublicId = imagePublicId
+                        if let imagePublicId = imagePublicId {
+                            uploadedImagePublicId = imagePublicId
+                        } else {
+                            print("Error: Image upload failed.")
+                        }
                     }
                 }
             }
@@ -63,8 +67,8 @@ struct SignupPageView: View {
             
           Section {
 
-            Button("Sign Up") {
-              let userInfo = User(username: username, email: email, password: password, confPassword: confPassword, avatar: uploadedImagePublicId)
+            Button("Sign up") {
+              let userInfo = User(email: email, username: username, password: password, avatar: uploadedImagePublicId)
                 AuthenticationService().signUp(user: userInfo) {
                     canSignUp in if canSignUp {
                         navigateToFeedPage = true

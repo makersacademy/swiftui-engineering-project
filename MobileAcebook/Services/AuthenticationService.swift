@@ -13,20 +13,20 @@ class AuthenticationService: AuthenticationServiceProtocol {
     var canSignUp = false
       
     let username = user.username
-    let email = user.emailAddress
+    let email = user.email
     let password = user.password
-    let confPassword = user.confPassword
+//    let confPassword = user.confPassword
 
-    guard let unwrappedUsername = username, let unwrappedEmail = email, let unwrappedPassword = password, let unwrappedConfPassword = confPassword else {
-                completion(false)
-                return
-            }
+//    guard let unwrappedUsername = username, let unwrappedEmail = email, let unwrappedPassword = password, let unwrappedConfPassword = confPassword else {
+//                completion(false)
+//                return
+//            }
 
-    let validEmail = isEmailValid(unwrappedEmail)
-    let passwordsMatch = doPasswordsMatch(unwrappedPassword, unwrappedConfPassword)
-    let validPassword = isPasswordValid(unwrappedPassword)
+    let validEmail = isEmailValid(email)
+//    let passwordsMatch = doPasswordsMatch(unwrappedPassword, unwrappedConfPassword)
+    let validPassword = isPasswordValid(password)
       
-    if validEmail && passwordsMatch && validPassword && unwrappedEmail != "" && unwrappedUsername != "" && unwrappedPassword != "" && unwrappedConfPassword != ""{
+    if validEmail /*&& passwordsMatch*/ && validPassword {
 
       createUser(user: user) {
         result in switch result {

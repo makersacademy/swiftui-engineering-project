@@ -6,7 +6,8 @@
 //
 
 public struct User: Codable {
-    let emailAddress: String
+    let email: String
     let username: String
     let password: String
+    let avatar: String
 }
