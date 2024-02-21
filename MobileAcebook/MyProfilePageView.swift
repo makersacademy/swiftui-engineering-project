@@ -15,6 +15,7 @@ struct MyProfilePageView: View {
     ]
     
     @ObservedObject var postsModel = PostsView()
+    @ObservedObject var loggedinUserModel = LoggedInUser()
     
     var body: some View {
         ZStack {
@@ -34,12 +35,14 @@ struct MyProfilePageView: View {
                         .accessibilityIdentifier("profile-picturem")
                     LazyVGrid(columns: layout, alignment: .leading, content: {
                         Text("Username:")
-                        Text("Test Username")
+                        Text(loggedinUserModel.user?.username ?? "")
                         Text("")
                         Text("")
                         Text("Email: ")
-                        Text("TestEmailAddress")
-                    })
+                        Text(loggedinUserModel.user?.email ?? "")
+                    }).onAppear{
+                        loggedinUserModel.fetchUser()
+                    }
         
                 }
                 Spacer()
