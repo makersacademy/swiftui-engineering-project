@@ -8,14 +8,38 @@ class PostsViewModel: ObservableObject {
     @Published var posts: [PostResponse] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
-
+    var apiToken: String?
+    
+    init() {
+        loadApiToken()
+        fetchPosts()
+       }
+    
+    
+    func loadApiToken() {
+        do {
+            apiToken = try KeychainHelper.loadToken(account: "default")
+        } catch {
+            print("failed to load token")
+        }
+    }
+    
+    func deleteApiToken() {
+        do {
+            try KeychainHelper.deleteToken()
+            print("Token deleted successfully")
+        } catch {
+            print("failed to delete token")
+        }
+    }
+    
     func fetchPosts() {
-        guard let url = URL(string: Constants.postsURL) else {
+        guard let url = URL(string: Constants.postsURL), let apiToken = apiToken else {
             return
         }
 
         var request = URLRequest(url: url)
-        request.setValue("Bearer \(Constants.apiToken)", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \(apiToken)", forHTTPHeaderField: "Authorization")
 
         isLoading = true
         errorMessage = nil
@@ -50,6 +74,7 @@ class PostsViewModel: ObservableObject {
 
 struct Constants {
     static let postsURL = "http://127.0.0.1:8080/posts"
-    static let apiToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDg0MjgyMTgsImV4cCI6MTcwODQzMTgxOH0.iuJlN6aF-oSkPWjyZducvGWVP-3Ch3rIxDlheDAMGhU"
+
 }
+
 

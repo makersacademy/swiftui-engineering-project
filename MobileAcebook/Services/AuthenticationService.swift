@@ -6,6 +6,9 @@
 //
 import Foundation
 
+import Foundation
+
+
 class AuthenticationService: AuthenticationServiceProtocol {
     func signUp(user: User, completion: @escaping (Bool) -> Void) {
     var canSignUp = false
@@ -63,3 +66,4 @@ class AuthenticationService: AuthenticationServiceProtocol {
   }
 
 }
+
