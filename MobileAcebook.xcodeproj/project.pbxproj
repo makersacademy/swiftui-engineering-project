@@ -13,6 +13,7 @@
 		A6C7F03C2B83AEF10078F253 /* MyProfilePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C7F03B2B83AEF10078F253 /* MyProfilePageView.swift */; };
 
 		130052BB2B83BDE4004ACBC7 /* LogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130052BA2B83BDE4004ACBC7 /* LogoutView.swift */; };
+		139F5F252B86156600F943A8 /* LogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139F5F242B86156600F943A8 /* LogoutService.swift */; };
 		13B33CD02B8507D500D9947F /* NavigationTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B33CCF2B8507D500D9947F /* NavigationTabView.swift */; };
 		13B33CD62B85E58700D9947F /* PostPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B33CD52B85E58700D9947F /* PostPageView.swift */; };
 		13B33CD82B85E76300D9947F /* CreatePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B33CD72B85E76300D9947F /* CreatePostView.swift */; };
@@ -58,6 +59,7 @@
 		A6C7F03B2B83AEF10078F253 /* MyProfilePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfilePageView.swift; sourceTree = "<group>"; };
 
 		130052BA2B83BDE4004ACBC7 /* LogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutView.swift; sourceTree = "<group>"; };
+		139F5F242B86156600F943A8 /* LogoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutService.swift; sourceTree = "<group>"; };
 		13B33CCF2B8507D500D9947F /* NavigationTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTabView.swift; sourceTree = "<group>"; };
 		13B33CD52B85E58700D9947F /* PostPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPageView.swift; sourceTree = "<group>"; };
 		13B33CD72B85E76300D9947F /* CreatePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostView.swift; sourceTree = "<group>"; };
@@ -186,7 +188,7 @@
 				A68236F82B85F2BB0061DD2B /* GetPostsService.swift */,
 
 				C4C075C62B84F68900A1CBA9 /* LoginService.swift */,
-
+				139F5F242B86156600F943A8 /* LogoutService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -357,6 +359,7 @@
 				A68236F72B85F2840061DD2B /* Post.swift in Sources */,
 
 				13B33CDA2B85EFF100D9947F /* ProfilePageView.swift in Sources */,
+				139F5F252B86156600F943A8 /* LogoutService.swift in Sources */,
 				13B33CD62B85E58700D9947F /* PostPageView.swift in Sources */,
 				13B33CD02B8507D500D9947F /* NavigationTabView.swift in Sources */,
 				130052BB2B83BDE4004ACBC7 /* LogoutView.swift in Sources */,

@@ -14,8 +14,20 @@ class AuthenticationService: AuthenticationServiceProtocol, ObservableObject {
     }
     
     func logout() {
+        // Remove token from UserDefaults
         UserDefaults.standard.removeObject(forKey: "token")
         UserDefaults.standard.setValue(false, forKey: "isAuthenticated")
+        
+        // Delete the token from Keychain
+        deleteTokenFromKeychain()
+        
+        // Notify observers about the authentication state change
+        DispatchQueue.main.async {
+            self.objectWillChange.send()
+            
+            // Navigate to the welcome page
+            NotificationCenter.default.post(name: .logoutNotification, object: nil)
+        }
     }
 
 }
