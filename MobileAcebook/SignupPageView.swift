@@ -16,7 +16,7 @@ struct SignupPageView: View {
   @State private var confPassword: String = ""
 
   @StateObject var imagePicker = ImagePicker()
-  @State private var uploadedImagePublicId: String = ""
+  @State private var uploadedImagePublicId: String = "/default_avatar.png"
     
   @State private var navigateToFeedPage: Bool = false
 
@@ -57,7 +57,7 @@ struct SignupPageView: View {
                     imagePicker.uploadToCloudinary(data: imageData) { imagePublicId in
                         if let imagePublicId = imagePublicId {
                             uploadedImagePublicId = imagePublicId
-                        } else {
+                        } else { /*look here later*/
                             print("Error: Image upload failed.")
                         }
                     }
@@ -69,14 +69,16 @@ struct SignupPageView: View {
 
             Button("Sign up") {
               let userInfo = User(email: email, username: username, password: password, avatar: uploadedImagePublicId)
-                AuthenticationService().signUp(user: userInfo) {
+                AuthenticationService().signUp(user: userInfo, confPassword: confPassword) {
                     canSignUp in if canSignUp {
+                        print("line 74 \(navigateToFeedPage)")
                         navigateToFeedPage = true
                     } else {
+                        print("line 77 \(canSignUp)")
                         navigateToFeedPage = false
                     }
                 }
-            }.background(NavigationLink(destination: HomePageView(), isActive: $navigateToFeedPage){ EmptyView() })
+            }.background(NavigationLink(destination: LoginPageView(), isActive: $navigateToFeedPage){ EmptyView() })
           }
         }
         Spacer()
@@ -88,3 +90,4 @@ struct SignupPageView: View {
 #Preview {
   SignupPageView()
 }
+

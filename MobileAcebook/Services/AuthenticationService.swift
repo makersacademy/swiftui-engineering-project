@@ -9,24 +9,18 @@ import Foundation
 
 
 class AuthenticationService: AuthenticationServiceProtocol {
-    func signUp(user: User, completion: @escaping (Bool) -> Void) {
+    func signUp(user: User, confPassword: String, completion: @escaping (Bool) -> Void) {
     var canSignUp = false
       
-    let username = user.username
     let email = user.email
     let password = user.password
-//    let confPassword = user.confPassword
-
-//    guard let unwrappedUsername = username, let unwrappedEmail = email, let unwrappedPassword = password, let unwrappedConfPassword = confPassword else {
-//                completion(false)
-//                return
-//            }
-
+    let confPassword = confPassword
+    print("\(email) \(password) \(confPassword)")
     let validEmail = isEmailValid(email)
-//    let passwordsMatch = doPasswordsMatch(unwrappedPassword, unwrappedConfPassword)
+    let passwordsMatch = doPasswordsMatch(password, confPassword)
     let validPassword = isPasswordValid(password)
-      
-    if validEmail /*&& passwordsMatch*/ && validPassword {
+    print("\(validEmail) \(passwordsMatch) \(validPassword)")
+    if validEmail && passwordsMatch && validPassword {
 
       createUser(user: user) {
         result in switch result {
@@ -60,7 +54,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
   }
 
   func isPasswordValid(_ password: String) -> Bool {
-    let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
+    let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")
     return passwordPredicate.evaluate(with: password)
   }
 

@@ -15,6 +15,7 @@ struct LoginPageView: View {
     @State private var isLoginSucessful: Bool = false
     @State private var errorMessage: String?
     @State private var isTokenStored: Bool = false
+    @State private var navigateToHomePage: Bool = false
     
     var body: some View {
         NavigationView {
@@ -28,11 +29,12 @@ struct LoginPageView: View {
                 SecureField("password", text: $password)
                     .textContentType(.password)
                 
-                Button("Log In") {
+                Button("Log in") {
                     loginViewModel.logIn(email: emailAddress, password: password) { result in
                         switch result {
                         case .success:
                             isLoginSucessful = true
+                            
                         case .failure(let error):
                             errorMessage = error.localizedDescription
                             isLoginSucessful = false
@@ -40,7 +42,7 @@ struct LoginPageView: View {
                     }
                     
                 }
-                .background(NavigationLink(destination: HomePageView(), isActive: $isLoginSucessful) { EmptyView() })
+                .background(NavigationLink(destination: HomePageView(), isActive: $navigateToHomePage) { EmptyView() })
                 
                 if let error = errorMessage {
                     Text(error)
@@ -60,8 +62,8 @@ struct LoginPageView: View {
                     print("Error loading token from keychain: \(error.localizedDescription)")
                 }
                 
-                if isTokenStored {
-                    isLoginSucessful = true
+                if isTokenStored && isLoginSucessful {
+                    navigateToHomePage = true
                 }
             }
             

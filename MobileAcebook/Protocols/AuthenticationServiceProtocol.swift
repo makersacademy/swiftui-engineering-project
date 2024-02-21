@@ -6,5 +6,5 @@
 //
 
 public protocol AuthenticationServiceProtocol {
-    func signUp(user: User, completion: @escaping (Bool) -> Void)
+    func signUp(user: User, confPassword: String, completion: @escaping (Bool) -> Void)
 }
