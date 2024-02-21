@@ -11,7 +11,7 @@ struct WelcomePageView: View {
     @State private var isSignupViewPresented = false
     let authService = AuthenticationService()
     let postService = PostService()
-    
+
     var body: some View {
         NavigationView {
             ZStack {
