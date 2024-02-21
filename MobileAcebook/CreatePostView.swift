@@ -8,9 +8,9 @@ import SwiftUI
 
 struct CreatePostView: View {
     @State private var message: String = ""
-    @State private var showingAlert = false // To control alert visibility
-    @State private var alertTitle = "" // To set the alert title dynamically
-    @State private var alertMessage = "" // To set the alert message dynamically
+    @State private var showingAlert = false
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
 
     var body: some View {
         VStack {
