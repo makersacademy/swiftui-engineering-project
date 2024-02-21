@@ -38,7 +38,7 @@ struct NavigationTabView: View {
                             Label("Add Post", systemImage: "plus.bubble.fill")
                                 .foregroundColor(.black)
                         }
-                    ProfilePageView()
+                    MyProfilePageView()
                         .tabItem {
                             Label("Profile", systemImage: "person")
                                 .foregroundColor(.black)
