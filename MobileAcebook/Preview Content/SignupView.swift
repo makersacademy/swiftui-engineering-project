@@ -1,9 +1,5 @@
-//
-//  SignupView.swift
-//  MobileAcebook
-//
-//  Created by Aisha Mohamed on 19/02/2024.
-//
+
+
 
 import Foundation
 import SwiftUI
@@ -28,8 +24,6 @@ struct SignupView: View {
     
     var body: some View {
         
-    
-        NavigationView {
             VStack {
                 
                 Spacer()
@@ -66,7 +60,7 @@ struct SignupView: View {
                     })
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                
-                NavigationLink( destination: LoginView(), isActive: $shouldNavigate){
+                NavigationLink( destination: LoginPage(authenticationService: AuthenticationService()), isActive: $shouldNavigate){
                         EmptyView()
                 }
                 
@@ -85,27 +79,12 @@ struct SignupView: View {
                 }
                 .padding()
                 
-//                NavigationLink(
-//                    destination: LoginView(),
-////                    isActive: $isSignupSuccessful,
-//                    label: {
-//                        Text("Navigation - Sign up")
-//                            .padding()
-//                            .frame(maxWidth: .infinity)
-//                            .background(Color(UIColor(rgb: 0x38548f)))
-//                            .foregroundColor(.white)
-//                            .cornerRadius(10)
-//                            
-//                    }
-//                )
-//                .padding()
-                
-            Spacer()
+                Spacer()
                 HStack {
                     Text("Already have an account? Login")
                         .foregroundColor(.white)
                     NavigationLink(
-                        destination: LoginView(),
+                        destination: LoginPage(authenticationService: AuthenticationService()),
                         label: {
                             Text("HERE")
                                 .foregroundColor(.white)
@@ -114,13 +93,14 @@ struct SignupView: View {
                     )
                 }
             }
+            
             .padding()
             .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("Signup"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
             }
             .background(Color(UIColor(rgb: 0x4267B2)))
-    }
 }
     
         private func signup() {
