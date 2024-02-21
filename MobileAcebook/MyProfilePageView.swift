@@ -49,12 +49,14 @@ struct MyProfilePageView: View {
                 Text("Posts").font(.title)
                 List{
                     ForEach(postsModel.posts) {post in
-                        let _ = print(postsModel.posts)
-                        ScrollView {
-                            VStack(alignment: .leading) {
-                                Text(post.message)
+                        if post.createdBy == loggedinUserModel.user?._id {
+                            ScrollView {
+                                VStack(alignment: .leading) {
+                                    Text(post.message)
+                                }
                             }
                         }
+                        
                     }
                 }
                 .onAppear {
