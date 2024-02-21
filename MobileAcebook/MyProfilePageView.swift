@@ -14,6 +14,8 @@ struct MyProfilePageView: View {
         GridItem(.flexible(minimum: 150))
     ]
     
+    @ObservedObject var postsModel = PostsView()
+    
     var body: some View {
         ZStack {
             VStack {
@@ -42,15 +44,20 @@ struct MyProfilePageView: View {
                 }
                 Spacer()
                 Text("Posts").font(.title)
-                List{
-                    Section () {
-                        Text("Posts")
+                List(postsModel.posts) {post in
+                    ScrollView {
+                        VStack(alignment: .leading) {
+                            Text(post.message)
+                        }
+                    }
+                }
+                .onAppear {
+                        postsModel.fetchPosts()
                     }
                 }
             }
         }
     }
-}
 
 struct MyProfilePageView_Previews: PreviewProvider {
     static var previews: some View {

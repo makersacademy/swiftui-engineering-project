@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A68236F72B85F2840061DD2B /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68236F62B85F2840061DD2B /* Post.swift */; };
+		A68236F92B85F2BB0061DD2B /* GetPostsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68236F82B85F2BB0061DD2B /* GetPostsService.swift */; };
 		A6C7F03C2B83AEF10078F253 /* MyProfilePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C7F03B2B83AEF10078F253 /* MyProfilePageView.swift */; };
 		AE5D85B02AC8A221009680C6 /* MobileAcebookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85AF2AC8A221009680C6 /* MobileAcebookApp.swift */; };
 		AE5D85B42AC8A224009680C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE5D85B32AC8A224009680C6 /* Assets.xcassets */; };
@@ -40,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A68236F62B85F2840061DD2B /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		A68236F82B85F2BB0061DD2B /* GetPostsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPostsService.swift; sourceTree = "<group>"; };
 		A6C7F03B2B83AEF10078F253 /* MyProfilePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfilePageView.swift; sourceTree = "<group>"; };
 		AE5D85AC2AC8A221009680C6 /* MobileAcebook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileAcebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE5D85AF2AC8A221009680C6 /* MobileAcebookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileAcebookApp.swift; sourceTree = "<group>"; };
@@ -149,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				AE5D85E02AC9AFA9009680C6 /* AuthenticationService.swift */,
+				A68236F82B85F2BB0061DD2B /* GetPostsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -165,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				AE5D85E72AC9B29A009680C6 /* User.swift */,
+				A68236F62B85F2840061DD2B /* Post.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -309,9 +315,11 @@
 			files = (
 				AE5D85E12AC9AFA9009680C6 /* AuthenticationService.swift in Sources */,
 				A6C7F03C2B83AEF10078F253 /* MyProfilePageView.swift in Sources */,
+				A68236F92B85F2BB0061DD2B /* GetPostsService.swift in Sources */,
 				AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */,
 				AE5D85B02AC8A221009680C6 /* MobileAcebookApp.swift in Sources */,
 				AE5D85E82AC9B29A009680C6 /* User.swift in Sources */,
+				A68236F72B85F2840061DD2B /* Post.swift in Sources */,
 				AE5D85DA2AC8A337009680C6 /* WelcomePageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
