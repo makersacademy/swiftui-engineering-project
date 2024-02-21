@@ -1,9 +1,4 @@
-//
-//  LoginView.swift
-//  MobileAcebook
-//
-//  Created by Aisha Mohamed on 20/02/2024.
-//
+
 
 import Foundation
 import SwiftUI
@@ -20,11 +15,6 @@ struct LoginView: View {
                     .font(.largeTitle)
                     .padding(.bottom, 20)
                 
-                Spacer()
-//                
-//                Spacer()
-//                
-//                Spacer()
             }
         }
     }
