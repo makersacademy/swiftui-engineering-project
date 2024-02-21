@@ -8,6 +8,7 @@ struct ProfileView: View {
     @State private var isLoggedOut = false
     @State private var isPersonClicked = false
     @State private var isHouseClicked = false
+    @State private var isDarkMode = false
     
     var body: some View {
         NavigationView {
@@ -16,15 +17,21 @@ struct ProfileView: View {
                     Text("My profile page")
                 }
             }
-            .navigationTitle("Profile")
+            .navigationBarTitle("", displayMode: .inline)
+            .navigationBarItems(leading:
+                Image("facebook-name-logo")
+                        .resizable()
+                        .frame(width: 140, height: 30) 
+                        .foregroundColor(isDarkMode ? .white : .black)
+            )
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            isLoggedOut = true
-                        }) {
-                            Image(systemName: isLoggedOut ? "sun.max.fill" : "sun.max")
-                                .foregroundColor(Color(UIColor(rgb: 0x1877F2)))
-                        }
+                    Button(action: {
+                        isDarkMode.toggle()
+                    }) {
+                        Image(systemName: isDarkMode ? "sun.max.fill" : "sun.max")
+                            .foregroundColor(Color(UIColor(rgb: 0x1877F2)))
+                    }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: LoginPage(authenticationService: AuthenticationService()), isActive: $isLoggedOut) {
@@ -38,6 +45,7 @@ struct ProfileView: View {
                     }
                 }
             }
+            .environment(\.colorScheme, isDarkMode ? .dark : .light)
             .toolbar {
                 ToolbarItemGroup(placement: .bottomBar) {
                     NavigationLink(destination: FeedView(), isActive: $isHouseClicked) {

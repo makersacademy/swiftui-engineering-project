@@ -12,13 +12,19 @@ struct FeedView: View {
     @State private var isLoggedOut = false
     @State private var isPersonClicked = false
     @State private var isHouseClicked = false
+    @State private var isDarkMode = false
     var body: some View {
         
         NavigationView {
             VStack{
                 List {
-                    Text("Post 1")
-                        .padding()
+                    HStack{
+                        Text("What's on your mind? ")
+                            .padding()
+                        Spacer()
+                        Image(systemName: "plus.rectangle.on.rectangle")
+                            .foregroundColor(.green)
+                    }
                     Text("Post 2")
                         .padding()
                     Text("Post 3")
@@ -35,29 +41,26 @@ struct FeedView: View {
                         .padding()
                     Text("Post 9")
                         .padding()
-                    Text("Post 10") .padding()
-                    Text("Post 11") .padding()
-                    Text("Post 12") .padding()
-                    Text("Post 13") .padding()
-                    Text("Post 14") .padding()
-                    Text("Post 15") .padding()
-                    Text("Post 16") .padding()
-                    Text("Post 17") .padding()
-                    Text("Post 18") .padding()
-                    Text("Post 19") .padding()
-                    Text("Post 20") .padding()
-                    Text("Post 21") .padding()
+                    Text("Post 10") 
+                        .padding()
+                    
                 }
             }
-            .navigationTitle("Feed")
+            .navigationBarTitle("", displayMode: .inline)
+            .navigationBarItems(leading:
+                Image("facebook-name-logo")
+                        .resizable()
+                        .frame(width: 140, height: 30)
+                        .foregroundColor(isDarkMode ? .white : .black)
+            )
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            isLoggedOut = true
-                        }) {
-                            Image(systemName: isLoggedOut ? "sun.max.fill" : "sun.max")
-                                .foregroundColor(Color(UIColor(rgb: 0x1877F2)))
-                        }
+                    Button(action: {
+                        isDarkMode.toggle()
+                    }) {
+                        Image(systemName: isDarkMode ? "sun.max.fill" : "sun.max")
+                            .foregroundColor(Color(UIColor(rgb: 0x1877F2)))
+                    }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: LoginPage(authenticationService: AuthenticationService()), isActive: $isLoggedOut) {
@@ -71,6 +74,7 @@ struct FeedView: View {
                 }
                 
             }
+            .environment(\.colorScheme, isDarkMode ? .dark : .light)
             .toolbar {
                 ToolbarItemGroup(placement: .bottomBar) {
                     NavigationLink(destination: FeedView(), isActive: $isHouseClicked) {
