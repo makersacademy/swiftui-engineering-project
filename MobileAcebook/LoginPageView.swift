@@ -16,7 +16,7 @@ struct LoginPageView: View {
     @State private var showPasswordError = false
     
     @ObservedObject var authService = AuthenticationService()
-
+    
     
     var body: some View {
         NavigationView {
@@ -69,11 +69,11 @@ struct LoginPageView: View {
                     Button("Login") {
                         login()
                     }.font(.headline)
-                    .foregroundColor(.white)
-                    .frame(width: 300, height: 50)
-                    .background(Color.black)
-                    .cornerRadius(15.0)
-                    .accessibilityIdentifier("loginButton")
+                        .foregroundColor(.white)
+                        .frame(width: 300, height: 50)
+                        .background(Color.black)
+                        .cornerRadius(15.0)
+                        .accessibilityIdentifier("loginButton")
                     
                     Spacer()
                     Spacer()
@@ -86,33 +86,37 @@ struct LoginPageView: View {
                         Button("Click here"){
                             //Redirects to sign up
                         }.foregroundColor(.white)
-                        .frame(width: 100, height: 30)
-                        .background(Color.black)
-                        .cornerRadius(15.0)
-                        .accessibilityIdentifier("clickHereButton")
+                            .frame(width: 100, height: 30)
+                            .background(Color.black)
+                            .cornerRadius(15.0)
+                            .accessibilityIdentifier("clickHereButton")
                     }
                 }
                 if showEmailError { // Display email error message
-                Text("Email doesn't exist")
-                .foregroundColor(.red)
-                .padding()
-                .background(Color.white)
-                .cornerRadius(10)
-                .offset(y: -100) // Adjust the position as needed
+                    Text("Email doesn't exist")
+                        .foregroundColor(.red)
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .offset(y: -100) // Adjust the position as needed
                 } else if showPasswordError { // Display password error message
-                Text("Incorrect password")
-                .foregroundColor(.red)
-                .padding()
-                .background(Color.white)
-                .cornerRadius(10)
-                .offset(y: -100) // Adjust the position as needed
-                                }
+                    Text("Incorrect password")
+                        .foregroundColor(.red)
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .offset(y: -100) // Adjust the position as needed
+                }
             }
         }
         .navigationBarHidden(true)
         .fullScreenCover(isPresented: $isAuthenticated) {
             // This will present the PostPageView when isAuthenticated becomes true
             NavigationTabView()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .logoutNotification)) { _ in
+            // Present the welcome page when logout notification is received
+            isAuthenticated = false // Set isAuthenticated to false to trigger presentation of welcome page
         }
     }
     
@@ -155,6 +159,9 @@ struct LoginPageView: View {
                         saveTokenToKeychain(token: token)
                         isAuthenticated = true
                         print("Is Authenticated: \(isAuthenticated)")
+                        // Clear input fields
+                        email = ""
+                        password = ""
                     } else {
                         print("Invalid token: Authentication failed")
                         // Handle error, for example, show a general error message
@@ -175,14 +182,18 @@ struct LoginPageView: View {
         }.resume()
     }
     
-    }
-        
+}
+
+
+
+private func isValidToken(_ token: String) -> Bool {
     
-    
-    private func isValidToken(_ token: String) -> Bool {
-        
-        return token.count > 50
-    }
+    return token.count > 50
+}
+
+extension Notification.Name {
+    static let logoutNotification = Notification.Name("LogoutNotification")
+}
 
 
 struct LoginPageView_Previews: PreviewProvider {
