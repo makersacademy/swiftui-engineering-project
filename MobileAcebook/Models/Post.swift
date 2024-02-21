@@ -8,7 +8,7 @@
 import Foundation
 
 struct Post: Codable, Identifiable{
-    let id: Int?
+    let id = UUID()
     let _id: String
     let message: String
     let image: String

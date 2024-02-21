@@ -44,10 +44,13 @@ struct MyProfilePageView: View {
                 }
                 Spacer()
                 Text("Posts").font(.title)
-                List(postsModel.posts) {post in
-                    ScrollView {
-                        VStack(alignment: .leading) {
-                            Text(post.message)
+                List{
+                    ForEach(postsModel.posts) {post in
+                        let _ = print(postsModel.posts)
+                        ScrollView {
+                            VStack(alignment: .leading) {
+                                Text(post.message)
+                            }
                         }
                     }
                 }
