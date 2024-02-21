@@ -11,7 +11,28 @@ struct SignUpPageView: View {
     @State private var signUpDetails = SignUpDetails(username: "", email: "", password: "")
     @State private var passwordConfirm = ""
     @State private var passwordsMatch = true
-    @State private var formSubmitted = false
+    @State private var messages: [String] = []
+  
+    
+
+    
+    func validate() -> Bool {
+        messages = []
+        
+        if signUpDetails.username.isEmpty {
+            messages.append("Username is empty")
+        }
+        
+        if signUpDetails.email.isEmpty {
+            messages.append("Email is empty")
+        }
+        
+        if signUpDetails.password.isEmpty {
+            messages.append("passowrd is empty")
+        }
+        
+        return messages.count == 0
+    }
 
     
     func submitButton() {
@@ -54,19 +75,21 @@ struct SignUpPageView: View {
                 
                 Button("Submit") {
                     passwordsMatch = signUpDetails.password == passwordConfirm
+                    if validate() {
+//                        do something
+                    }
+                    
                     if passwordsMatch {
                         submitButton()
-                        formSubmitted = true
-
-                        }
-
+                        
                     }
+                    
+                  
+                }
+                ForEach(messages, id: \.self) {message in Text(message)}
+//                }
                 
-                Group {
-                    if formSubmitted {
-                                Text("Log in")
-                                }
-                            }
+
  
 
                 }
