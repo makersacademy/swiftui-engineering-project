@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct NavigationTabView: View {
-    @State private var selectedTabIndex = 0 // keeps track of selected tab
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
