@@ -8,32 +8,40 @@
 import SwiftUI
 
 struct WelcomePageView: View {
+    @State private var isSignupViewPresented = false
+    let authService = AuthenticationService()
     var body: some View {
-        ZStack {
-            VStack {
-                Spacer()
+        NavigationView {
+            ZStack {
+                VStack {
+                    Spacer()
 
-                Text("Welcome to Acebook!")
-                    .font(.largeTitle)
-                    .padding(.bottom, 20)
-                    .accessibilityIdentifier("welcomeText")
+                    Text("Welcome to Acebook!")
+                        .font(.largeTitle)
+                        .padding(.bottom, 20)
+                        .accessibilityIdentifier("welcomeText")
 
-                Spacer()
+                    Spacer()
 
-                Image("makers-logo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 200, height: 200)
-                    .accessibilityIdentifier("makers-logo")
-                
-                Spacer()
+                    Image("makers-logo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                        .accessibilityIdentifier("makers-logo")
+                    
+                    Spacer()
 
-                Button("Sign Up") {
-                    // TODO: sign up logic
+                    
+                    NavigationLink(
+                        destination: SignupView(authenticationService: authService),
+                        label: {
+                            Text("Sign Up")
+                        }
+                    )
+                    .accessibilityIdentifier("signUpButton")
+                    
+                    Spacer()
                 }
-                .accessibilityIdentifier("signUpButton")
-                
-                Spacer()
             }
         }
     }
