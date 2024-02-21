@@ -40,8 +40,12 @@ func saveTokenToKeychain(token: String) {
     print("Token saved to Keychain.")
 }
 
+struct Token: Decodable {
+    let token: String
+}
+
 // Function to retrieve token from Keychain
-func retrieveTokenFromKeychain() -> String? {
+func retrieveTokenFromKeychain() -> Token? {
     // Define the query parameters for retrieving the Keychain item
     let query: [String: Any] = [
         kSecClass as String: kSecClassGenericPassword,
@@ -60,10 +64,7 @@ func retrieveTokenFromKeychain() -> String? {
     }
     
     // Convert the retrieved data to a string
-    guard let token = String(data: tokenData, encoding: .utf8) else {
-        print("Failed to convert data to token string.")
-        return nil
-    }
+    let token = try? JSONDecoder().decode(Token.self, from: tokenData)
     
     return token
 }
