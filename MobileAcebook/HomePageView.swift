@@ -8,7 +8,7 @@ struct HomePageView: View {
     
     var body: some View {
         Group {
-            if authService.isLoggedOut {
+            if !authService.isLoggedIn {
                 WelcomePageView()
             } else {
                 
@@ -77,6 +77,11 @@ struct HomePageView: View {
                             }
                             
                             .padding()
+                            Button {
+                                logoutViewModel.signOut()
+                            } label: {
+                                Text("Log out")
+                            }
                         }
                         .navigationBarTitle("Home Page")
                         .navigationBarTitleDisplayMode(.inline) // Center the title
@@ -85,6 +90,8 @@ struct HomePageView: View {
                             viewModel.fetchPosts()
                             
                         }
+                        
+
                     }
                     
                     .tabItem {
@@ -140,6 +147,3 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 #endif
-
-
-

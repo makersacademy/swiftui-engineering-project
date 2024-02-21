@@ -14,7 +14,7 @@ struct WelcomePageView: View {
     @StateObject var imagePicker = ImagePicker()
     @State private var uploadedImagePublicId: String?
     var body: some View {
-        
+        NavigationView{
             ZStack {
                 VStack {
                     Spacer()
@@ -46,24 +46,33 @@ struct WelcomePageView: View {
                         Text("upload a photo")
                     }
                     .onChange(of: imagePicker.imageData) { imageData in
-                                // This block is executed when image data is set in the ImagePicker
-                                // You can update the uploadedImagePublicId here
-                                if let imageData = imageData {
-                                    imagePicker.uploadToCloudinary(data: imageData) { imagePublicId in
-                                        uploadedImagePublicId = imagePublicId
-                                    }
-                                }
+                        // This block is executed when image data is set in the ImagePicker
+                        // You can update the uploadedImagePublicId here
+                        if let imageData = imageData {
+                            imagePicker.uploadToCloudinary(data: imageData) { imagePublicId in
+                                uploadedImagePublicId = imagePublicId
                             }
-                        Spacer()
+                        }
+                    }
+                    
+               
+                    NavigationLink("login page", destination: LoginPageView())
+         
+             
+                    NavigationLink("feed page", destination: HomePageView())
+                    
+                    
                     
                 }
             }
-        
-    }
-    
-    struct WelcomePageView_Previews: PreviewProvider {
-        static var previews: some View {
-            WelcomePageView()
+            
         }
     }
 }
+    
+struct WelcomePageView_Previews: PreviewProvider {
+    static var previews: some View {
+        WelcomePageView()
+    }
+}
+

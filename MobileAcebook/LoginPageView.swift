@@ -9,7 +9,6 @@ import SwiftUI
 
 struct LoginPageView: View {
     @StateObject private var loginViewModel = LoginViewModel()
-    @StateObject var authService = AuthenticationService.shared
     
     @State private var emailAddress: String = ""
     @State private var password: String = ""
@@ -47,7 +46,9 @@ struct LoginPageView: View {
                         Text(success)
                             .foregroundColor(.green)
                 }
+
             }
+            
         } .environmentObject(loginViewModel)
     }
 }

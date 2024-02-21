@@ -16,7 +16,6 @@ public struct LoginError: Error {
     var localizedDescription: String
 }
 
-
 class AuthenticationService: ObservableObject, AuthenticationServiceProtocol {
     @Published var isLoggedOut: Bool = false
     @Published var isLoggedIn: Bool = false
@@ -54,13 +53,15 @@ class AuthenticationService: ObservableObject, AuthenticationServiceProtocol {
             switch httpResponse.statusCode {
                     case 201:
                 if let data = data, let decodedResponse = try? JSONDecoder().decode(LoginResponse.self, from: data) {
-                            do {
-                                try KeychainHelper.saveToken(decodedResponse.token)
-                                    self.isLoggedIn = true
-                                completion(.success(()))
-                                } catch {
-                                    completion(.failure(LoginError(localizedDescription: "Failed to save token: \(error.localizedDescription)")))
-                                }
+                    DispatchQueue.main.async {
+                        do {
+                            try KeychainHelper.saveToken(decodedResponse.token)
+                            self.isLoggedIn = true
+                            completion(.success(()))
+                        } catch {
+                            completion(.failure(LoginError(localizedDescription: "Failed to save token: \(error.localizedDescription)")))
+                        }
+                    }
                         }
                     case 401:
                         completion(.failure(LoginError(localizedDescription: "Email not found")))
@@ -79,7 +80,7 @@ class AuthenticationService: ObservableObject, AuthenticationServiceProtocol {
     func signOut(completion: @escaping (Result<Void, Error>) -> Void) {
         do {
             try KeychainHelper.deleteToken()
-            isLoggedOut = true
+            isLoggedIn = false
             completion(.success(()))
         } catch {
             print("failed to signout, can't delete token")
