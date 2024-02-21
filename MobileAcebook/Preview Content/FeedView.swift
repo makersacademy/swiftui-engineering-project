@@ -78,34 +78,51 @@ struct FeedView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .bottomBar) {
                     NavigationLink(destination: FeedView(), isActive: $isHouseClicked) {
-                        Button(action: {
-                            isHouseClicked = true
-                        }) {
+                        VStack {
                             Image(systemName: "house.fill")
                                 .foregroundColor(Color(UIColor(rgb: 0x316ff6)))
+                            Text("Home")
+                                .font(.caption)
                         }
                     }
                     Spacer()
-                    Image(systemName: "play.tv")
-                        .foregroundColor(Color.gray)
+                    VStack {
+                        Image(systemName: "play.tv")
+                            .foregroundColor(Color.gray)
+                        Text("Video")
+                            .font(.caption)
+                    }
                     Spacer()
-                    Image(systemName: "person.2")
-                        .foregroundColor(Color.gray)
+                    VStack {
+                        Image(systemName: "person.2")
+                            .foregroundColor(Color.gray)
+                        Text("Friends")
+                            .font(.caption)
+                    }
                     Spacer()
                     NavigationLink(destination: ProfileView(), isActive: $isPersonClicked) {
-                        Button(action: {
-                            isPersonClicked = true
-                        }) {
+                        VStack {
                             Image(systemName: "person.crop.circle")
                                 .foregroundColor(Color.gray)
+                            Text("Profile")
+                                .font(.caption)
+                                .foregroundColor(Color.black)
                         }
                     }
                     Spacer()
-                    Image(systemName: "bell")
-                        .foregroundColor(Color.gray)
+                    VStack {
+                        Image(systemName: "bell")
+                            .foregroundColor(Color.gray)
+                        Text("Notifs")
+                            .font(.caption)
+                    }
                     Spacer()
-                    Image(systemName: "line.3.horizontal")
-                        .foregroundColor(Color.gray)
+                    VStack {
+                        Image(systemName: "line.3.horizontal")
+                            .foregroundColor(Color.gray)
+                        Text("Menu")
+                            .font(.caption)
+                    }
                 }
             }
 
