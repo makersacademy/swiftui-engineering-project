@@ -8,7 +8,7 @@ struct PostResponse: Codable {
 
 class PostService: PostServiceProtocol, ObservableObject {
     func fetchPosts(completion: @escaping ([Post]?, Error?) -> Void) {
-        let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVkMzI4NDM1ZThmNDYxMWY1NmExMmQ1IiwiaWF0IjoxNzA4NDQzNTg1LCJleHAiOjE3MDg0NDk1ODV9.V3v_ccIYWT1LLl89DNQJCq2nQxcbpJfcxjOWIwrONvg" // Use the actual method to retrieve your token
+        let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVkMzI4NDM1ZThmNDYxMWY1NmExMmQ1IiwiaWF0IjoxNzA4NTA2ODA1LCJleHAiOjE3MDg1NjY4MDV9.qF4WFyQ9_yKeAFacnUToTotblEp-DfYzOBhPDtI0tIw" // Use the actual method to retrieve your token
         guard let url = URL(string: "http://127.0.0.1:8080/posts") else {
             completion(nil, nil)
             return
@@ -25,9 +25,9 @@ class PostService: PostServiceProtocol, ObservableObject {
             }
             
             // Print the raw JSON response as a string for debugging
-            if let data = data, let jsonString = String(data: data, encoding: .utf8) {
-                print("Raw JSON response: \(jsonString)")
-            }
+//            if let data = data, let jsonString = String(data: data, encoding: .utf8) {
+//                print("Raw JSON response: \(jsonString)")
+//            }
             
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let data = data else {
                 completion(nil, nil) // Consider creating a specific error to return here
