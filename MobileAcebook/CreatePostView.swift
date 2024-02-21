@@ -4,13 +4,14 @@
 //
 //  Created by Si on 21/02/2024.
 //
-
 import SwiftUI
-import Foundation
 
 struct CreatePostView: View {
     @State private var message: String = ""
-    
+    @State private var showingAlert = false // To control alert visibility
+    @State private var alertTitle = "" // To set the alert title dynamically
+    @State private var alertMessage = "" // To set the alert message dynamically
+
     var body: some View {
         VStack {
             TextField("Enter message here", text: $message)
@@ -18,55 +19,33 @@ struct CreatePostView: View {
                 .padding()
 
             Button("Create Post") {
-                createPost(message: message)
+                CreatePostService.createPost(message: message) { success in
+                    if success {
+                        alertTitle = "Success"
+                        alertMessage = "Your post has been successfully created."
+                        print(alertMessage)
+                        // Clear the message text field
+                        message = ""
+                    } else {
+                        alertTitle = "Failure"
+                        alertMessage = "Failed to create your post. Please try again."
+                        print(alertMessage)
+                    }
+                    // Show the alert
+                    showingAlert = true
+                }
             }
         }
         .padding()
-    }
-    
-    func createPost(message: String) {
-        guard let url = URL(string: "http://127.0.0.1:8080/posts") else { return }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        if let token = retrieveTokenFromKeychain()?.token {
-            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        } else {
-            print("Failed to retrieve token from keychain.")
-            return
+        .alert(isPresented: $showingAlert) {
+            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
         }
-        
-        let postData: [String: Any] = ["message": message]
-        do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: postData)
-        } catch {
-            print("Error encoding post data: \(error)")
-            return
-        }
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            // Corrected scope for httpResponse
-            if let httpResponse = response as? HTTPURLResponse {
-                if httpResponse.statusCode == 201 {
-                    DispatchQueue.main.async {
-                        print("Post created successfully.")
-                    }
-                } else {
-                    print("Failed to create post. Status Code: \(httpResponse.statusCode)")
-                }
-            } else {
-                print("Error during URLSession data task: \(error?.localizedDescription ?? "Unknown error")")
-            }
-        }.resume()
     }
 }
-
 
 struct CreatePostView_Previews: PreviewProvider {
     static var previews: some View {
         CreatePostView()
     }
 }
-
 

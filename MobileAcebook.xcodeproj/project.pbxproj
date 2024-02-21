@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		130052BB2B83BDE4004ACBC7 /* LogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130052BA2B83BDE4004ACBC7 /* LogoutView.swift */; };
+		130D27172B8659FD0059289C /* CreatePostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130D27162B8659FD0059289C /* CreatePostService.swift */; };
 		139F5F252B86156600F943A8 /* LogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139F5F242B86156600F943A8 /* LogoutService.swift */; };
 		13B33CD02B8507D500D9947F /* NavigationTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B33CCF2B8507D500D9947F /* NavigationTabView.swift */; };
 		13B33CD62B85E58700D9947F /* PostPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B33CD52B85E58700D9947F /* PostPageView.swift */; };
@@ -52,6 +53,7 @@
 
 /* Begin PBXFileReference section */
 		130052BA2B83BDE4004ACBC7 /* LogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutView.swift; sourceTree = "<group>"; };
+		130D27162B8659FD0059289C /* CreatePostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostService.swift; sourceTree = "<group>"; };
 		139F5F242B86156600F943A8 /* LogoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutService.swift; sourceTree = "<group>"; };
 		13B33CCF2B8507D500D9947F /* NavigationTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTabView.swift; sourceTree = "<group>"; };
 		13B33CD52B85E58700D9947F /* PostPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPageView.swift; sourceTree = "<group>"; };
@@ -178,12 +180,10 @@
 			children = (
 				AE5D85E02AC9AFA9009680C6 /* AuthenticationService.swift */,
 				A68236F82B85F2BB0061DD2B /* GetPostsService.swift */,
+				130D27162B8659FD0059289C /* CreatePostService.swift */,
 				C4C075C62B84F68900A1CBA9 /* LoginService.swift */,
-
 				A68236FC2B86369E0061DD2B /* LoggedInUserService.swift */,
-
 				139F5F242B86156600F943A8 /* LogoutService.swift */,
-
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -356,6 +356,7 @@
 				13B33CD62B85E58700D9947F /* PostPageView.swift in Sources */,
 				13B33CD02B8507D500D9947F /* NavigationTabView.swift in Sources */,
 				130052BB2B83BDE4004ACBC7 /* LogoutView.swift in Sources */,
+				130D27172B8659FD0059289C /* CreatePostService.swift in Sources */,
 				AE5D85DA2AC8A337009680C6 /* WelcomePageView.swift in Sources */,
 				A68236FD2B86369E0061DD2B /* LoggedInUserService.swift in Sources */,
 				C4C075BC2B83B34100A1CBA9 /* LoginPageView.swift in Sources */,
