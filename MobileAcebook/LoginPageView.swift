@@ -191,6 +191,7 @@ private func isValidToken(_ token: String) -> Bool {
     return token.count > 50
 }
 
+// Custom notification name for logout events
 extension Notification.Name {
     static let logoutNotification = Notification.Name("LogoutNotification")
 }
