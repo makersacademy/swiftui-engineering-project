@@ -14,7 +14,7 @@ struct WelcomePageView: View {
     @StateObject var imagePicker = ImagePicker()
     @State private var uploadedImagePublicId: String?
     var body: some View {
-        NavigationView {
+        
             ZStack {
                 VStack {
                     Spacer()
@@ -58,7 +58,7 @@ struct WelcomePageView: View {
                     
                 }
             }
-        }
+        
     }
     
     struct WelcomePageView_Previews: PreviewProvider {
