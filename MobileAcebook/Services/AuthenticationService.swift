@@ -4,7 +4,6 @@
 //
 // Created by Josué Estévez Fernández on 01/10/2023.
 //
-import Foundation
 
 import Foundation
 
@@ -14,7 +13,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
     var canSignUp = false
       
     let username = user.username
-    let email = user.email
+    let email = user.emailAddress
     let password = user.password
     let confPassword = user.confPassword
 
