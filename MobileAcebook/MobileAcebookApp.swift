@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct MobileAcebookApp: App {
+    @StateObject var authService = AuthenticationService.shared
     var body: some Scene {
         WindowGroup {
             WelcomePageView()
+                .environmentObject(authService)
         }
     }
 }
