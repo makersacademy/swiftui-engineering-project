@@ -12,8 +12,9 @@ struct LoginPageView: View {
     
     @State private var emailAddress: String = ""
     @State private var password: String = ""
-    @State private var isNavigationActive: Bool = false
+    @State private var isLoginSucessful: Bool = false
     @State private var errorMessage: String?
+    @State private var isTokenStored: Bool = false
     
     var body: some View {
         NavigationView {
@@ -28,40 +29,53 @@ struct LoginPageView: View {
                     .textContentType(.password)
                 
                 Button("Log In") {
-                    Task {
-                        do {
-                            try await loginViewModel.logIn(email: emailAddress, password: password)
-                            isNavigationActive = true
-                            
-                        } catch {
+                    loginViewModel.logIn(email: emailAddress, password: password) { result in
+                        switch result {
+                        case .success:
+                            isLoginSucessful = true
+                        case .failure(let error):
                             errorMessage = error.localizedDescription
-                            isNavigationActive = false
+                            isLoginSucessful = false
                         }
                     }
                     
-                }.background(NavigationLink(destination: HomePageView(), isActive: $isNavigationActive) { EmptyView() })
-               
+                }
+                .background(NavigationLink(destination: HomePageView(), isActive: $isLoginSucessful) { EmptyView() })
+                
+                if let error = errorMessage {
+                    Text(error)
+                        .foregroundColor(.red)
+                    
+                }
+            }
+            .onAppear{
+                do {
+                    if let storedToken = try KeychainHelper.loadToken() {
+                        isTokenStored = true
+                    } else {
+                        isTokenStored = false
+                    }
+                } catch {
+
+                    print("Error loading token from keychain: \(error.localizedDescription)")
+                }
+                
+                if isTokenStored {
+                    isLoginSucessful = true
+                }
             }
             
-            if let error = errorMessage {
-                Text(error)
-                    .foregroundColor(.red)
-                
-            }
-           
-        }
-        .environmentObject(loginViewModel)
-                
-        }
-
+        } .environmentObject(loginViewModel)
     }
+}
     
-    struct LoginPageView_Previews: PreviewProvider {
-        static var previews: some View {
-            LoginPageView()
-        }
+    
+struct LoginPageView_Previews: PreviewProvider {
+    static var previews: some View {
+        LoginPageView()
     }
-        
+}
+    
 
 
 

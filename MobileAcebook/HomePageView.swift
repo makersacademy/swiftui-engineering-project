@@ -79,6 +79,7 @@ struct HomePageView: View {
                 .navigationBarTitle("Home Page")
                 .navigationBarTitleDisplayMode(.inline) // Center the title
                 .onAppear {
+                    viewModel.loadApiToken()
                     viewModel.fetchPosts()
                 }
             }
