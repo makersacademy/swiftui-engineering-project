@@ -9,20 +9,21 @@
 import SwiftUI
 
 struct NavigationTabView: View {
-    @Environment(\.presentationMode) var presentationMode
+    // Code for back button. Remove if not required
+    // @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationView {
             VStack {
                 // Top bar with back and logout buttons
                 HStack {
-                    Button(action: {
-                        // Navigate back to previous page
-                        presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Image(systemName: "arrow.backward.circle.fill")
-                            .foregroundColor(.black)
-                    }
+//                    Button(action: {
+//                        // Navigate back to previous page
+//                        presentationMode.wrappedValue.dismiss()
+//                    }) {
+//                        Image(systemName: "arrow.backward.circle.fill")
+//                            .foregroundColor(.black)
+//                    }
                     Spacer()
                     Button(action: {
                         // Add action for logout button

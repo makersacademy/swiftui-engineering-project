@@ -12,6 +12,8 @@ struct LoginPageView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var isAuthenticated = false
+    @State private var showEmailError = false
+    @State private var showPasswordError = false
     
     @ObservedObject var authService = AuthenticationService()
 
@@ -20,6 +22,16 @@ struct LoginPageView: View {
         NavigationView {
             ZStack {
                 VStack {
+                    
+                    Text("Acebook")
+                        .font(.largeTitle)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(width: 200, height: 50)
+                        .background(.black)
+                        .cornerRadius(30.0)
+                        .accessibilityIdentifier("welcomeText")
+                    
                     Spacer()
                     
                     Image("makers-logo")
@@ -33,6 +45,8 @@ struct LoginPageView: View {
                         .bold()
                     
                     Spacer()
+                    Spacer()
+                    
                     
                     VStack(alignment: .leading, spacing: 15) {
                         TextField("", text: self.$email, prompt: Text("Email").foregroundColor(.white))
@@ -40,6 +54,7 @@ struct LoginPageView: View {
                             .background(.black)
                             .cornerRadius(20.0)
                             .foregroundColor(.white)
+                            .autocapitalization(.none)
                         
                         SecureField("", text: self.$password, prompt: Text("Password").foregroundColor(.white))
                             .padding()
@@ -48,6 +63,7 @@ struct LoginPageView: View {
                             .foregroundColor(.white)
                     }.padding([.leading, .trailing], 27.5)
                     
+                    Spacer()
                     Spacer()
                     
                     Button("Login") {
@@ -60,7 +76,9 @@ struct LoginPageView: View {
                     .accessibilityIdentifier("loginButton")
                     
                     Spacer()
+                    Spacer()
                     Divider()
+                    
                     
                     VStack{
                         Text("Don't have an account?").bold()
@@ -74,6 +92,21 @@ struct LoginPageView: View {
                         .accessibilityIdentifier("clickHereButton")
                     }
                 }
+                if showEmailError { // Display email error message
+                Text("Email doesn't exist")
+                .foregroundColor(.red)
+                .padding()
+                .background(Color.white)
+                .cornerRadius(10)
+                .offset(y: -100) // Adjust the position as needed
+                } else if showPasswordError { // Display password error message
+                Text("Incorrect password")
+                .foregroundColor(.red)
+                .padding()
+                .background(Color.white)
+                .cornerRadius(10)
+                .offset(y: -100) // Adjust the position as needed
+                                }
             }
         }
         .navigationBarHidden(true)
@@ -112,28 +145,55 @@ struct LoginPageView: View {
         request.httpBody = httpBody
         
         URLSession.shared.dataTask(with: request) { data, response, error in
-            if let data = data, let token = String(data: data, encoding: .utf8) {
-                if isValidToken(token) {
-                    print("Authentication token: \(token)")
-                    isAuthenticated = true
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Error: \(error.localizedDescription)")
+                    // Handle error, for example, show a general error message
+                    return
+                }
+                
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    print("Invalid response")
+                    // Handle error, for example, show a general error message
+                    return
+                }
+                
+                if httpResponse.statusCode == 201, let data = data, let token = String(data: data, encoding: .utf8) {
+                    // Successful authentication
+                    if isValidToken(token) {
+                        print("Authentication token: \(token)")
+                        saveTokenToKeychain(token: token)
+                        isAuthenticated = true
+                        print("Is Authenticated: \(isAuthenticated)")
+                    } else {
+                        print("Invalid token: Authentication failed")
+                        // Handle error, for example, show a general error message
+                    }
+                } else if httpResponse.statusCode == 401 {
+                    // Incorrect password
+                    showEmailError = true
+                    print("Email does not exist")
+                } else if httpResponse.statusCode == 402 {
+                    // Email doesn't exist
+                    showPasswordError = true
+                    print("Incorrect password")
                 } else {
-                    isAuthenticated = false
-                    print("Invalid token: Authentication failed")
+                    print("Unexpected status code: \(httpResponse.statusCode)")
+                    // Handle error, for example, show a general error message
                 }
             }
         }.resume()
     }
     
+    }
+        
+    
+    
     private func isValidToken(_ token: String) -> Bool {
         
         return token.count > 50
     }
-    
-    private func logout() {
-        authService.logout() // Clear user session
-        isAuthenticated = false // Update UI to reflect logged out state
-    }
-}
+
 
 struct LoginPageView_Previews: PreviewProvider {
     static var previews: some View {
