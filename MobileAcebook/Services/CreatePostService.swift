@@ -9,7 +9,7 @@ import Foundation
 
 struct CreatePostRequest: Codable {
     let message: String
-    let image: String?
+    let publicID: String?
 }
 
 class CreatePostService {
@@ -32,9 +32,14 @@ class CreatePostService {
             return
         }
         
-        let postData = CreatePostRequest(message: message, image: image)
+        // Use the provided image or a default one if nil
+        let defaultImage = "public_id" // Default ImageId
+        let postData = CreatePostRequest(message: message, publicID: image ?? defaultImage)
+        
         do {
-            request.httpBody = try JSONEncoder().encode(postData)
+            let jsonData = try JSONEncoder().encode(postData)
+            print(String(data: jsonData, encoding: .utf8)!) // Debugging line to see the JSON
+            request.httpBody = jsonData
         } catch {
             print("Error encoding post data: \(error)")
             completion(false)
