@@ -54,25 +54,36 @@ struct FeedView: View {
                         .foregroundColor(isDarkMode ? .white : .black)
             )
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        isDarkMode.toggle()
-                    }) {
-                        Image(systemName: isDarkMode ? "sun.max.fill" : "sun.max")
-                            .foregroundColor(Color(UIColor(rgb: 0x1877F2)))
-                    }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: LoginPage(authenticationService: AuthenticationService()), isActive: $isLoggedOut) {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    ZStack {
+                        Circle()
+                            .foregroundColor(Color.gray.opacity(0.3)) // Adjust opacity and color as needed
+                            .frame(width: 40, height: 40) // Adjust size as needed
+                        
                         Button(action: {
-                            isLoggedOut = true
+                            isDarkMode.toggle()
                         }) {
-                            Image(systemName: isLoggedOut ? "rectangle.portrait.and.arrow.right.fill" : "rectangle.portrait.and.arrow.right")
-                                .foregroundColor(Color(UIColor(rgb: 0x1877F2)))
+                            Image(systemName: isDarkMode ? "sun.max.fill" : "sun.max")
+                                .foregroundColor(Color.black)
+                        }
+                    }
+                    
+                    ZStack {
+                        Circle()
+                            .foregroundColor(Color.gray.opacity(0.3)) // Adjust opacity and color as needed
+                            .frame(width: 40, height: 40) // Adjust size as needed
+                        
+                        NavigationLink(destination: LoginPage(authenticationService: AuthenticationService()), isActive: $isLoggedOut) {
+                            Button(action: {
+                                isLoggedOut = true
+                            }) {
+                                Image(systemName: isLoggedOut ? "rectangle.portrait.and.arrow.right.fill" : "rectangle.portrait.and.arrow.right")
+                                    .foregroundColor(Color.black)
+                            }
                         }
                     }
                 }
-                
+
             }
             .environment(\.colorScheme, isDarkMode ? .dark : .light)
             .toolbar {
