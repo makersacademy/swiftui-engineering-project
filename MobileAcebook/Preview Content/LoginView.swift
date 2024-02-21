@@ -13,8 +13,8 @@ struct LoginPage: View {
     var authenticationService: AuthenticationService
     
     var body: some View {
-        NavigationView {
             ZStack {
+                
                 Color(red: Double(67) / 255.0,
                       green: Double(100) / 255.0,
                       blue: Double(157) / 255.0
@@ -22,6 +22,7 @@ struct LoginPage: View {
                 .ignoresSafeArea()
                 
                 VStack {
+                    Spacer()
                     Text("Acebook")
                         .font(.system(size: 70))
                         .bold()
@@ -29,6 +30,7 @@ struct LoginPage: View {
                         .foregroundColor(Color.white)
                     TextField("Email", text: $email)
                         .padding()
+                        .autocapitalization(.none)
                         .frame(width: 300, height: 50)
                         .background(Color.white)
                         .cornerRadius(10)
@@ -40,7 +42,6 @@ struct LoginPage: View {
                         .cornerRadius(10)
                         .border(.red, width: CGFloat(wrongPassword))
                     
-//                    added code
                     NavigationLink(
                             destination: FeedView(),
                             isActive: $shouldNavigate
@@ -48,7 +49,6 @@ struct LoginPage: View {
                             EmptyView()
                                         }
                     
-//                    added code
                     Button(action: {
                         authenticateUser(email: email, password: password)
                     }) {
@@ -59,14 +59,30 @@ struct LoginPage: View {
                             .cornerRadius(10)
                             .bold()
                     }
+                    Spacer()
+                        HStack {
+                            Text("Don't have an account? Create one")
+                                .foregroundColor(.white)
+                            NavigationLink(
+                                destination: SignupView(authenticationService: AuthenticationService()),
+                                label: {
+                                    Text("HERE")
+                                        .foregroundColor(.white)
+                                        
+                                }
+                            )
+                        }
                 }
-                .navigationBarHidden(true)
+
+                
                 .alert(isPresented: $showAlert) {
                     Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
                 }
             }
+            .navigationBarBackButtonHidden(true)
+            .navigationBarHidden(true)
            
-        }
+
     }
 
     func authenticateUser(email: String, password: String) {

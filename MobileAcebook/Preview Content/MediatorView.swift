@@ -15,14 +15,14 @@ struct MediatorView: View {
                             self.isLoadingActive = true
                         }
                     }
-                    .navigationBarHidden(true)
-                
-                NavigationLink(destination: LoginView(), isActive: $isLoadingActive) {
+                    
+                NavigationLink(destination: LoginPage(authenticationService: AuthenticationService()), isActive: $isLoadingActive) {
                     EmptyView()
                 }
                 .hidden()
             }
         }
+        
     }
 }
 
