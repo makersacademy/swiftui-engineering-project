@@ -50,6 +50,6 @@ class PostsViewModel: ObservableObject {
 
 struct Constants {
     static let postsURL = "http://127.0.0.1:8080/posts"
-    static let apiToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDg0MjgyMTgsImV4cCI6MTcwODQzMTgxOH0.iuJlN6aF-oSkPWjyZducvGWVP-3Ch3rIxDlheDAMGhU"
+    static let apiToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDg1MjM5OTAsImV4cCI6MTcwODUyOTk5MH0.KMAIm_dn0opPgBJ0MuMysoYnJ-PO2KtTQt-ycR4wfCc"
 }
 
