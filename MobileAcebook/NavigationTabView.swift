@@ -7,11 +7,12 @@
 
 
 import SwiftUI
+import Foundation
 
 struct NavigationTabView: View {
     // Code for back button. Remove if not required
     // @Environment(\.presentationMode) var presentationMode
-    
+    @ObservedObject var authService = AuthenticationService()
     var body: some View {
         NavigationView {
             VStack {
@@ -26,7 +27,7 @@ struct NavigationTabView: View {
 //                    }
                     Spacer()
                     Button(action: {
-                        // Add action for logout button
+                        authService.logout()
                     }) {
                         Text("Logout")
                             .foregroundColor(.black)
