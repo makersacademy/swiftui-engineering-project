@@ -13,6 +13,9 @@ struct SignUpPageView: View {
     @State private var passwordsMatch = true
     @State private var messages: [String] = []
     @State private var showInvalidEmailError = false
+    @State private var showAlert = false
+    @State private var alertDismissed = false
+    
     
 //    Email validation, requires a @ and a .c to become valid
     func isValidEmail(email: String) -> Bool {
@@ -81,33 +84,40 @@ struct SignUpPageView: View {
                 if !passwordsMatch {
                     Text("Passwords do not match").foregroundColor(.red)}
                 
-//                Error handling for password validation
+//                Error handling for email validation
                 
-//                if isValidEmail(email: signUpDetails.email) {
-//                    
-//                } else {
-//                    Text("Invalid email address").foregroundColor(.red)
-//                }
-//                
+                if isValidEmail(email: signUpDetails.email) {
+                } else {
+                    Text("Invalid email address").foregroundColor(.red)
+                }
+//                error handling for password validation
+                
 //                if !validatePassword(signUpDetails.password) {
 //                    Text("password must be 8 characters long, and include at least one digit and character")
 //                    
-//                }
+                }
                 
                 Button("Submit") {
                     passwordsMatch = signUpDetails.password == passwordConfirm
-                    if validateForm() {
-//                        do something
+                    if validateForm() && passwordsMatch {
+                        showAlert = true
+                        submitButton()
                     }
 
-                    
-                    if passwordsMatch {
-                        submitButton()
-                    
-                    }
-                    
-                  
                 }
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("Success!"),
+                        message: Text("Please log in"),
+                        dismissButton: .default(Text("Let's go, baby")) {
+                            // Set alertDismissed to true when the alert is dismissed
+                            alertDismissed = true
+                        }
+                    )
+                }
+            
+            
+                
                 ForEach(messages, id: \.self) {message in Text(message).foregroundColor(.red)}
 //                }
                 
@@ -118,7 +128,7 @@ struct SignUpPageView: View {
             }
 
         }
-    }
+    
     
     struct SignupPageView_Previews: PreviewProvider {
         static var previews: some View {
