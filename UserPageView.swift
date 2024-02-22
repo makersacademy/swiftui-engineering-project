@@ -13,7 +13,6 @@ struct UserPageView: View {
     let cloudinary = CLDCloudinary(configuration: CloudinaryConfig.configuration)
 
     var body: some View {
-        NavigationView{
             VStack {
                 HStack {
                     // replace image path with publicId of user image from sign up
@@ -25,7 +24,6 @@ struct UserPageView: View {
                 Spacer ()
             }
         }
-    }
 
 }
 

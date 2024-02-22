@@ -12,7 +12,7 @@ struct LoginPageView: View {
     
     @State private var emailAddress: String = ""
     @State private var password: String = ""
-    @State private var isLoginSucessful: Bool = false
+//    @State private var isLoginSucessful: Bool = false
     @State private var errorMessage: String?
     @State private var isTokenStored: Bool = false
     
@@ -29,40 +29,24 @@ struct LoginPageView: View {
                     .textContentType(.password)
                 
                 Button("Log In") {
-                    loginViewModel.logIn(email: emailAddress, password: password) { result in
-                        switch result {
-                        case .success:
-                            isLoginSucessful = true
-                        case .failure(let error):
-                            errorMessage = error.localizedDescription
-                            isLoginSucessful = false
-                        }
-                    }
+                    loginViewModel.logIn(email: emailAddress, password: password)
                     
                 }
-                .background(NavigationLink(destination: HomePageView(), isActive: $isLoginSucessful) { EmptyView() })
+                .disabled(loginViewModel.isLoggingIn)
+                .background(NavigationLink(destination: HomePageView(), isActive: .constant(loginViewModel.successMessage != nil)) {
+                        EmptyView()
+                    })
                 
-                if let error = errorMessage {
-                    Text(error)
-                        .foregroundColor(.red)
-                    
-                }
-            }
-            .onAppear{
-                do {
-                    if let storedToken = try KeychainHelper.loadToken() {
-                        isTokenStored = true
-                    } else {
-                        isTokenStored = false
+                    if let error = loginViewModel.errorMessage {
+                        Text(error)
+                            .foregroundColor(.red)
                     }
-                } catch {
+                    
+                if let success = loginViewModel.successMessage {
+                        Text(success)
+                            .foregroundColor(.green)
+                }
 
-                    print("Error loading token from keychain: \(error.localizedDescription)")
-                }
-                
-                if isTokenStored {
-                    isLoginSucessful = true
-                }
             }
             
         } .environmentObject(loginViewModel)
