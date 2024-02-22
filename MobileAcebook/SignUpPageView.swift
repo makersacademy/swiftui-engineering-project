@@ -82,15 +82,17 @@ struct SignUpPageView: View {
                     Text("Passwords do not match").foregroundColor(.red)}
                 
 //                Error handling for password validation
-                if isValidEmail(email: signUpDetails.email) {
-                    
-                } else {
-                    Text("Invalid email address").foregroundColor(.red)
-                }
                 
-                if !validatePassword(signUpDetails.password) {
-                    Text("password needs to be 8 characters, one digit")
-                }
+//                if isValidEmail(email: signUpDetails.email) {
+//                    
+//                } else {
+//                    Text("Invalid email address").foregroundColor(.red)
+//                }
+//                
+//                if !validatePassword(signUpDetails.password) {
+//                    Text("password must be 8 characters long, and include at least one digit and character")
+//                    
+//                }
                 
                 Button("Submit") {
                     passwordsMatch = signUpDetails.password == passwordConfirm
