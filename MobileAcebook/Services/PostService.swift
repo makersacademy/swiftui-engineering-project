@@ -25,9 +25,9 @@ class PostService: PostServiceProtocol, ObservableObject {
             }
             
 //             Print the raw JSON response as a string for debugging
-            if let data = data, let jsonString = String(data: data, encoding: .utf8) {
-                print("Raw JSON response: \(jsonString)")
-            }
+//            if let data = data, let jsonString = String(data: data, encoding: .utf8) {
+//                print("Raw JSON response: \(jsonString)")
+//            }
             
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let data = data else {
                 completion(nil, nil) // Consider creating a specific error to return here
