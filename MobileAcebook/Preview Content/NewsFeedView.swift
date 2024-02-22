@@ -23,9 +23,9 @@ struct NewsFeedView: View {
             ZStack {
                 List(viewModel.posts) { post in
                     VStack(alignment: .leading) {
-                        Text(post.message)
+                        Text(post.message ?? "No message provided")
                             .font(.headline)
-                        Text(post.image)
+                        Text(post.image ?? "No image provided")
                             .font(.subheadline)
                     }
                 }
