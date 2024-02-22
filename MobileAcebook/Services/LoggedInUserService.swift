@@ -18,15 +18,15 @@ class LoggedInUser: ObservableObject {
           request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
             request.addValue("application/json", forHTTPHeaderField: "Accept")
-          URLSession.shared.dataTask(with: request) { data, response, error in
-              if let data = data, let result = try? JSONDecoder().decode(Item.self, from:data) {
-                  DispatchQueue.main.async {
-                      self.user = result.user
-                  }
-            }
-          }.resume()
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let data = data, let result = try? JSONDecoder().decode(Item.self, from:data) {
+                    DispatchQueue.main.async {
+                        self.user = result.user
+                    }
+                }
+            }.resume()
         } else {
-          print("Invalid URL")
+            print("Invalid URL")
         }
     }
 }

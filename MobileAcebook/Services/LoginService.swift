@@ -44,7 +44,6 @@ struct Token: Decodable {
     let token: String
 }
 
-
 // Function to retrieve token from Keychain
 func retrieveTokenFromKeychain() -> Token? {
     // Define the query parameters for retrieving the Keychain item
