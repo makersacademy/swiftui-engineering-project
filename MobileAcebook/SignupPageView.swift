@@ -86,7 +86,10 @@ struct SignupPageView: View {
   }
 }
 
-#Preview {
-  SignupPageView()
+struct SignupPageView_Previews: PreviewProvider {
+    static var previews: some View {
+        SignupPageView()
+            .environmentObject(AuthenticationService.shared)
+    }
 }
 
