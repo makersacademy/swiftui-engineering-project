@@ -36,16 +36,11 @@ struct SignupPageView: View {
 
         Spacer()
 
-          if showErrMessage{
-              Text(errMessage)
-                  .multilineTextAlignment(.center)
-          } else {
-              Image(systemName: "network")
-                  .resizable()
-                  .scaledToFit()
-                  .frame(width: 160, height: 160)
-                  .accessibilityIdentifier("network-logo")
-          }
+          Image(systemName: "network")
+              .resizable()
+              .scaledToFit()
+              .frame(width: 160, height: 160)
+              .accessibilityIdentifier("network-logo")
 
         Form {
           Section(header: Text("Sign Up")
@@ -84,6 +79,10 @@ struct SignupPageView: View {
                         }
                     }
                 }
+            }
+            if showErrMessage{
+                Text(errMessage)
+                    .multilineTextAlignment(.center)
             }
             
           Section {
