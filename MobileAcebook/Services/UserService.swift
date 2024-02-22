@@ -1,15 +1,39 @@
+//
+//  UserService.swift
+//  MobileAcebook
+//
+//  Created by Gabriela Ehrenbrink on 22/02/2024.
+//
+
 import Foundation
 
-struct PostResponse: Codable {
-    let posts: [Post]
-    let user: User
+
+//struct UserResponse: Codable {
+//    let users: [User]
+//    let user: String?
+//    let token: String
+//}
+
+struct UserData: Codable {
+    let username: String
+    let avatar: String
+    let email: String
+    let password: String
+}
+
+struct UserResponse: Codable {
+    let ownerData: UserData
     let token: String
 }
 
-class PostService: PostServiceProtocol, ObservableObject {
-    func fetchPosts(completion: @escaping ([Post]?, Error?) -> Void) {
-        let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDg2MjIzOTksImV4cCI6MTcwOTA1NDM5OX0.Rw1yZ9O-0BiBYcY4qS2UucQHZkvOS7eL89HofUyuhF0" // temporary token only used locally, will be saved in separed gitignored file later on
-        guard let url = URL(string: "http://127.0.0.1:8080/posts") else {
+protocol UserServiceProtocol {
+    func fetchUser(completion: @escaping (UserData?, Error?) -> Void)
+}
+
+class UserService: UserServiceProtocol, ObservableObject {
+    func fetchUser(completion: @escaping (UserData?, Error?) -> Void) {
+        let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDg2MjIzOTksImV4cCI6MTcwOTA1NDM5OX0.Rw1yZ9O-0BiBYcY4qS2UucQHZkvOS7eL89HofUyuhF0" // temporary token only used locally, will be saved in separated gitignored file later on
+        guard let url = URL(string: "http://127.0.0.1:8080/posts/65d782366b9025be365e88de") else {
             completion(nil, nil)
             return
         }
@@ -24,7 +48,7 @@ class PostService: PostServiceProtocol, ObservableObject {
                 return
             }
             
-//             Print the raw JSON response as a string for debugging
+            // Print the raw JSON response as a string for debugging
             if let data = data, let jsonString = String(data: data, encoding: .utf8) {
                 print("Raw JSON response: \(jsonString)")
             }
@@ -36,9 +60,9 @@ class PostService: PostServiceProtocol, ObservableObject {
             
             do {
                 let decoder = JSONDecoder()
-                let responseData = try decoder.decode(PostResponse.self, from: data)
+                let responseData = try decoder.decode(UserResponse.self, from: data)
                 DispatchQueue.main.async {
-                    completion(responseData.posts, nil)
+                    completion(responseData.ownerData, nil)
                 }
             } catch {
                 print("Decoding error: \(error)")

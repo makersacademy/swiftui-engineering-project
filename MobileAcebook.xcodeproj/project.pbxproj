@@ -30,6 +30,7 @@
 		AE5D85E32AC9AFD2009680C6 /* MockAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E22AC9AFD2009680C6 /* MockAuthenticationService.swift */; };
 		AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E52AC9B077009680C6 /* AuthenticationServiceProtocol.swift */; };
 		AE5D85E82AC9B29A009680C6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E72AC9B29A009680C6 /* User.swift */; };
+		F84318862B87AB0800759D1A /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84318852B87AB0800759D1A /* UserService.swift */; };
 		F8E836342B84CCCC00D0A3FB /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E836332B84CCCC00D0A3FB /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,7 @@
 		AE5D85E22AC9AFD2009680C6 /* MockAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthenticationService.swift; sourceTree = "<group>"; };
 		AE5D85E52AC9B077009680C6 /* AuthenticationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceProtocol.swift; sourceTree = "<group>"; };
 		AE5D85E72AC9B29A009680C6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F84318852B87AB0800759D1A /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		F8E836332B84CCCC00D0A3FB /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,14 +144,12 @@
 		AE5D85B52AC8A224009680C6 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				794202532B855C0000C781CC /* MediatorView.swift */,
 				AE5D85B62AC8A224009680C6 /* Preview Assets.xcassets */,
 				137764892B84E56700000843 /* SignupView.swift */,
 				1377648B2B84E59900000843 /* UserView.swift */,
 				1377648D2B84ECF000000843 /* NewsFeedView.swift */,
 				799662122B83ABCA00B22FF5 /* SignupView.swift */,
 				F8E836332B84CCCC00D0A3FB /* LoginView.swift */,
-				F8E836352B84F35B00D0A3FB /* FeedView.swift */,
 				794202512B855ACB00C781CC /* LoadingView.swift */,
 				794202532B855C0000C781CC /* MediatorView.swift */,
 				794202592B861E1700C781CC /* ProfileView.swift */,
@@ -181,6 +181,7 @@
 			children = (
 				AE5D85E02AC9AFA9009680C6 /* AuthenticationService.swift */,
 				1377648F2B84EE0C00000843 /* PostService.swift */,
+				F84318852B87AB0800759D1A /* UserService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -344,6 +345,7 @@
 			files = (
 				1377648A2B84E56700000843 /* SignupView.swift in Sources */,
 				137764942B84F37200000843 /* PostServiceProtocol.swift in Sources */,
+				F84318862B87AB0800759D1A /* UserService.swift in Sources */,
 				799662132B83ABCA00B22FF5 /* SignupView.swift in Sources */,
 				F8E836342B84CCCC00D0A3FB /* LoginView.swift in Sources */,
 				AE5D85E12AC9AFA9009680C6 /* AuthenticationService.swift in Sources */,

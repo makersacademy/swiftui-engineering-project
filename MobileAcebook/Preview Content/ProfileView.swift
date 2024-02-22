@@ -4,11 +4,25 @@ import Foundation
 
 import SwiftUI
 
+class ProfileViewModel: ObservableObject {
+    @Published var user: UserData? = nil
+}
+
+
 struct ProfileView: View {
     @State private var isLoggedOut = false
     @State private var isPersonClicked = false
     @State private var isHouseClicked = false
+    @State private var isFetching = false
+    @State private var fetchFailed = false
+    @State private var errorMessage = ""
+    
+    @ObservedObject private var userService = UserService()
+    @ObservedObject private var viewModel = ProfileViewModel()
+    
+    
     let postService = PostService()
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -20,21 +34,43 @@ struct ProfileView: View {
                         ZStack {
                             Circle()
                                 .fill(Color.white)
-                                .frame(width: 150, height: 150)
+                                .frame(width: 130, height: 130)
+                            if let avatarURLString = viewModel.user?.avatar, let avatarURL = URL(string: avatarURLString) {
+                                    // If the user has an avatar URL, try to load the image
+                                    AsyncImage(url: avatarURL) { image in
+                                        image
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 120, height: 120)
+                                            .clipShape(Circle())
+                                    } placeholder: {
+                                        // Placeholder or default image
+                                        Image(systemName: "person")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 120, height: 120)
+                                    }
+                                } else {
+                                    // If the avatar URL is not available, show a default image
+                                    Image(systemName: "person")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 120, height: 120)
+                                }
 
-                            Image(systemName: "person")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-//                                .clipShape(Circle())
-                                .frame(width: 120, height: 120)
+//                            Image(systemName: "person")
+//                                .resizable()
+//                                .aspectRatio(contentMode: .fill)
+////                                .clipShape(Circle())
+//                                .frame(width: 120, height: 120)
                         }
                         .offset(y: -60)
                         VStack {
-                            Text("John Smith") // Replace with user's name
+                            Text(viewModel.user?.username ?? "Unknown Username") // Replace with user's name
                                         .font(.headline)
                                         .foregroundColor(.black)
 
-                            Text("john@email.com") // Replace with user's email
+                            Text(viewModel.user?.email ?? "Unknown Email") // Replace with user's email
                                         .font(.subheadline)
                                         .foregroundColor(.gray)
                 
@@ -48,6 +84,8 @@ struct ProfileView: View {
                                         .font(.headline)
                                         .foregroundColor(.black)
                                         .bold()
+                                        .onAppear {
+                                                    fetchUser()}
 //                            Add Posts from user
 
                             
@@ -151,7 +189,29 @@ struct ProfileView: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
     }
-}
+    private func fetchUser() {
+            isFetching = true
+            fetchFailed = false
+            errorMessage = ""
+
+            userService.fetchUser { user, error in
+                DispatchQueue.main.async {
+                    self.isFetching = false
+
+                    if let error = error {
+                        self.fetchFailed = true
+                        self.errorMessage = "Failed to fetch user: \(error.localizedDescription)"
+                    } else if let user = user {
+                        self.viewModel.user = user
+                    } else {
+                        // No error but also no user
+                        self.fetchFailed = true
+                        self.errorMessage = "No user found."
+                    }
+                }
+            }
+        }
+    }
 
 
 
