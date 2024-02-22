@@ -18,7 +18,6 @@ public struct LoginError: Error {
 
 
 class AuthenticationService: ObservableObject, AuthenticationServiceProtocol {
-    @Published var isLoggedOut: Bool = false
     @Published var isLoggedIn: Bool = false
     
     func signUp(user: User, confPassword: String, completion: @escaping (Bool, String?) -> Void) {
