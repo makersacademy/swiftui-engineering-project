@@ -23,20 +23,21 @@ struct WelcomePageView: View {
                     
                     Spacer()
                     
-                    Image("makers-logo")
+                    Image(systemName: "network")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 200, height: 200)
-                        .accessibilityIdentifier("makers-logo")
+                        .accessibilityIdentifier("network-logo")
                     
                     Spacer()
                     
-                    NavigationLink("Sign Up", destination: SignupPageView())
-                   
-     
-                    NavigationLink("login page", destination: LoginPageView())
-         
+                    HStack {
+                        NavigationLink("Sign up", destination: SignupPageView()).padding(.trailing, 80.0)
+                        
+                        NavigationLink("Log in", destination: LoginPageView())
+                    }
 
+         
                     Spacer()
 
                     

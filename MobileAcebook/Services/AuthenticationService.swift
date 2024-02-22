@@ -22,54 +22,55 @@ class AuthenticationService: ObservableObject, AuthenticationServiceProtocol {
     @Published var isLoggedIn: Bool = false
     
     func signUp(user: User, confPassword: String, completion: @escaping (Bool) -> Void) {
-
-    var canSignUp = false
-      
-    let email = user.email
-    let password = user.password
-    let confPassword = confPassword
-    print("\(email) \(password) \(confPassword)")
-    let validEmail = isEmailValid(email)
-    let passwordsMatch = doPasswordsMatch(password, confPassword)
-    let validPassword = isPasswordValid(password)
-    print("\(validEmail) \(passwordsMatch) \(validPassword)")
-    if validEmail && passwordsMatch && validPassword {
-
-      createUser(user: user) {
-        result in switch result {
-        case .success(let data):
-            print("User has been created: \(data)")
-          canSignUp = true
-            print("ln 34, \(canSignUp)")
-            completion(canSignUp)
-        case .failure(let error):
-          print("Error creating user: \(error)")
-          canSignUp = false
-            completion(canSignUp)
+        
+        var canSignUp = false
+        
+        let email = user.email
+        let password = user.password
+        let confPassword = confPassword
+        print("\(email) \(password) \(confPassword)")
+        let validEmail = isEmailValid(email)
+        let passwordsMatch = doPasswordsMatch(password, confPassword)
+        let validPassword = isPasswordValid(password)
+        print("\(validEmail) \(passwordsMatch) \(validPassword)")
+        if validEmail && passwordsMatch && validPassword {
+            
+            createUser(user: user) {
+                result in switch result {
+                case .success(let data):
+                    print("User has been created: \(data)")
+                    canSignUp = true
+                    print("ln 34, \(canSignUp)")
+                    completion(canSignUp)
+                case .failure(let error):
+                    print("Error creating user: \(error)")
+                    canSignUp = false
+                    completion(canSignUp)
+                }
+            }
+        } else {
+            completion(false) // alert or error message will go here
         }
-      }
-    } else {
-      completion(false) // alert or error message will go here
     }
-  }
-
-  func isEmailValid(_ email: String) -> Bool {
-    let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "[A-Za-z0-9._%+-]+@[A-Za-z0-9._%+-]+\\.[A-Za-z]{2,}")
-    return emailPredicate.evaluate(with: email)
-  }
-
-  func doPasswordsMatch(_ password: String, _ confPassword: String) -> Bool {
-    if password == confPassword {
-      return true
-    } else {
-      return false
+    
+    func isEmailValid(_ email: String) -> Bool {
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "[A-Za-z0-9._%+-]+@[A-Za-z0-9._%+-]+\\.[A-Za-z]{2,}")
+        return emailPredicate.evaluate(with: email)
     }
-  }
+    
+    func doPasswordsMatch(_ password: String, _ confPassword: String) -> Bool {
+        if password == confPassword {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func isPasswordValid(_ password: String) -> Bool {
+        let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")
+        return passwordPredicate.evaluate(with: password)
+    }
 
-  func isPasswordValid(_ password: String) -> Bool {
-    let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")
-    return passwordPredicate.evaluate(with: password)
-  }
     
     func logIn(email: String, password: String, completion: @escaping(Result<Void, LoginError>) -> Void) {
         let requestBody = ["email": email, "password": password]

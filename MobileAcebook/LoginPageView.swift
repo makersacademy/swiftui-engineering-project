@@ -16,10 +16,8 @@ struct LoginPageView: View {
     @State private var navigateToHomePage: Bool = false
     
     var body: some View {
-        NavigationView {
-            Form {
-                
-                TextField("email address", text: $emailAddress)
+        Form {
+                TextField("email", text: $emailAddress)
                     .autocapitalization(.none)
                     .keyboardType(.emailAddress)
                     .textContentType(.emailAddress)
@@ -28,7 +26,7 @@ struct LoginPageView: View {
                     .textContentType(.password)
                 
 
-                Button("Log In") {
+                Button("Log in") {
                     loginViewModel.logIn(email: emailAddress, password: password)
                     
                 }
@@ -47,9 +45,7 @@ struct LoginPageView: View {
                             .foregroundColor(.green)
                 }
 
-            }
-            
-        } .environmentObject(loginViewModel)
+            }.environmentObject(loginViewModel)
     }
 }
     

@@ -14,6 +14,7 @@ struct SignupPageView: View {
   @State private var email: String = ""
   @State private var password: String = ""
   @State private var confPassword: String = ""
+    @StateObject var authService = AuthenticationService.shared
 
   @StateObject var imagePicker = ImagePicker()
   @State private var uploadedImagePublicId: String = "/default_avatar.png"
@@ -21,7 +22,6 @@ struct SignupPageView: View {
   @State private var navigateToFeedPage: Bool = false
 
   var body: some View {
-    NavigationView {
       VStack{
 
         Text("Welcome to Acebook!")
@@ -31,11 +31,11 @@ struct SignupPageView: View {
 
         Spacer()
 
-        Image("makers-logo")
-          .resizable()
-          .scaledToFit()
-          .frame(width: 200, height: 200)
-          .accessibilityIdentifier("makers-logo")
+        Image(systemName: "network")
+              .resizable()
+              .scaledToFit()
+              .frame(width: 200, height: 200)
+              .accessibilityIdentifier("network-logo")
 
         Form {
           Section(header: Text("Sign Up")
@@ -69,7 +69,7 @@ struct SignupPageView: View {
 
             Button("Sign up") {
               let userInfo = User(email: email, username: username, password: password, avatar: uploadedImagePublicId)
-                AuthenticationService().signUp(user: userInfo, confPassword: confPassword) {
+                authService.signUp(user: userInfo, confPassword: confPassword) {
                     canSignUp in if canSignUp {
                         print("line 74 \(navigateToFeedPage)")
                         navigateToFeedPage = true
@@ -83,7 +83,6 @@ struct SignupPageView: View {
         }
         Spacer()
       }
-    }
   }
 }
 
