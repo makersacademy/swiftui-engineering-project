@@ -8,11 +8,11 @@ import Foundation
 
 struct User: Codable {
     let username: String
-    let avatar: String
-    let id: String
+    let avatar: String?
+    let id: String?
     let email: String
     let password: String
-    let __v: Int
+    let __v: Int?
 
     enum CodingKeys: String, CodingKey {
         case username, avatar, email, password, __v

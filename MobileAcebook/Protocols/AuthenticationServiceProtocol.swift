@@ -8,3 +8,4 @@
 protocol AuthenticationServiceProtocol {
     func signUp(user: User, completion: @escaping (Bool, Error?) -> Void)
 }
+
