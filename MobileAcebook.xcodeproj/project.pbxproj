@@ -179,11 +179,8 @@
 				AE5D85E02AC9AFA9009680C6 /* AuthenticationService.swift */,
 				A68236F82B85F2BB0061DD2B /* GetPostsService.swift */,
 				C4C075C62B84F68900A1CBA9 /* LoginService.swift */,
-
 				A68236FC2B86369E0061DD2B /* LoggedInUserService.swift */,
-
 				139F5F242B86156600F943A8 /* LogoutService.swift */,
-
 			);
 			path = Services;
 			sourceTree = "<group>";

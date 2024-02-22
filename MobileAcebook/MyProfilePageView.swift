@@ -16,24 +16,41 @@ struct MyProfilePageView: View {
     
     @ObservedObject var postsModel = PostsView()
     @ObservedObject var loggedinUserModel = LoggedInUser()
+ 
+  
     
     var body: some View {
         ZStack {
             VStack {
                 Spacer()
-
+                
                 Text("My Profile")
                     .font(.largeTitle)
+                    .bold()
                     .padding(.bottom, 20)
                     .accessibilityIdentifier("titleText")
-
-                HStack{
-                    Image("makers-logo")
+                
+                if let avatarImage = UIImage(named: "default_avatar.png") {
+                    Image(uiImage: avatarImage)
                         .resizable()
-                        .scaledToFit()
-                        .frame(width: 75, height: 100)
-                        .accessibilityIdentifier("profile-picturem")
-                    LazyVGrid(columns: layout, alignment: .leading, content: {
+                        .scaledToFill()
+                        .frame(width: 150, height: 150)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 150, height: 150)
+                        .clipShape(Circle())
+                        .accessibilityIdentifier("profile-picture")
+                } else {
+                    Image(systemName: "person.circle.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 150, height: 150)
+                        .clipShape(Circle())
+                        .foregroundColor(.gray)
+                    }
+                
+                
+                    
+                    LazyVGrid(columns: layout, alignment: .center, content: {
                         Text("Username:")
                         Text(loggedinUserModel.user?.username ?? "")
                         Text("")
@@ -43,8 +60,8 @@ struct MyProfilePageView: View {
                     }).onAppear{
                         loggedinUserModel.fetchUser()
                     }
-        
-                }
+                
+                
                 Spacer()
                 Text("Posts").font(.title)
                 List{
@@ -60,12 +77,13 @@ struct MyProfilePageView: View {
                     }
                 }
                 .onAppear {
-                        postsModel.fetchPosts()
-                    }
+                    postsModel.fetchPosts()
                 }
             }
         }
     }
+}
+    
 
 struct MyProfilePageView_Previews: PreviewProvider {
     static var previews: some View {

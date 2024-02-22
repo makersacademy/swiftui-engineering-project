@@ -6,10 +6,15 @@
 //
 
 import Foundation
+import PhotosUI
 
 class LoggedInUser: ObservableObject {
     @Published var user: User?
+    @Published var profile: User?
+    
     var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVkNGIwYWUwYzhmZDYxZDBlZDFmNDEwIiwiaWF0IjoxNzA4NTIzNTA3LCJleHAiOjE3MDg1MjQxMDd9.fbccplfPmMCaEH8xmMtq6TMO0sRhF6pmJ0zchIHlPQA"
+    
+    
     
     func fetchUser() {
         if let url = URL(string: "http://127.0.0.1:8080/posts") {
@@ -30,3 +35,6 @@ class LoggedInUser: ObservableObject {
         }
     }
 }
+
+
+
