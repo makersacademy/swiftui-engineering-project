@@ -79,7 +79,8 @@ struct SignupView: View {
                 }
                 .padding()
                 
-                Spacer()
+            Spacer()
+
                 HStack {
                     Text("Already have an account? Login")
                         .foregroundColor(.white)
@@ -103,22 +104,22 @@ struct SignupView: View {
             .background(Color(UIColor(rgb: 0x1877F2)))
 }
     
-        private func signup() {
-            let newUser = User(username: username, email: email, password: password)
-            
-            authenticationService.signUp(user: newUser) { success, error in
+    private func signup() {
+        let newUser = User(username: username, email: email, password: password)
+        
+        authenticationService.signUp(user: newUser) { success, error in
+            DispatchQueue.main.async { // Ensure UI updates are on the main thread
                 if success {
                     print("Signup successful")
                     alertMessage = "Signup successful"
-                    showAlert = true
-                    
+                    isSignupSuccessful = true // Moved inside the success block
                 } else {
                     print("Signup failed: \(error?.localizedDescription ?? "Unknown error")")
                     alertMessage = "Signup failed: \(error?.localizedDescription ?? "Unknown error")"
-                    showAlert = true
                 }
+                showAlert = true
             }
-            isSignupSuccessful = true
+        }
     }
     private func isValidPassword(_ password: String) -> Bool {
         let psswordRegex = "^(?=.*[!@£$%^&*.,])(?=.*[A-Z])(?=.*[0-9]).{8,}$"
@@ -144,7 +145,6 @@ extension UIColor {
        )
    }
 }
-
 
 struct SignupViewPage_Previews: PreviewProvider {
     static var previews: some View {

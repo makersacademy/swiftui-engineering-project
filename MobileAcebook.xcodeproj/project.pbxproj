@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		137764882B84E50B00000843 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137764872B84E50B00000843 /* Post.swift */; };
+		1377648A2B84E56700000843 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137764892B84E56700000843 /* SignupView.swift */; };
+		1377648C2B84E59900000843 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377648B2B84E59900000843 /* UserView.swift */; };
+		1377648E2B84ECF000000843 /* NewsFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377648D2B84ECF000000843 /* NewsFeedView.swift */; };
+		137764902B84EE0C00000843 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377648F2B84EE0C00000843 /* PostService.swift */; };
+		137764922B84F17900000843 /* NewsFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137764912B84F17900000843 /* NewsFeedViewModel.swift */; };
+		137764942B84F37200000843 /* PostServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137764932B84F37200000843 /* PostServiceProtocol.swift */; };
 		794202522B855ACB00C781CC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794202512B855ACB00C781CC /* LoadingView.swift */; };
 		794202542B855C0000C781CC /* MediatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794202532B855C0000C781CC /* MediatorView.swift */; };
 		7942025A2B861E1700C781CC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794202592B861E1700C781CC /* ProfileView.swift */; };
@@ -24,7 +31,6 @@
 		AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E52AC9B077009680C6 /* AuthenticationServiceProtocol.swift */; };
 		AE5D85E82AC9B29A009680C6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E72AC9B29A009680C6 /* User.swift */; };
 		F8E836342B84CCCC00D0A3FB /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E836332B84CCCC00D0A3FB /* LoginView.swift */; };
-		F8E836362B84F35B00D0A3FB /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E836352B84F35B00D0A3FB /* FeedView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +51,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		137764872B84E50B00000843 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		137764892B84E56700000843 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
+		1377648B2B84E59900000843 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		1377648D2B84ECF000000843 /* NewsFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedView.swift; sourceTree = "<group>"; };
+		1377648F2B84EE0C00000843 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		137764912B84F17900000843 /* NewsFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedViewModel.swift; sourceTree = "<group>"; };
+		137764932B84F37200000843 /* PostServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostServiceProtocol.swift; sourceTree = "<group>"; };
 		794202512B855ACB00C781CC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		794202532B855C0000C781CC /* MediatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediatorView.swift; sourceTree = "<group>"; };
 		794202592B861E1700C781CC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -65,7 +78,6 @@
 		AE5D85E52AC9B077009680C6 /* AuthenticationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceProtocol.swift; sourceTree = "<group>"; };
 		AE5D85E72AC9B29A009680C6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F8E836332B84CCCC00D0A3FB /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		F8E836352B84F35B00D0A3FB /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,10 +144,14 @@
 			children = (
 				794202532B855C0000C781CC /* MediatorView.swift */,
 				AE5D85B62AC8A224009680C6 /* Preview Assets.xcassets */,
+				137764892B84E56700000843 /* SignupView.swift */,
+				1377648B2B84E59900000843 /* UserView.swift */,
+				1377648D2B84ECF000000843 /* NewsFeedView.swift */,
 				799662122B83ABCA00B22FF5 /* SignupView.swift */,
 				F8E836332B84CCCC00D0A3FB /* LoginView.swift */,
 				F8E836352B84F35B00D0A3FB /* FeedView.swift */,
 				794202512B855ACB00C781CC /* LoadingView.swift */,
+				794202532B855C0000C781CC /* MediatorView.swift */,
 				794202592B861E1700C781CC /* ProfileView.swift */,
 			);
 			path = "Preview Content";
@@ -164,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				AE5D85E02AC9AFA9009680C6 /* AuthenticationService.swift */,
+				1377648F2B84EE0C00000843 /* PostService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -180,6 +197,8 @@
 			isa = PBXGroup;
 			children = (
 				AE5D85E72AC9B29A009680C6 /* User.swift */,
+				137764872B84E50B00000843 /* Post.swift */,
+				137764912B84F17900000843 /* NewsFeedViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -188,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				AE5D85E52AC9B077009680C6 /* AuthenticationServiceProtocol.swift */,
+				137764932B84F37200000843 /* PostServiceProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -322,13 +342,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8E836362B84F35B00D0A3FB /* FeedView.swift in Sources */,
+				1377648A2B84E56700000843 /* SignupView.swift in Sources */,
+				137764942B84F37200000843 /* PostServiceProtocol.swift in Sources */,
 				799662132B83ABCA00B22FF5 /* SignupView.swift in Sources */,
 				F8E836342B84CCCC00D0A3FB /* LoginView.swift in Sources */,
 				AE5D85E12AC9AFA9009680C6 /* AuthenticationService.swift in Sources */,
 				7942025A2B861E1700C781CC /* ProfileView.swift in Sources */,
 				AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */,
+				1377648C2B84E59900000843 /* UserView.swift in Sources */,
+				137764922B84F17900000843 /* NewsFeedViewModel.swift in Sources */,
 				AE5D85B02AC8A221009680C6 /* MobileAcebookApp.swift in Sources */,
+				137764902B84EE0C00000843 /* PostService.swift in Sources */,
+				137764882B84E50B00000843 /* Post.swift in Sources */,
+				1377648E2B84ECF000000843 /* NewsFeedView.swift in Sources */,
 				794202522B855ACB00C781CC /* LoadingView.swift in Sources */,
 				794202542B855C0000C781CC /* MediatorView.swift in Sources */,
 				AE5D85E82AC9B29A009680C6 /* User.swift in Sources */,

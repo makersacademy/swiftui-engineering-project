@@ -8,7 +8,7 @@
 import Foundation
 
 class AuthenticationService: ObservableObject, AuthenticationServiceProtocol {
-    
+
     func signUp(user: User, completion: @escaping (Bool, Error?) -> Void) {
         guard let url = URL(string: "http://127.0.0.1:8080/")?.appendingPathComponent("users") else {
             completion(false, nil)
@@ -40,6 +40,7 @@ class AuthenticationService: ObservableObject, AuthenticationServiceProtocol {
         } catch {
             completion(false, error)
         }
+
     }
     
     func LogIn(email: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
@@ -78,6 +79,7 @@ class AuthenticationService: ObservableObject, AuthenticationServiceProtocol {
         } catch {
             completion(false, error)
         }
+
     }
 }
 
