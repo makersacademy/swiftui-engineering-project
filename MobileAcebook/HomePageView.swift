@@ -1,4 +1,5 @@
 import SwiftUI
+import Cloudinary
 
 struct HomePageView: View {
     @StateObject var authService = AuthenticationService.shared
@@ -6,123 +7,133 @@ struct HomePageView: View {
     @ObservedObject var viewModel = PostsViewModel()
     @State private var isLoggingOut = false
     @State private var selectedTab = "Home"
-
+    let cloudinary = CLDCloudinary(configuration: CloudinaryConfig.configuration)
+    
     
     var body: some View {
         TabView(selection: $selectedTab) {
-                    NavigationView {
-                        VStack {
-                            List(viewModel.posts) { post in
-                                VStack(alignment: .leading) {
-                                    HStack {
-                                        
-                                        Image(systemName: "person.circle.fill")
-                                            .resizable()
-                                            .frame(width: 40, height: 40)
-                                            .foregroundColor(.blue)
-                                            .padding(.trailing, 8)
-                                        
-                                        if let message = post.message {
-                                            Text(message)
-                                                .font(.subheadline)
-                                        } else {
-                                            Text("No message available")
-                                                .font(.subheadline)
-                                                .foregroundColor(.gray)
-                                        }
-                                    }
-                                    
-                                    
-                                    if let createdBy = post.createdBy {
-                                        Text("Posted by: \(createdBy)")
-                                            .font(.caption)
-                                            .foregroundColor(.blue)
-                                    }
-                                    
-                                    HStack {
-                                        
-                                        Button(action: {
-                                            
-                                        }) {
-                                            Image(systemName: "heart")
-                                                .foregroundColor(.red)
-                                                .imageScale(.small)
-                                        }
-                                        .padding(.trailing, 8)
-                                        Button(action: {
-                                            
-                                        }) {
-                                            Label("Comments", systemImage: "bubble.left")
-                                                .font(.caption)
-                                        }
-                                        .foregroundColor(.blue)
-                                        .padding(.trailing, 16)
-                                        
-                                        
-                                    }
-                                    .padding(.top, 8)
-                                    .padding(.bottom, 8)
-                                    .background(Color.gray.opacity(0.1))
-                                    .cornerRadius(8)
-                                    
-                                    HStack {
-                                        
-                                    }
+            NavigationView {
+                VStack {
+                    List(viewModel.posts) { post in
+                        VStack(alignment: .leading) {
+                            HStack {
+                                
+                                Image(systemName: "person.circle.fill")
+                                    .resizable()
+                                    .frame(width: 40, height: 40)
+                                    .foregroundColor(.blue)
+                                    .padding(.trailing, 8)
+                                
+                                if let message = post.message {
+                                    Text(message)
+                                        .font(.subheadline)
+                                } else {
+                                    Text("No message available")
+                                        .font(.subheadline)
+                                        .foregroundColor(.gray)
                                 }
-                                .padding()
+                                
+                                if let postImagePath = post.image {
+                                    
+                                    cloudinaryImageView(cloudinary: cloudinary, imagePath: "acebook-mobile/\(postImagePath)")
+                                        .aspectRatio(contentMode: .fit)
+                                        .scaledToFit()
+                                    
+                                    
+                                }
                             }
                             
-                            .padding()
-//                            Button {
-//                                logoutViewModel.signOut()
-//                            } label: {
-//                                Text("Log out")
-//                            }
-                        }
-                        .navigationBarTitle("Home Page")
-                        .navigationBarTitleDisplayMode(.inline) // Center the title
-                        .onAppear {
-                            viewModel.loadApiToken()
-                            viewModel.fetchPosts()
                             
+                            if let createdBy = post.createdBy {
+                                Text("Posted by: \(createdBy)")
+                                    .font(.caption)
+                                    .foregroundColor(.blue)
+                            }
+                            
+                            HStack {
+                                
+                                Button(action: {
+                                    
+                                }) {
+                                    Image(systemName: "heart")
+                                        .foregroundColor(.red)
+                                        .imageScale(.small)
+                                }
+                                .padding(.trailing, 8)
+                                Button(action: {
+                                    
+                                }) {
+                                    Label("Comments", systemImage: "bubble.left")
+                                        .font(.caption)
+                                }
+                                .foregroundColor(.blue)
+                                .padding(.trailing, 16)
+                                
+                                
+                            }
+                            .padding(.top, 8)
+                            .padding(.bottom, 8)
+                            .background(Color.gray.opacity(0.1))
+                            .cornerRadius(8)
+                            
+                            HStack {
+                                
+                            }
                         }
-                    }
-                    .tabItem {
-                        Label("Home", systemImage: "house.fill")
-                    }
-                    NavigationView {
-                        UserPageView()
-                    }
-                    .tabItem {
-                        Image(systemName: "person.fill")
-                        Text("User")
-                    }
-                    NavigationView {
-                        NewPostView()
-                    }
-                    .tabItem {
-                        Label("New Post", systemImage: "pencil.line")
+                        .padding()
                     }
                     
-                    Text("Logout")
-                    .tag("Logout")
-                    .tabItem {
-                        Label("Logout", systemImage: "person.fill.xmark")
-                    }
+                    .padding()
+                    //                            Button {
+                    //                                logoutViewModel.signOut()
+                    //                            } label: {
+                    //                                Text("Log out")
+                    //                            }
+                }
+                .navigationBarTitle("Home Page")
+                .navigationBarTitleDisplayMode(.inline) // Center the title
+                .onAppear {
+                    viewModel.loadApiToken()
+                    viewModel.fetchPosts()
                     
                 }
-                .navigationBarBackButtonHidden(true)
-                .onChange(of: selectedTab) { newValue in
-                    if newValue == "Logout" {
-                        logoutViewModel.signOut()
-                        isLoggingOut = true
-                    }
+            }
+            .tabItem {
+                Label("Home", systemImage: "house.fill")
+            }
+            NavigationView {
+                UserPageView()
+            }
+            .tabItem {
+                Image(systemName: "person.fill")
+                Text("User")
+            }
+            NavigationView {
+                NewPostView()
+            }
+            .tabItem {
+                Label("New Post", systemImage: "pencil.line")
+            }
+            
+            Text("Logout")
+                .tag("Logout")
+                .tabItem {
+                    Label("Logout", systemImage: "person.fill.xmark")
                 }
-                .background(NavigationLink(destination: WelcomePageView(), isActive: $isLoggingOut){ EmptyView() })
+            
+        }
+        .navigationBarBackButtonHidden(true)
+        .onChange(of: selectedTab) { newValue in
+            if newValue == "Logout" {
+                logoutViewModel.signOut()
+                isLoggingOut = true
+            }
+        }
+        .background(NavigationLink(destination: WelcomePageView(), isActive: $isLoggingOut){ EmptyView() })
     }
     
 }
-    
+
 
 
 #if DEBUG
