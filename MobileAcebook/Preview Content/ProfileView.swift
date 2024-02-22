@@ -14,7 +14,48 @@ struct ProfileView: View {
             VStack {
                 ScrollView {
                     // profile page layout design goes inside this scrollView (not outside it) so that it is visible between the upper and lower nav
-                    Text("My profile page here")
+                    VStack(spacing: 0) {
+//                        color for now but should be an image uploaded by user
+                        Color(UIColor(rgb: 0x4267B2)).frame(height: UIScreen.main.bounds.height / 4)
+                        ZStack {
+                            Circle()
+                                .fill(Color.white)
+                                .frame(width: 150, height: 150)
+
+                            Image(systemName: "person")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+//                                .clipShape(Circle())
+                                .frame(width: 120, height: 120)
+                        }
+                        .offset(y: -60)
+                        VStack {
+                            Text("John Smith") // Replace with user's name
+                                        .font(.headline)
+                                        .foregroundColor(.black)
+
+                            Text("john@email.com") // Replace with user's email
+                                        .font(.subheadline)
+                                        .foregroundColor(.gray)
+                
+                        }
+                        .frame(width: 300, height: 100)
+                        .background(Color.gray.opacity(0.06))
+                        .cornerRadius(10)
+                        .offset(y: -30)
+                        VStack {
+                            Text("My Posts")
+                                        .font(.headline)
+                                        .foregroundColor(.black)
+                                        .bold()
+//                            Add Posts from user
+
+                            
+                        }
+                        .frame(width: 300, height: 100)
+                        .offset(y: -30)
+                    }
+
                 }
             }
             .navigationBarTitle("", displayMode: .inline)
