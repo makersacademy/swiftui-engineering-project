@@ -7,8 +7,8 @@ import Foundation
 
 public struct Post: Hashable, Codable, Identifiable {
     public let id: String
-    let message: String
-    let image: String
+    let message: String?
+    let image: String?
     
     enum CodingKeys: String, CodingKey {
         case id = "_id" // Map the "_id" JSON key to the "id" property

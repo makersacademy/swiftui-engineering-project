@@ -11,6 +11,7 @@ struct LoginPage: View {
     @State private var shouldNavigate = false
     
     var authenticationService: AuthenticationService
+    let postService = PostService()
     
     var body: some View {
             ZStack {
@@ -43,7 +44,7 @@ struct LoginPage: View {
                         .border(.red, width: CGFloat(wrongPassword))
                     
                     NavigationLink(
-                            destination: FeedView(),
+                            destination: NewsFeedView(postService: postService),
                             isActive: $shouldNavigate
                         ) {
                             EmptyView()
