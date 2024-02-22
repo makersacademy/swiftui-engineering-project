@@ -14,7 +14,7 @@ struct SignupPageView: View {
   @State private var email: String = ""
   @State private var password: String = ""
   @State private var confPassword: String = ""
-    @StateObject var authService = AuthenticationService.shared
+@StateObject var authService = AuthenticationService.shared
 
   @StateObject var imagePicker = ImagePicker()
   @State private var uploadedImagePublicId: String = "/default_avatar.png"

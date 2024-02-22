@@ -10,18 +10,34 @@ import Cloudinary
 
 
 struct UserPageView: View {
+    @StateObject var authService = AuthenticationService.shared
+    @StateObject var userPageViewModel = UserPageViewModel()
+    
+    
     let cloudinary = CLDCloudinary(configuration: CloudinaryConfig.configuration)
 
     var body: some View {
             VStack {
-                HStack {
-                    // replace image path with publicId of user image from sign up
-                    cloudinaryImageView(cloudinary: cloudinary, imagePath: "acebook-mobile/Screenshot_2024-02-20_at_11.23.41_qd0jaw")
-
-                    Text("username")
+                if let error = userPageViewModel.errorMessage {
+                    Text(error)
                 }
+                
+                HStack {
+                    if let avatar = userPageViewModel.user?.avatar {
+                        cloudinaryImageView(cloudinary: cloudinary, imagePath: avatar)
+                    }
+                    
+                    if let username = userPageViewModel.user?.username {
+                        Text(username)
+                    }
+                }
+                
+                Text("Under development")
 
                 Spacer ()
+            }
+            .onAppear {
+                userPageViewModel.getUser()
             }
         }
 

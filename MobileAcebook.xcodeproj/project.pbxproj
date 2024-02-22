@@ -36,6 +36,7 @@
 		F390896B2B861A04000D4C06 /* KeyChainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390896A2B861A04000D4C06 /* KeyChainHelper.swift */; };
 		F390896D2B86451E000D4C06 /* LogoutButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390896C2B86451E000D4C06 /* LogoutButtonView.swift */; };
 		F390896F2B865707000D4C06 /* LogoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390896E2B865706000D4C06 /* LogoutViewModel.swift */; };
+		F39089712B879EE8000D4C06 /* UserPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39089702B879EE8000D4C06 /* UserPageViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		F390896A2B861A04000D4C06 /* KeyChainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainHelper.swift; sourceTree = "<group>"; };
 		F390896C2B86451E000D4C06 /* LogoutButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutButtonView.swift; sourceTree = "<group>"; };
 		F390896E2B865706000D4C06 /* LogoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewModel.swift; sourceTree = "<group>"; };
+		F39089702B879EE8000D4C06 /* UserPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +207,7 @@
 				13CC078B2B84F3A70079987A /* CreateUserViewModel.swift */,
 				D08BFF862B83BC6200D0506C /* PostsViewModel.swift */,
 				F390896A2B861A04000D4C06 /* KeyChainHelper.swift */,
+				F39089702B879EE8000D4C06 /* UserPageViewModel.swift */,
 				F390896C2B86451E000D4C06 /* LogoutButtonView.swift */,
 				F39089682B8505C3000D4C06 /* LogInViewModel.swift */,
 				F390896E2B865706000D4C06 /* LogoutViewModel.swift */,
@@ -374,6 +377,7 @@
 				F390895F2B84EAD5000D4C06 /* ImagePicker.swift in Sources */,
 				D08BFF852B83ABBA00D0506C /* Post.swift in Sources */,
 				AE5D85DA2AC8A337009680C6 /* WelcomePageView.swift in Sources */,
+				F39089712B879EE8000D4C06 /* UserPageViewModel.swift in Sources */,
 				13CC078E2B84F4A50079987A /* SignupPageView.swift in Sources */,
 				F39089632B84EB71000D4C06 /* CloudinaryImageView.swift in Sources */,
 				D08BFF872B83BC6200D0506C /* PostsViewModel.swift in Sources */,
