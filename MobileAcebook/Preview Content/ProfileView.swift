@@ -8,13 +8,13 @@ struct ProfileView: View {
     @State private var isLoggedOut = false
     @State private var isPersonClicked = false
     @State private var isHouseClicked = false
-    @State private var isDarkMode = false
     
     var body: some View {
         NavigationView {
             VStack {
-                List {
-                    Text("My profile page")
+                ScrollView {
+                    // profile page layout design goes inside this scrollView (not outside it) so that it is visible between the upper and lower nav
+                    Text("My profile page here")
                 }
             }
             .navigationBarTitle("", displayMode: .inline)
@@ -22,41 +22,36 @@ struct ProfileView: View {
                 Image("facebook-name-logo")
                         .resizable()
                         .frame(width: 140, height: 30) 
-                        .foregroundColor(isDarkMode ? .white : .black)
+                        
             )
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     ZStack {
                         Circle()
-                            .foregroundColor(Color.gray.opacity(0.3)) // Adjust opacity and color as needed
-                            .frame(width: 40, height: 40) // Adjust size as needed
-                        
-                        Button(action: {
-                            isDarkMode.toggle()
-                        }) {
-                            Image(systemName: isDarkMode ? "sun.max.fill" : "sun.max")
+                            .foregroundColor(Color.gray.opacity(0.3))
+                            .frame(width: 40, height: 40)
+                            Image(systemName: "magnifyingglass")
                                 .foregroundColor(Color.black)
-                        }
+                        
                     }
                     
                     ZStack {
                         Circle()
-                            .foregroundColor(Color.gray.opacity(0.3)) // Adjust opacity and color as needed
-                            .frame(width: 40, height: 40) // Adjust size as needed
+                            .foregroundColor(Color.gray.opacity(0.3))
+                            .frame(width: 40, height: 40)
                         
                         NavigationLink(destination: LoginPage(authenticationService: AuthenticationService()), isActive: $isLoggedOut) {
                             Button(action: {
                                 isLoggedOut = true
                             }) {
                                 Image(systemName: isLoggedOut ? "rectangle.portrait.and.arrow.right.fill" : "rectangle.portrait.and.arrow.right")
-                                    .foregroundColor(Color.black)
+                                    .foregroundColor( Color.black)
                             }
                         }
                     }
                 }
 
             }
-            .environment(\.colorScheme, isDarkMode ? .dark : .light)
             .toolbar {
                 ToolbarItemGroup(placement: .bottomBar) {
                     NavigationLink(destination: FeedView(), isActive: $isHouseClicked) {

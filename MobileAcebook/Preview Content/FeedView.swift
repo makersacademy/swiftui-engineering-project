@@ -17,14 +17,33 @@ struct FeedView: View {
         
         NavigationView {
             VStack{
-                List {
-                    HStack{
-                        Text("What's on your mind? ")
-                            .padding()
-                        Spacer()
-                        Image(systemName: "plus.rectangle.on.rectangle")
-                            .foregroundColor(.green)
+                ScrollView{
+                    // feed page layout design goes inside this scrollView (not outside it) so that it is visible between the upper and lower nav
+                    VStack {
+                        ZStack {
+                            Rectangle()
+                                .fill(Color.gray.opacity(0.2))
+                                .cornerRadius(10)
+                                .padding(.horizontal)
+                            HStack {
+                                Text("What's on your mind? ")
+                                    .padding()
+                                Spacer()
+                                Image(systemName: "plus.rectangle.on.rectangle")
+                                    .resizable()
+                                    .frame(width: 25, height: 25)
+                                    .foregroundColor(.green)
+                                    .padding()
+                            }
+                            .padding(.horizontal)
+                        }
+                        .padding(.vertical, 5)
+                        
+                        
                     }
+                    
+                    Text("Post 1")
+                        .padding()
                     Text("Post 2")
                         .padding()
                     Text("Post 3")
@@ -46,6 +65,7 @@ struct FeedView: View {
                     
                 }
             }
+            .background(Color(UIColor.systemBackground))
             .navigationBarTitle("", displayMode: .inline)
             .navigationBarItems(leading:
                 Image("facebook-name-logo")
@@ -57,28 +77,26 @@ struct FeedView: View {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     ZStack {
                         Circle()
-                            .foregroundColor(Color.gray.opacity(0.3)) // Adjust opacity and color as needed
-                            .frame(width: 40, height: 40) // Adjust size as needed
+                            .foregroundColor(Color.gray.opacity(0.3))
+                            .frame(width: 40, height: 40)
                         
-                        Button(action: {
-                            isDarkMode.toggle()
-                        }) {
+                        Button(action: {isDarkMode.toggle()}) {
                             Image(systemName: isDarkMode ? "sun.max.fill" : "sun.max")
-                                .foregroundColor(Color.black)
+                                .foregroundColor(isDarkMode ? Color.white : Color.black)
                         }
                     }
                     
                     ZStack {
                         Circle()
-                            .foregroundColor(Color.gray.opacity(0.3)) // Adjust opacity and color as needed
-                            .frame(width: 40, height: 40) // Adjust size as needed
+                            .foregroundColor(Color.gray.opacity(0.3)) 
+                            .frame(width: 40, height: 40)
                         
                         NavigationLink(destination: LoginPage(authenticationService: AuthenticationService()), isActive: $isLoggedOut) {
                             Button(action: {
                                 isLoggedOut = true
                             }) {
                                 Image(systemName: isLoggedOut ? "rectangle.portrait.and.arrow.right.fill" : "rectangle.portrait.and.arrow.right")
-                                    .foregroundColor(Color.black)
+                                    .foregroundColor(isDarkMode ? Color.white : Color.black)
                             }
                         }
                     }
