@@ -5,16 +5,12 @@ struct HomePageView: View {
     @StateObject var logoutViewModel = LogoutViewModel()
     @ObservedObject var viewModel = PostsViewModel()
     @State private var isLoggingOut = false
+    @State private var selectedTab = "Home"
+
     
     var body: some View {
-        Group {
-            if !authService.isLoggedIn {
-                WelcomePageView()
-            } else {
-                
-                TabView {
+        TabView(selection: $selectedTab) {
                     NavigationView {
-                        
                         VStack {
                             List(viewModel.posts) { post in
                                 VStack(alignment: .leading) {
@@ -77,11 +73,11 @@ struct HomePageView: View {
                             }
                             
                             .padding()
-                            Button {
-                                logoutViewModel.signOut()
-                            } label: {
-                                Text("Log out")
-                            }
+//                            Button {
+//                                logoutViewModel.signOut()
+//                            } label: {
+//                                Text("Log out")
+//                            }
                         }
                         .navigationBarTitle("Home Page")
                         .navigationBarTitleDisplayMode(.inline) // Center the title
@@ -90,10 +86,7 @@ struct HomePageView: View {
                             viewModel.fetchPosts()
                             
                         }
-                        
-
                     }
-                    
                     .tabItem {
                         Label("Home", systemImage: "house.fill")
                     }
@@ -111,33 +104,27 @@ struct HomePageView: View {
                     .tabItem {
                         Label("New Post", systemImage: "pencil.line")
                     }
-                    NavigationView {
-                        EmptyView()
-                    }
-                    .tabItem{
+                    
+                    Text("Logout")
+                    .tag("Logout")
+                    .tabItem {
                         Label("Logout", systemImage: "person.fill.xmark")
-                            .onTapGesture {
-                                isLoggingOut = true
-                            }
                     }
                     
                 }
-                /*
-                 Button("Log In") {
-                     loginViewModel.logIn(email: emailAddress, password: password)
-                     
-                 }
-                 .disabled(loginViewModel.isLoggingIn)
-                 .background(NavigationLink(destination: HomePageView(), isActive: .constant(loginViewModel.successMessage != nil)) {
-                         EmptyView()
-                     })
-                 */
-                
-            }
-            
-        }.navigationBarBackButtonHidden(true)
+                .navigationBarBackButtonHidden(true)
+                .onChange(of: selectedTab) { newValue in
+                    if newValue == "Logout" {
+                        logoutViewModel.signOut()
+                        isLoggingOut = true
+                    }
+                }
+                .background(NavigationLink(destination: WelcomePageView(), isActive: $isLoggingOut){ EmptyView() })
     }
+    
 }
+    
+
 
 #if DEBUG
 struct ContentView_Previews: PreviewProvider {
