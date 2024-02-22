@@ -6,13 +6,10 @@
 //
 
 import SwiftUI
-import PhotosUI
-import Cloudinary
 
 
 struct WelcomePageView: View {
-    @StateObject var imagePicker = ImagePicker()
-    @State private var uploadedImagePublicId: String?
+    
     var body: some View {
         NavigationView{
             ZStack {
@@ -34,34 +31,14 @@ struct WelcomePageView: View {
                     
                     Spacer()
                     
-                    Button("Sign Up") {
-                        // TODO: sign up logic
-                    }
-                    .accessibilityIdentifier("signUpButton")
-                    
-                    
-                    NavigationLink("user page", destination: UserPageView())
-                    
-                    PhotosPicker(selection: $imagePicker.imageSelection) {
-                        Text("upload a photo")
-                    }
-                    .onChange(of: imagePicker.imageData) { imageData in
-                        // This block is executed when image data is set in the ImagePicker
-                        // You can update the uploadedImagePublicId here
-                        if let imageData = imageData {
-                            imagePicker.uploadToCloudinary(data: imageData) { imagePublicId in
-                                uploadedImagePublicId = imagePublicId
-                            }
-                        }
-                    }
-                    
-               
+                    NavigationLink("Sign Up", destination: SignupPageView())
+                   
+     
                     NavigationLink("login page", destination: LoginPageView())
          
-             
-                    NavigationLink("feed page", destination: HomePageView())
-                    
-                    
+
+                    Spacer()
+
                     
                 }
             }
@@ -69,7 +46,7 @@ struct WelcomePageView: View {
         }
     }
 }
-    
+
 struct WelcomePageView_Previews: PreviewProvider {
     static var previews: some View {
         WelcomePageView()

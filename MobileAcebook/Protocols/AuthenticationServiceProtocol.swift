@@ -8,8 +8,7 @@
 
 
 public protocol AuthenticationServiceProtocol {
-    func signUp(user: User) -> Bool
+    func signUp(user: User, completion: @escaping (Bool) -> Void)
     func logIn(email: String, password: String, completion: @escaping(Result<Void, LoginError>) -> Void)
     func signOut(completion: @escaping (Result<Void, Error>) -> Void)
-    
 }
