@@ -9,23 +9,23 @@ import Foundation
 struct User: Codable {
     let username: String
     let avatar: String?
-    let id: String?
+//    let id: String?
     let email: String
     let password: String
-    let __v: Int?
+//    let __v: Int?
 
     enum CodingKeys: String, CodingKey {
-        case username, avatar, email, password, __v
-        case id = "_id" // Correct mapping for "_id" from JSON to "id" in Swift
+        case username, avatar, email, password
+//        case id = "_id" // Correct mapping for "_id" from JSON to "id" in Swift
     }
 
     // Custom initializer if needed
-    init(username: String, email: String, password: String, avatar: String = "/default_avatar.png", id: String = UUID().uuidString, __v: Int = 0) {
+    init(username: String, email: String, password: String, avatar: String = "/default_avatar.png") {
         self.username = username
         self.avatar = avatar
-        self.id = id
+//        self.id = id
         self.email = email
         self.password = password
-        self.__v = __v
+//        self.__v = __v
     }
 }
