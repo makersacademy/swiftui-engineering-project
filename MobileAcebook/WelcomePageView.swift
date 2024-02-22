@@ -11,7 +11,7 @@ import SwiftUI
 struct WelcomePageView: View {
     
     var body: some View {
-        
+        NavigationView{
             ZStack {
                 VStack {
                     Spacer()
@@ -32,19 +32,24 @@ struct WelcomePageView: View {
                     Spacer()
                     
                     NavigationLink("Sign Up", destination: SignupPageView())
-                    
-                    
-                    NavigationLink("user page", destination: UserPageView())
-    
+                   
+     
+                    NavigationLink("login page", destination: LoginPageView())
+         
+
                     Spacer()
+
                     
                 }
             }
-        
+            
+        }
     }
 }
+
 struct WelcomePageView_Previews: PreviewProvider {
     static var previews: some View {
         WelcomePageView()
     }
 }
+

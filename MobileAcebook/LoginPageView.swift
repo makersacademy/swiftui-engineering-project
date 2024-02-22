@@ -12,9 +12,7 @@ struct LoginPageView: View {
     
     @State private var emailAddress: String = ""
     @State private var password: String = ""
-    @State private var isLoginSucessful: Bool = false
     @State private var errorMessage: String?
-    @State private var isTokenStored: Bool = false
     @State private var navigateToHomePage: Bool = false
     
     var body: some View {
@@ -29,42 +27,26 @@ struct LoginPageView: View {
                 SecureField("password", text: $password)
                     .textContentType(.password)
                 
-                Button("Log in") {
-                    loginViewModel.logIn(email: emailAddress, password: password) { result in
-                        switch result {
-                        case .success:
-                            isLoginSucessful = true
-                            
-                        case .failure(let error):
-                            errorMessage = error.localizedDescription
-                            isLoginSucessful = false
-                        }
-                    }
-                    
-                }
-                .background(NavigationLink(destination: HomePageView(), isActive: $navigateToHomePage) { EmptyView() })
-                
-                if let error = errorMessage {
-                    Text(error)
-                        .foregroundColor(.red)
-                    
-                }
-            }
-            .onAppear{
-                do {
-                    if let storedToken = try KeychainHelper.loadToken() {
-                        isTokenStored = true
-                    } else {
-                        isTokenStored = false
-                    }
-                } catch {
 
-                    print("Error loading token from keychain: \(error.localizedDescription)")
+                Button("Log In") {
+                    loginViewModel.logIn(email: emailAddress, password: password)
+                    
                 }
+                .disabled(loginViewModel.isLoggingIn)
+                .background(NavigationLink(destination: HomePageView(), isActive: .constant(loginViewModel.successMessage != nil)) {
+                        EmptyView()
+                    })
                 
-                if isTokenStored && isLoginSucessful {
-                    navigateToHomePage = true
+                    if let error = loginViewModel.errorMessage {
+                        Text(error)
+                            .foregroundColor(.red)
+                    }
+                    
+                if let success = loginViewModel.successMessage {
+                        Text(success)
+                            .foregroundColor(.green)
                 }
+
             }
             
         } .environmentObject(loginViewModel)
