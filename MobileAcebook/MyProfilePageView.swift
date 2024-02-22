@@ -16,6 +16,7 @@ struct MyProfilePageView: View {
     
     @ObservedObject var postsModel = PostsView()
     @ObservedObject var loggedinUserModel = LoggedInUser()
+    @ObservedObject var postOwnerModel = PostUser()
     
     var body: some View {
         ZStack {
@@ -65,7 +66,12 @@ struct MyProfilePageView: View {
                                 VStack(alignment: .leading) {
                                     Text(post.message)
                                     Spacer()
-                                    Text(convertDateFormat(inputDate: post.createdAt)).font(.footnote)
+                                    HStack{
+                                        Text(postOwnerModel.postOwner?.username ?? "").font(.footnote).onAppear{postOwnerModel.fetchPostUser(userId: post.createdBy)}
+                                        Spacer()
+                                        Text(convertDateFormat(inputDate: post.createdAt)).font(.footnote)
+                                    }
+                                    
                                 }
                             }
                         }
@@ -74,6 +80,7 @@ struct MyProfilePageView: View {
                 }
                 .onAppear {
                         postsModel.fetchPosts()
+                    
                     }
                 }
             }
