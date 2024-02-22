@@ -98,8 +98,7 @@ struct HomePageView: View {
                         Text("User")
                     }
                     NavigationView {
-                        // "New Post" tab content
-                        Text("New Post Content")
+                        NewPostView()
                     }
                     .tabItem {
                         Label("New Post", systemImage: "pencil.line")
