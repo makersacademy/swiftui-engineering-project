@@ -12,9 +12,8 @@ struct LoginPageView: View {
     
     @State private var emailAddress: String = ""
     @State private var password: String = ""
-//    @State private var isLoginSucessful: Bool = false
     @State private var errorMessage: String?
-    @State private var isTokenStored: Bool = false
+    @State private var navigateToHomePage: Bool = false
     
     var body: some View {
         NavigationView {
@@ -28,6 +27,7 @@ struct LoginPageView: View {
                 SecureField("password", text: $password)
                     .textContentType(.password)
                 
+
                 Button("Log In") {
                     loginViewModel.logIn(email: emailAddress, password: password)
                     

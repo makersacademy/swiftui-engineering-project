@@ -16,28 +16,24 @@ public struct LoginError: Error {
     var localizedDescription: String
 }
 
+
 class AuthenticationService: ObservableObject, AuthenticationServiceProtocol {
     @Published var isLoggedOut: Bool = false
     @Published var isLoggedIn: Bool = false
     
-    func signUp(user: User, completion: @escaping (Bool) -> Void) {
+    func signUp(user: User, confPassword: String, completion: @escaping (Bool) -> Void) {
+
     var canSignUp = false
       
-    let username = user.username
-    let email = user.emailAddress
+    let email = user.email
     let password = user.password
-    let confPassword = user.confPassword
-
-    guard let unwrappedUsername = username, let unwrappedEmail = email, let unwrappedPassword = password, let unwrappedConfPassword = confPassword else {
-                completion(false)
-                return
-            }
-
-    let validEmail = isEmailValid(unwrappedEmail)
-    let passwordsMatch = doPasswordsMatch(unwrappedPassword, unwrappedConfPassword)
-    let validPassword = isPasswordValid(unwrappedPassword)
-      
-    if validEmail && passwordsMatch && validPassword && unwrappedEmail != "" && unwrappedUsername != "" && unwrappedPassword != "" && unwrappedConfPassword != ""{
+    let confPassword = confPassword
+    print("\(email) \(password) \(confPassword)")
+    let validEmail = isEmailValid(email)
+    let passwordsMatch = doPasswordsMatch(password, confPassword)
+    let validPassword = isPasswordValid(password)
+    print("\(validEmail) \(passwordsMatch) \(validPassword)")
+    if validEmail && passwordsMatch && validPassword {
 
       createUser(user: user) {
         result in switch result {
@@ -71,7 +67,7 @@ class AuthenticationService: ObservableObject, AuthenticationServiceProtocol {
   }
 
   func isPasswordValid(_ password: String) -> Bool {
-    let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
+    let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")
     return passwordPredicate.evaluate(with: password)
   }
     
