@@ -8,7 +8,7 @@ struct PostResponse: Codable {
 
 class PostService: PostServiceProtocol, ObservableObject {
     func fetchPosts(completion: @escaping ([Post]?, Error?) -> Void) {
-        let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVkNjIyOWM3MWJjZjlkMWZkMTQ2ZjM5IiwiaWF0IjoxNzA4NTMyMzk1LCJleHAiOjE3MDg5NjQzOTV9.X8EZfJi0Ay4LAj7TrL-gey3w3PpvYRt5lJv-r0qeFp4" // temporary token only used locally, will be saved in separed gitignored file later on
+        let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVkNzRkZTM2YTc3YjA2MmRiZDljOGE3IiwiaWF0IjoxNzA4NjA5MDc0LCJleHAiOjE3MDkwNDEwNzR9.Sb2_LEb7UcqGLpGQMPsJvlmq3tBDrAFlSbdDiuYovm0" // temporary token only used locally, will be saved in separed gitignored file later on
         guard let url = URL(string: "http://127.0.0.1:8080/posts") else {
             completion(nil, nil)
             return

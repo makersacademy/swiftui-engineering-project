@@ -19,6 +19,8 @@ struct NewsFeedView: View {
     @State private var isPersonClicked = false
     @State private var isHouseClicked = false
     @State private var isDarkMode = false
+    @State private var thumbUpPressed = false
+    @State private var quotePressed = false
     var postService: PostServiceProtocol
     let postServiceTwo = PostService()
     @State private var newPost = ""
@@ -49,10 +51,52 @@ struct NewsFeedView: View {
                         LazyVStack(spacing: 16) { // Adjust spacing as needed
                             ForEach(viewModel.posts) { post in
                                 VStack(alignment: .leading) {
+                                    HStack(spacing: 10) {
+                                        // Placeholder image for user profile picture
+                                        Image(systemName: "person.circle.fill")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 40, height: 40)
+                                            .clipShape(Circle())
+                                            .padding(.trailing, 10) // Adjust padding as needed
+                                        
+                                        // Post message text
+                                        Text("Username")
+                                            .font(.headline)
+                                    }
+                    
+                                    if let imageUrlString = post.image,
+                                       let imageUrl = URL(string: imageUrlString) {
+                                        AsyncImage(url: imageUrl) { image in
+                                            image
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fill)
+                                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                        } placeholder: {
+                                            // Placeholder while loading
+                                            Text("")
+                                        }
+                                    }
                                     Text(post.message ?? "No message provided")
-                                        .font(.headline)
-                                    Text(post.image ?? "No image provided")
-                                        .font(.subheadline)
+                                        
+                                    
+                                    HStack {
+                                 
+                                        Image(systemName: thumbUpPressed ? "hand.thumbsup.fill" : "hand.thumbsup")
+                                            .foregroundColor(Color.blue)
+                                            .onTapGesture {
+                                                thumbUpPressed.toggle()
+                                            }
+                                        
+                                        Spacer()
+                                        
+                                     
+                                        Image(systemName: "quote.bubble")
+                                            .foregroundColor(Color.blue)
+                                            .onTapGesture {
+                                                quotePressed.toggle()
+                                            }
+                                    }
                                 }
                                 .padding()
                                 .background(Color(UIColor.systemBackground)) // Use .white for pure white
@@ -62,6 +106,7 @@ struct NewsFeedView: View {
                         }
                         .padding(.horizontal)
                         .padding(.top)
+                        .background(Color.gray.opacity(0.1))
                     }
                     .onAppear {
                         viewModel.fetchPosts()
