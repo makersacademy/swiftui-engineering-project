@@ -101,7 +101,7 @@ struct SignupView: View {
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("Signup"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
             }
-            .background(Color(UIColor(rgb: 0x1877F2)))
+            .background(Color(UIColor(rgb: 0x4267B2)))
 }
     
     private func signup() {

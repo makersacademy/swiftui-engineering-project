@@ -8,7 +8,7 @@ struct ProfileView: View {
     @State private var isLoggedOut = false
     @State private var isPersonClicked = false
     @State private var isHouseClicked = false
-    
+    let postService = PostService()
     var body: some View {
         NavigationView {
             VStack {
@@ -54,7 +54,7 @@ struct ProfileView: View {
             }
             .toolbar {
                 ToolbarItemGroup(placement: .bottomBar) {
-                    NavigationLink(destination: FeedView(), isActive: $isHouseClicked) {
+                    NavigationLink(destination: NewsFeedView(postService: postService), isActive: $isHouseClicked) {
                         VStack {
                             Image(systemName: "house")
                                 .foregroundColor(Color.gray)
