@@ -9,7 +9,7 @@
 
 public protocol AuthenticationServiceProtocol {
   
-    func signUp(user: User, confPassword: String, completion: @escaping (Bool) -> Void)
+    func signUp(user: User, confPassword: String, completion: @escaping (Bool, String?) -> Void)
     func logIn(email: String, password: String, completion: @escaping(Result<Void, LoginError>) -> Void)
     func signOut(completion: @escaping (Result<Void, Error>) -> Void)
 

@@ -22,35 +22,62 @@ class AuthenticationService: ObservableObject, AuthenticationServiceProtocol {
     @Published var isLoggedIn: Bool = false
     @Published var userId: String = ""
     
-    func signUp(user: User, confPassword: String, completion: @escaping (Bool) -> Void) {
-        
+    func signUp(user: User, confPassword: String, completion: @escaping (Bool, String?) -> Void) {
         var canSignUp = false
-        
+        var errorMessage: String? = nil
+
+        let username = user.username
         let email = user.email
         let password = user.password
-        let confPassword = confPassword
-        print("\(email) \(password) \(confPassword)")
+        
+        let validUsername = isUsernameValid(username)
         let validEmail = isEmailValid(email)
         let passwordsMatch = doPasswordsMatch(password, confPassword)
         let validPassword = isPasswordValid(password)
-        print("\(validEmail) \(passwordsMatch) \(validPassword)")
-        if validEmail && passwordsMatch && validPassword {
-            
-            createUser(user: user) {
-                result in switch result {
+
+        if validUsername && validEmail && passwordsMatch && validPassword {
+            createUser(user: user) { result in
+                switch result {
                 case .success(let data):
                     print("User has been created: \(data)")
                     canSignUp = true
-                    print("ln 34, \(canSignUp)")
-                    completion(canSignUp)
+                    completion(canSignUp, errorMessage)
                 case .failure(let error):
                     print("Error creating user: \(error)")
                     canSignUp = false
-                    completion(canSignUp)
+                    errorMessage = "Error creating user. Email has already been taken. Please try again."
+                    completion(canSignUp, errorMessage)
                 }
             }
         } else {
-            completion(false) // alert or error message will go here
+            var errorMessages: [String] = []
+
+            if !validUsername {
+                errorMessages.append("Invalid username.")
+            }
+            
+            if !validEmail {
+                errorMessages.append("Invalid email.")
+            }
+
+            if !passwordsMatch {
+                errorMessages.append("Passwords do not match.")
+            }
+
+            if !validPassword {
+                errorMessages.append("Password must be at least 8 characters long.\nPassword must contain at least 1 upper case and 1 lower case letter.\nPassword must contain at least 1 number.\nPassword must contain at least 1 special character (?!#%)")
+            }
+
+            errorMessage = errorMessages.joined(separator: "\n")
+            completion(false, errorMessage)
+        }
+    }
+    
+    func isUsernameValid(_ username: String) -> Bool {
+        if username != "" {
+            return true
+        } else {
+            return false
         }
     }
     
