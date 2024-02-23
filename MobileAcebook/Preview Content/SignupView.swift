@@ -16,7 +16,8 @@ struct SignupView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State private var isSignupSuccessful = false
-    @State private var shouldNavigate = false
+    @State private var shouldNavigate2 = false
+    @State private var isSignupInProgress = false
     var iconClick = true
     
     var authenticationService: AuthenticationServiceProtocol
@@ -76,15 +77,14 @@ struct SignupView: View {
                 Button(action: {
                     signup()
                 }) {
-                    NavigationLink(destination: LoginPage(authenticationService: AuthenticationService()), isActive: $shouldNavigate) {
-                        Text("Sign Up")
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color(UIColor(rgb: 0x38548f)))
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                    }
+                    Text("Sign Up")
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color(UIColor(rgb: 0x38548f)))
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
                 }
+                .disabled(isSignupInProgress) // Disable the button while sign-up is in progress
                 .padding()
                 
             Spacer()
@@ -94,11 +94,13 @@ struct SignupView: View {
                         .foregroundColor(.white)
                     NavigationLink(
                         destination: LoginPage(authenticationService: AuthenticationService()),
+                        isActive: $shouldNavigate2,
                         label: {
                             Text("HERE")
                                 .foregroundColor(.white)
                                 .underline(true, color: .white)
-                                
+                                .onTapGesture {
+                                    shouldNavigate2 = true}
                         }
                     )
                 }
@@ -114,22 +116,32 @@ struct SignupView: View {
 }
     
     private func signup() {
-        let newUser = User(username: username, email: email, password: password)
+            let newUser = User(username: username, email: email, password: password)
 
-        authenticationService.signUp(user: newUser) { success, error in
-            DispatchQueue.main.async {
-                if success {
-                    print("Signup successful")
-                    alertMessage = "Signup successful"
-                    shouldNavigate = true
-                } else {
-                    print("Signup failed: \(error?.localizedDescription ?? "Unknown error")")
-                    alertMessage = "Signup failed: \(error?.localizedDescription ?? "Unknown error")"
+            // Set isSignupInProgress to true when sign-up begins
+            isSignupInProgress = true
+
+            authenticationService.signUp(user: newUser) { success, error in
+                DispatchQueue.main.async {
+                    // Reset isSignupInProgress when sign-up completes
+                    defer { isSignupInProgress = false }
+                    print("Signup callback: success = \(success), error = \(error?.localizedDescription ?? "nil")")
+
+                    if success {
+                        print("Signup successful")
+                        alertMessage = "Signup successful"
+
+                        // Update isSignupSuccessful to trigger the NavigationLink
+                        isSignupSuccessful = true
+                    } else {
+                        print("Signup failed: \(error?.localizedDescription ?? "Unknown error")")
+                        alertMessage = "Signup failed: \(error?.localizedDescription ?? "Unknown error")"
+                    }
+                    showAlert = true
                 }
-                showAlert = true
             }
         }
-    }
+
     private func isValidPassword(_ password: String) -> Bool {
         let psswordRegex = "^(?=.*[!@£$%^&*.,])(?=.*[A-Z])(?=.*[0-9]).{8,}$"
         return NSPredicate(format: "SELF MATCHES %@", psswordRegex).evaluate(with: password)

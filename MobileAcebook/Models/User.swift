@@ -17,7 +17,7 @@ struct User: Codable {
     }
 
     // Custom initializer if needed
-    init(username: String, email: String, password: String, avatar: String = "/default_avatar.png") {
+    init(username: String, email: String, password: String, avatar: String = "https://pbs.twimg.com/media/BtFUrp6CEAEmsml.jpg:large") {
         self.username = username
         self.avatar = avatar
         self.email = email
