@@ -74,14 +74,27 @@ class AuthenticationService: ObservableObject, AuthenticationServiceProtocol {
                     return
                 }
                 
+//                // Save token to UserDefaults
+//                if let responseData = data,
+//                   let token = String(data: responseData, encoding: .utf8) {
+//                    saveTokenToUserDefaults(token: token)
+//                }
+                
                 completion(true, nil)
             }.resume()
         } catch {
             completion(false, error)
         }
-
     }
+    
+//    func logout() {
+//           UserDefaults.standard.removeObject(forKey: "authToken")
+//       }
+
 }
+//func saveTokenToUserDefaults(token: String) {
+//    UserDefaults.standard.set(token, forKey: "authToken")
+//}
 
 
 

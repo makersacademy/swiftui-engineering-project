@@ -19,6 +19,10 @@ struct NewsFeedView: View {
     @State private var isPersonClicked = false
     @State private var isHouseClicked = false
     @State private var isDarkMode = false
+    @State private var thumbUpPressed = false
+    @State private var quotePressed = false
+    @State private var message = ""
+    @State private var image = ""
     var postService: PostServiceProtocol
     let postServiceTwo = PostService()
     @State private var newPost = ""
@@ -56,9 +60,55 @@ struct NewsFeedView: View {
                         LazyVStack(spacing: 16) { // Adjust spacing as needed
                             ForEach(viewModel.posts) { post in
                                 VStack(alignment: .leading) {
+                                    HStack(spacing: 10) {
+                                        // Placeholder image for user profile picture
+                                        Image(systemName: "person.circle.fill")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 40, height: 40)
+                                            .clipShape(Circle())
+                                            .padding(.trailing, 10) // Adjust padding as needed
+                                        
+                                        // Post message text
+                                        Text("Username")
+                                            .font(.headline)
+                                    }
+                    
+                                    if let imageUrlString = post.image,
+                                       let imageUrl = URL(string: imageUrlString) {
+                                        AsyncImage(url: imageUrl) { image in
+                                            image
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fill)
+                                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                        } placeholder: {
+                                            // Placeholder while loading
+                                            Text("")
+                                        }
+                                    }
                                     Text(post.message ?? "No message provided")
+                                        
+                                    
+                                    HStack {
+                                 
+                                        Image(systemName: thumbUpPressed ? "hand.thumbsup.fill" : "hand.thumbsup")
+                                            .foregroundColor(Color.blue)
+                                            .onTapGesture {
+                                                thumbUpPressed.toggle()
+                                            }
+                                        
+                                        Spacer()
+                                        
+                                     
+                                        Image(systemName: "quote.bubble")
+                                            .foregroundColor(Color.blue)
+                                            .onTapGesture {
+                                                quotePressed.toggle()
+                                            }
+                                    }
+
                                         .font(.headline)
-                                    Text(post.image ?? "No image provided")
+//                                    Text(post.image ?? "No image provided")
                                         .font(.subheadline)
                                     // Example of displaying the creation date
                                     Text("Posted on \(post.createdAt, formatter: dateFormatter)")
@@ -72,15 +122,17 @@ struct NewsFeedView: View {
                                     }
                                     .font(.caption)
                                     .foregroundColor(.secondary)
+
                                 }
                                 .padding()
-                                .background(Color(UIColor.systemBackground)) // Use .white for pure white
+                                .background(isDarkMode ? Color.black.opacity(1) : Color.white) // Use .white for pure white
                                 .cornerRadius(10)
                                 .shadow(radius: 1) // Optional: adds a subtle shadow around each post
                             }
                         }
                         .padding(.horizontal)
                         .padding(.top)
+                        .background(Color.gray.opacity(0.1))
                     }
                     .onAppear {
                         viewModel.fetchPosts()
@@ -129,6 +181,7 @@ struct NewsFeedView: View {
                                 
                                 NavigationLink(destination: LoginPage(authenticationService: AuthenticationService()), isActive: $isLoggedOut) {
                                     Button(action: {
+//                                        AuthenticationService().logout()
                                         isLoggedOut = true
                                     }) {
                                         Image(systemName: isLoggedOut ? "rectangle.portrait.and.arrow.right.fill" : "rectangle.portrait.and.arrow.right")
@@ -142,7 +195,7 @@ struct NewsFeedView: View {
                     .environment(\.colorScheme, isDarkMode ? .dark : .light)
                     .toolbar {
                         ToolbarItemGroup(placement: .bottomBar) {
-//                                NavigationLink(destination: NewsFeedView(postServiceTwo: postService), isActive: $isHouseClicked) {
+//                                NavigationLink(destination: NewsFeedView(postService: PostService()), isActive: $isHouseClicked) {
                                 VStack {
                                     Image(systemName: "house.fill")
                                         .foregroundColor(Color(UIColor(rgb: 0x316ff6)))
