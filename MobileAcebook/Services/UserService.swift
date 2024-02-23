@@ -31,9 +31,15 @@ protocol UserServiceProtocol {
 }
 
 class UserService: UserServiceProtocol, ObservableObject {
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVkNjIyOWM3MWJjZjlkMWZkMTQ2ZjM5IiwiaWF0IjoxNzA4NTMyMzk1LCJleHAiOjE3MDg5NjQzOTV9.X8EZfJi0Ay4LAj7TrL-gey3w3PpvYRt5lJv-r0qeFp4" // temporary token only used locally, will be saved in separated gitignored file later on
+    
     func fetchUser(completion: @escaping (UserData?, Error?) -> Void) {
-        let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDg2MjIzOTksImV4cCI6MTcwOTA1NDM5OX0.Rw1yZ9O-0BiBYcY4qS2UucQHZkvOS7eL89HofUyuhF0" // temporary token only used locally, will be saved in separated gitignored file later on
-        guard let url = URL(string: "http://127.0.0.1:8080/posts/65d782366b9025be365e88de") else {
+        // Using a hardcoded ID (as an example)
+        fetchUserById(userId: "65d88120c21fa47996095264", completion: completion)
+    }
+
+    func fetchUserById(userId: String, completion: @escaping (UserData?, Error?) -> Void) {
+        guard let url = URL(string: "http://127.0.0.1:8080/posts/\(userId)") else {
             completion(nil, nil)
             return
         }
@@ -48,13 +54,12 @@ class UserService: UserServiceProtocol, ObservableObject {
                 return
             }
             
-            // Print the raw JSON response as a string for debugging
             if let data = data, let jsonString = String(data: data, encoding: .utf8) {
                 print("Raw JSON response: \(jsonString)")
             }
             
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let data = data else {
-                completion(nil, nil) // Consider creating a specific error to return here
+                completion(nil, nil)
                 return
             }
             
@@ -65,17 +70,6 @@ class UserService: UserServiceProtocol, ObservableObject {
                     completion(responseData.ownerData, nil)
                 }
             } catch {
-                print("Decoding error: \(error)")
-                // If possible, print more detailed error info
-                if let decodingError = error as? DecodingError {
-                    switch decodingError {
-                    case .dataCorrupted(let context), .keyNotFound(_, let context), .typeMismatch(_, let context), .valueNotFound(_, let context):
-                        print(context.debugDescription)
-                        print(context.codingPath.map { $0.stringValue }.joined(separator: " -> "))
-                    @unknown default:
-                        print("Unknown decoding error")
-                    }
-                }
                 DispatchQueue.main.async {
                     completion(nil, error)
                 }
@@ -83,3 +77,4 @@ class UserService: UserServiceProtocol, ObservableObject {
         }.resume()
     }
 }
+

@@ -61,16 +61,22 @@ struct NewsFeedView: View {
                             ForEach(viewModel.posts) { post in
                                 VStack(alignment: .leading) {
                                     HStack(spacing: 10) {
-                                        // Placeholder image for user profile picture
-                                        Image(systemName: "person.circle.fill")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fill)
+                                        if let avatarUrl = post.user?.avatar, let url = URL(string: avatarUrl) {
+                                            AsyncImage(url: url) { image in
+                                                image.resizable()
+                                            } placeholder: {
+                                                ProgressView()
+                                            }
                                             .frame(width: 40, height: 40)
                                             .clipShape(Circle())
-                                            .padding(.trailing, 10) // Adjust padding as needed
+                                        } else {
+                                            Image(systemName: "person.circle.fill")
+                                                .resizable()
+                                                .frame(width: 40, height: 40)
+                                                .clipShape(Circle())
+                                        }
                                         
-                                        // Post message text
-                                        Text("Username")
+                                        Text(post.user?.username ?? "Username")
                                             .font(.headline)
                                     }
                     
@@ -275,7 +281,6 @@ struct NewsFeedView: View {
     
     private func addNewPost() {
         guard !newPost.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
-//        todos.append(newPost)
         newPost = ""
     }
 }
