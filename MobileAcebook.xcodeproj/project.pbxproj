@@ -25,6 +25,7 @@
 		D08BFF852B83ABBA00D0506C /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08BFF842B83ABBA00D0506C /* Post.swift */; };
 		D08BFF872B83BC6200D0506C /* PostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08BFF862B83BC6200D0506C /* PostsViewModel.swift */; };
 		D08BFF892B83BC9500D0506C /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08BFF882B83BC9500D0506C /* HomePageView.swift */; };
+		F3109E3E2B88ADC1008B1C6B /* GetUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3109E3D2B88ADC1008B1C6B /* GetUserModel.swift */; };
 		F390892E2B83ABEA000D4C06 /* Cloudinary in Frameworks */ = {isa = PBXBuildFile; productRef = F390892D2B83ABEA000D4C06 /* Cloudinary */; };
 		F39089592B84B5D9000D4C06 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		F390895B2B84CCEF000D4C06 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -37,6 +38,7 @@
 		F390896B2B861A04000D4C06 /* KeyChainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390896A2B861A04000D4C06 /* KeyChainHelper.swift */; };
 		F390896D2B86451E000D4C06 /* LogoutButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390896C2B86451E000D4C06 /* LogoutButtonView.swift */; };
 		F390896F2B865707000D4C06 /* LogoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390896E2B865706000D4C06 /* LogoutViewModel.swift */; };
+		F39089712B879EE8000D4C06 /* UserPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39089702B879EE8000D4C06 /* UserPageViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,7 @@
 		D08BFF842B83ABBA00D0506C /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D08BFF862B83BC6200D0506C /* PostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
 		D08BFF882B83BC9500D0506C /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
+		F3109E3D2B88ADC1008B1C6B /* GetUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetUserModel.swift; sourceTree = "<group>"; };
 		F390895E2B84EAD5000D4C06 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F39089602B84EB30000D4C06 /* UserPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserPageView.swift; path = ../UserPageView.swift; sourceTree = "<group>"; };
 		F39089622B84EB71000D4C06 /* CloudinaryImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudinaryImageView.swift; sourceTree = "<group>"; };
@@ -87,6 +90,7 @@
 		F390896A2B861A04000D4C06 /* KeyChainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainHelper.swift; sourceTree = "<group>"; };
 		F390896C2B86451E000D4C06 /* LogoutButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutButtonView.swift; sourceTree = "<group>"; };
 		F390896E2B865706000D4C06 /* LogoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewModel.swift; sourceTree = "<group>"; };
+		F39089702B879EE8000D4C06 /* UserPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +212,8 @@
 				13CC078B2B84F3A70079987A /* CreateUserViewModel.swift */,
 				D08BFF862B83BC6200D0506C /* PostsViewModel.swift */,
 				F390896A2B861A04000D4C06 /* KeyChainHelper.swift */,
+				F39089702B879EE8000D4C06 /* UserPageViewModel.swift */,
+				F3109E3D2B88ADC1008B1C6B /* GetUserModel.swift */,
 				F390896C2B86451E000D4C06 /* LogoutButtonView.swift */,
 				F39089682B8505C3000D4C06 /* LogInViewModel.swift */,
 				F390896E2B865706000D4C06 /* LogoutViewModel.swift */,
@@ -378,6 +384,8 @@
 				F390895F2B84EAD5000D4C06 /* ImagePicker.swift in Sources */,
 				D08BFF852B83ABBA00D0506C /* Post.swift in Sources */,
 				AE5D85DA2AC8A337009680C6 /* WelcomePageView.swift in Sources */,
+				F3109E3E2B88ADC1008B1C6B /* GetUserModel.swift in Sources */,
+				F39089712B879EE8000D4C06 /* UserPageViewModel.swift in Sources */,
 				13CC078E2B84F4A50079987A /* SignupPageView.swift in Sources */,
 				F39089632B84EB71000D4C06 /* CloudinaryImageView.swift in Sources */,
 				D08BFF872B83BC6200D0506C /* PostsViewModel.swift in Sources */,

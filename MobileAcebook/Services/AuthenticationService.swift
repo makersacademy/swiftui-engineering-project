@@ -10,6 +10,7 @@ import Foundation
 public struct LoginResponse: Codable {
     var token: String
     var message: String
+    var user: String
 }
 
 public struct LoginError: Error {
@@ -19,6 +20,7 @@ public struct LoginError: Error {
 
 class AuthenticationService: ObservableObject, AuthenticationServiceProtocol {
     @Published var isLoggedIn: Bool = false
+    @Published var userId: String = ""
     
     func signUp(user: User, confPassword: String, completion: @escaping (Bool, String?) -> Void) {
         var canSignUp = false
@@ -129,6 +131,7 @@ class AuthenticationService: ObservableObject, AuthenticationServiceProtocol {
                     DispatchQueue.main.async {
                         do {
                             try KeychainHelper.saveToken(decodedResponse.token)
+                            self.userId = decodedResponse.user
                             self.isLoggedIn = true
                             completion(.success(()))
                         } catch {
