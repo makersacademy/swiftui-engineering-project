@@ -12,6 +12,8 @@ import Cloudinary
 struct UserPageView: View {
     @StateObject var authService = AuthenticationService.shared
     @StateObject var userPageViewModel = UserPageViewModel()
+    @StateObject var getUserModel = GetUserModel()
+    @State private var currentUser: User?
     
     
     let cloudinary = CLDCloudinary(configuration: CloudinaryConfig.configuration)
@@ -30,17 +32,42 @@ struct UserPageView: View {
                     if let username = userPageViewModel.user?.username {
                         Text(username)
                     }
+
                 }
                 
                 Text("Under development")
+                /*
+                VStack {
+                    if let currentUser = currentUser {
+                        Text("User: \(currentUser.username)") // Display a specific property of the user
+                    } else {
+                        // You can show a loading indicator or some other placeholder here
+                        Text("error with new method")
+                    }
+                }
+                 */
+                
+                
 
                 Spacer ()
             }
             .onAppear {
                 userPageViewModel.getUser()
+                /*
+                getUserModel.getUser(userId: authService.userId) { result in
+                    switch result {
+                    case .success(let user):
+                        // Assign the user to your variable
+                        currentUser = user
+                    case .failure(let error):
+                        // Handle the error if needed
+                        print("Error: \(error)")
+                    }
+                }
+                */
             }
-        }
-
+                
+    }
 }
 
 
