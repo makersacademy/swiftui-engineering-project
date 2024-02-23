@@ -10,8 +10,8 @@ import PhotosUI
 import Cloudinary
 
 struct SignupPageView: View {
-    @StateObject var authService = AuthenticationService.shared
-    @StateObject var imagePicker = ImagePicker()
+  @StateObject var authService = AuthenticationService.shared
+  @StateObject var imagePicker = ImagePicker()
     
   @State private var username: String = ""
   @State private var email: String = ""
@@ -19,9 +19,12 @@ struct SignupPageView: View {
   @State private var confPassword: String = ""
   @State private var errMessage: String = ""
   @State private var uploadedImagePublicId: String = "/default_avatar.png"
+
+  @State private var customImageUploaded: Bool = false
+  @State private var navigateToLoginPage: Bool = false
   @State private var navigateToFeedPage: Bool = false
-    @State private var showErrMessage: Bool = false
-    @State private var showSignupBtn: Bool = true
+  @State private var showErrMessage: Bool = false
+  @State private var showSignupBtn: Bool = true
 
   var body: some View {
       VStack{
@@ -43,11 +46,11 @@ struct SignupPageView: View {
           Section(header: Text("Sign Up")
             .font(.title2)
             .multilineTextAlignment(.center)) {
-                TextField("Username", text:$username).onChange(of: username) {
+                TextField("Username", text:$username).autocapitalization(.none).onChange(of: username) {
                     _ in showErrMessage = false
                     showSignupBtn = true
                 }
-              TextField("Email", text:$email).onChange(of: email) {
+              TextField("Email", text:$email).autocapitalization(.none).onChange(of: email) {
                   _ in showErrMessage = false
                   showSignupBtn = true
               }
@@ -71,16 +74,24 @@ struct SignupPageView: View {
                     imagePicker.uploadToCloudinary(data: imageData) { imagePublicId in
                         if let imagePublicId = imagePublicId {
                             uploadedImagePublicId = imagePublicId
+                            customImageUploaded = true
                         } else { /*look here later*/
                             print("Error: Image upload failed.")
+                            customImageUploaded = false
                         }
                     }
                 }
             }
+            if customImageUploaded {
+                Text("Image has been uploaded successfully.")
+            }
+            
+            
             if showErrMessage{
                 Text(errMessage)
                     .multilineTextAlignment(.center)
             }
+            
             
           Section {
               if showSignupBtn{
@@ -88,20 +99,20 @@ struct SignupPageView: View {
                       let userInfo = User(email: email, username: username, password: password, avatar: uploadedImagePublicId)
                       authService.signUp(user: userInfo, confPassword: confPassword) {
                           canSignUp, errorMessage in if canSignUp {
-                              print("line 74 \(navigateToFeedPage)")
-                              navigateToFeedPage = true
+                              navigateToLoginPage = true
+                              
+                              NavigationLink(destination: LoginPageView()) { EmptyView()}
+                              
                           } else {
                               if let errorMessage = errorMessage {
                                   errMessage = errorMessage
                                   showErrMessage = true
                                   showSignupBtn = false
-                                  print(errMessage)
                               }
-                              print("line 77 \(canSignUp)")
-                              navigateToFeedPage = false
+                              
                           }
                       }
-                  }.background(NavigationLink(destination: LoginPageView(), isActive: $navigateToFeedPage){ EmptyView() })
+                  }
               }
           }
         }

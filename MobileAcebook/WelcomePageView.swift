@@ -36,11 +36,7 @@ struct WelcomePageView: View {
                         
                         NavigationLink("Log in", destination: LoginPageView())
                     }
-
-         
                     Spacer()
-
-                    
                 }
             }
             
