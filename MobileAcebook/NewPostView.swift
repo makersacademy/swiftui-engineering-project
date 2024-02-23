@@ -3,12 +3,14 @@ import SwiftUI
 struct NewPostView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var postMessage = ""
-    @State private var postSubmitted = false
+    @State private var showPostSuccesfulText = false
+    
 
     var body: some View {
         
             VStack(alignment: .leading) {
                 TextField("What do you want to say...", text: $postMessage)
+//                   
                     .padding()
                     .navigationTitle("New post")
 
@@ -18,7 +20,7 @@ struct NewPostView: View {
                 
                 .padding()
                 
-                if postSubmitted {
+                if showPostSuccesfulText {
                     Text("Post successful")
                         .foregroundColor(.green)
                         .padding(.top, 20)
@@ -26,12 +28,13 @@ struct NewPostView: View {
 
             }
             .padding()
+            .onAppear {
+                showPostSuccesfulText = false
+            }
         }
     
                         
-                    
-            
-    
+
 
     func submitPost() {
         guard !postMessage.isEmpty else {
@@ -80,8 +83,9 @@ struct NewPostView: View {
             }
 
             DispatchQueue.main.async {
-                postSubmitted = true
+                
                 postMessage = ""
+                showPostSuccesfulText = true
                 print("Post submitted successfully")
                 
             }
