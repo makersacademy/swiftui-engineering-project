@@ -16,16 +16,13 @@ struct LoginPage: View {
     var body: some View {
             ZStack {
                 
-                Color(red: Double(67) / 255.0,
-                      green: Double(100) / 255.0,
-                      blue: Double(157) / 255.0
-                )
+                Color(UIColor(rgb: 0x4267B2))
                 .ignoresSafeArea()
                 
                 VStack {
                     Spacer()
                     Text("Acebook")
-                        .font(.system(size: 70))
+                        .font(.system(size: 80))
                         .bold()
                         .padding()
                         .foregroundColor(Color.white)
@@ -59,6 +56,7 @@ struct LoginPage: View {
                             .background(Color(red: Double((0x254778 & 0xFF0000) >> 16) / 255.0, green: Double((0x254778 & 0x00FF00) >> 8) / 255.0, blue: Double(0x254778 & 0x0000FF) / 255.0))
                             .cornerRadius(10)
                             .bold()
+                            .padding()
                     }
                     Spacer()
                         HStack {
@@ -69,6 +67,7 @@ struct LoginPage: View {
                                 label: {
                                     Text("HERE")
                                         .foregroundColor(.white)
+                                        .underline(true, color: .white)
                                         
                                 }
                             )

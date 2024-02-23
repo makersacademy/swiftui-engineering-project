@@ -28,21 +28,27 @@ struct SignupView: View {
                 
                 Spacer()
                 Text("Acebook")
-                    .font(.system(size: 76))
+                    .font(.system(size: 80))
                     .padding(.bottom, 20)
                     .foregroundColor(.white)
+                    .bold()
                 
                 TextField("Username", text: $username)
                     .padding()
+                    .frame(width: 330, height: 50)
+                    .background(Color.white)
+                    .cornerRadius(10)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
                     .onChange(of: username, perform: { value in
                         usernameRequired = !username.isEmpty
                     })
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
                 
                 TextField("Email address", text: $email)
                     .padding()
+                    .frame(width: 330, height: 50)
+                    .background(Color.white)
+                    .cornerRadius(10)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
                     .keyboardType(.emailAddress)
@@ -50,32 +56,34 @@ struct SignupView: View {
                         emailRequired = !email.isEmpty
 //                        isEmailValid = isValidEmail(email)
                     })
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+
 
                 SecureField("Password", text: $password)
                     .padding()
+                    .frame(width: 330, height: 50)
+                    .background(Color.white)
+                    .cornerRadius(10)
                     .onChange(of: password, perform: { value in
                         passwordRequired = !password.isEmpty
                         isPasswordValid = isValidPassword(password)
                     })
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-               
-                NavigationLink( destination: LoginPage(authenticationService: AuthenticationService()), isActive: $shouldNavigate){
-                        EmptyView()
-                }
                 
                 if isPasswordValid {
                     Text("Password valid")
                         .foregroundColor(.green)
                 }
                 
-                Button(action: {signup()}) {
-                    Text("Button - Sign Up")
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color(UIColor(rgb: 0x38548f)))
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+                Button(action: {
+                    signup()
+                }) {
+                    NavigationLink(destination: LoginPage(authenticationService: AuthenticationService()), isActive: $shouldNavigate) {
+                        Text("Sign Up")
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color(UIColor(rgb: 0x38548f)))
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
                 }
                 .padding()
                 
@@ -89,6 +97,7 @@ struct SignupView: View {
                         label: {
                             Text("HERE")
                                 .foregroundColor(.white)
+                                .underline(true, color: .white)
                                 
                         }
                     )
@@ -106,13 +115,13 @@ struct SignupView: View {
     
     private func signup() {
         let newUser = User(username: username, email: email, password: password)
-        
+
         authenticationService.signUp(user: newUser) { success, error in
-            DispatchQueue.main.async { // Ensure UI updates are on the main thread
+            DispatchQueue.main.async {
                 if success {
                     print("Signup successful")
                     alertMessage = "Signup successful"
-                    isSignupSuccessful = true // Moved inside the success block
+                    shouldNavigate = true
                 } else {
                     print("Signup failed: \(error?.localizedDescription ?? "Unknown error")")
                     alertMessage = "Signup failed: \(error?.localizedDescription ?? "Unknown error")"

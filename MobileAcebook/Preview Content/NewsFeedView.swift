@@ -227,9 +227,9 @@ struct NewsFeedView: View {
     }
 }
 
-
 struct NewsFeedViewPage_Previews: PreviewProvider {
     static var previews: some View {
         NewsFeedView(postService: PostService())
     }
 }
+
