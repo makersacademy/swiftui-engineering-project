@@ -10,15 +10,15 @@ import PhotosUI
 import Cloudinary
 
 struct SignupPageView: View {
+    @StateObject var authService = AuthenticationService.shared
+    @StateObject var imagePicker = ImagePicker()
+    
   @State private var username: String = ""
   @State private var email: String = ""
   @State private var password: String = ""
   @State private var confPassword: String = ""
-@StateObject var authService = AuthenticationService.shared
-
-  @StateObject var imagePicker = ImagePicker()
-  @State private var uploadedImagePublicId: String = "/default_avatar.png"
     
+  @State private var uploadedImagePublicId: String = "/default_avatar.png"
   @State private var navigateToFeedPage: Bool = false
 
   var body: some View {
@@ -69,6 +69,8 @@ struct SignupPageView: View {
 
             Button("Sign up") {
               let userInfo = User(email: email, username: username, password: password, avatar: uploadedImagePublicId)
+                print("uploadedImagePublicId: \(uploadedImagePublicId)")
+                
                 authService.signUp(user: userInfo, confPassword: confPassword) {
                     canSignUp in if canSignUp {
                         print("line 74 \(navigateToFeedPage)")
