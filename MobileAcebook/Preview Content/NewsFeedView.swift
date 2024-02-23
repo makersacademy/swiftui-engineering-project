@@ -26,6 +26,13 @@ struct NewsFeedView: View {
     var postService: PostServiceProtocol
     let postServiceTwo = PostService()
     @State private var newPost = ""
+    
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter
+    }()
 
     var body: some View {
 
@@ -99,6 +106,23 @@ struct NewsFeedView: View {
                                                 quotePressed.toggle()
                                             }
                                     }
+
+                                        .font(.headline)
+//                                    Text(post.image ?? "No image provided")
+                                        .font(.subheadline)
+                                    // Example of displaying the creation date
+                                    Text("Posted on \(post.createdAt, formatter: dateFormatter)")
+                                        .font(.caption)
+                                        .foregroundColor(.gray)
+                                    // Example of displaying likes and comments count
+                                    HStack {
+                                        Text("\(post.likes.count) Likes")
+                                        Spacer()
+                                        Text("\(post.comments) Comments")
+                                    }
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+
                                 }
                                 .padding()
                                 .background(isDarkMode ? Color.black.opacity(1) : Color.white) // Use .white for pure white
@@ -256,9 +280,9 @@ struct NewsFeedView: View {
     }
 }
 
-
 struct NewsFeedViewPage_Previews: PreviewProvider {
     static var previews: some View {
         NewsFeedView(postService: PostService())
     }
 }
+
