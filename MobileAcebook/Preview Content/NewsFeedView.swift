@@ -21,6 +21,8 @@ struct NewsFeedView: View {
     @State private var isDarkMode = false
     @State private var thumbUpPressed = false
     @State private var quotePressed = false
+    @State private var message = ""
+    @State private var image = ""
     var postService: PostServiceProtocol
     let postServiceTwo = PostService()
     @State private var newPost = ""
@@ -99,7 +101,7 @@ struct NewsFeedView: View {
                                     }
                                 }
                                 .padding()
-                                .background(Color(UIColor.systemBackground)) // Use .white for pure white
+                                .background(isDarkMode ? Color.black.opacity(1) : Color.white) // Use .white for pure white
                                 .cornerRadius(10)
                                 .shadow(radius: 1) // Optional: adds a subtle shadow around each post
                             }
@@ -155,6 +157,7 @@ struct NewsFeedView: View {
                                 
                                 NavigationLink(destination: LoginPage(authenticationService: AuthenticationService()), isActive: $isLoggedOut) {
                                     Button(action: {
+//                                        AuthenticationService().logout()
                                         isLoggedOut = true
                                     }) {
                                         Image(systemName: isLoggedOut ? "rectangle.portrait.and.arrow.right.fill" : "rectangle.portrait.and.arrow.right")
@@ -168,7 +171,7 @@ struct NewsFeedView: View {
                     .environment(\.colorScheme, isDarkMode ? .dark : .light)
                     .toolbar {
                         ToolbarItemGroup(placement: .bottomBar) {
-//                                NavigationLink(destination: NewsFeedView(postServiceTwo: postService), isActive: $isHouseClicked) {
+//                                NavigationLink(destination: NewsFeedView(postService: PostService()), isActive: $isHouseClicked) {
                                 VStack {
                                     Image(systemName: "house.fill")
                                         .foregroundColor(Color(UIColor(rgb: 0x316ff6)))
