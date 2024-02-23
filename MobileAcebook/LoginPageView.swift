@@ -83,8 +83,9 @@ struct LoginPageView: View {
                     VStack{
                         Text("Don't have an account?").bold()
                         
-                        Button("Click here"){
-                            //Redirects to sign up
+                        
+                        NavigationLink(destination: SignUpPageView()){
+                            Text("Click here")
                         }.foregroundColor(.white)
                             .frame(width: 100, height: 30)
                             .background(Color.black)
