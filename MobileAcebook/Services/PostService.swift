@@ -36,22 +36,23 @@ class PostService: PostServiceProtocol, ObservableObject {
             
             do {
                 let decoder = JSONDecoder()
+                
+                decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
+                    let container = try decoder.singleValueContainer()
+                    let dateString = try container.decode(String.self)
+                    let formatter = ISO8601DateFormatter()
+                    formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                    if let date = formatter.date(from: dateString) {
+                        return date
+                    }
+                    throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date: \(dateString)")
+                })
+                
                 let responseData = try decoder.decode(PostResponse.self, from: data)
                 DispatchQueue.main.async {
                     completion(responseData.posts, nil)
                 }
             } catch {
-                print("Decoding error: \(error)")
-                // If possible, print more detailed error info
-                if let decodingError = error as? DecodingError {
-                    switch decodingError {
-                    case .dataCorrupted(let context), .keyNotFound(_, let context), .typeMismatch(_, let context), .valueNotFound(_, let context):
-                        print(context.debugDescription)
-                        print(context.codingPath.map { $0.stringValue }.joined(separator: " -> "))
-                    @unknown default:
-                        print("Unknown decoding error")
-                    }
-                }
                 DispatchQueue.main.async {
                     completion(nil, error)
                 }
