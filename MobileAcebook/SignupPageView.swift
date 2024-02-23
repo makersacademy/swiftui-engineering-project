@@ -10,22 +10,21 @@ import PhotosUI
 import Cloudinary
 
 struct SignupPageView: View {
+  @StateObject var authService = AuthenticationService.shared
+  @StateObject var imagePicker = ImagePicker()
+    
   @State private var username: String = ""
   @State private var email: String = ""
   @State private var password: String = ""
   @State private var confPassword: String = ""
-    
-    @State private var errMessage: String = ""
-    
-    @StateObject var authService = AuthenticationService.shared
-
-  @StateObject var imagePicker = ImagePicker()
+  @State private var errMessage: String = ""
   @State private var uploadedImagePublicId: String = "/default_avatar.png"
-    @State private var customImageUploaded: Bool = false
-    
+
+  @State private var customImageUploaded: Bool = false
   @State private var navigateToLoginPage: Bool = false
-    @State private var showErrMessage: Bool = false
-    @State private var showSignupBtn: Bool = true
+  @State private var navigateToFeedPage: Bool = false
+  @State private var showErrMessage: Bool = false
+  @State private var showSignupBtn: Bool = true
 
   var body: some View {
       VStack{
