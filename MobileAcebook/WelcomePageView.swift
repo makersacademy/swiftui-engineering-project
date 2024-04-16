@@ -20,41 +20,37 @@ struct WelcomePageView: View {
                     .multilineTextAlignment(.center)
                     .foregroundColor(Color(red: 0.50, green: 0.71, blue: 0.71))
                     .bold()
-
                 Spacer()
                 
- 
                 Image("paw-logo")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 130, height: 120)
+                    .frame(width: 130, height: 130)
                     .accessibilityIdentifier("paw-logo")
-                
                 Spacer()
-                
                 
                 Button("Login") {
                     // TODO: login logic
                 }
-                .frame(width: 100)
-                .buttonStyle(.bordered)
-                .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .accessibilityIdentifier("loginButton")
-                
-                
-                
+                    .frame(width: 100)
+                    .controlSize(.large)
+                    .buttonStyle(.bordered)
+                    .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    .accessibilityIdentifier("loginButton")
+                    
                 Button("Sign Up") {
                     // TODO: sign up logic
                 }
-                .frame(width: 100)
-                .buttonStyle(.bordered)
-                .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .accessibilityIdentifier("signUpButton")
-                
+                    .frame(width: 100)
+                    .controlSize(.large)
+                    .buttonStyle(.bordered)
+                    .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    .accessibilityIdentifier("signUpButton")
+                    
                 Spacer()
             }
         }
