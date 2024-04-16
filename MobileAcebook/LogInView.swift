@@ -60,8 +60,4 @@ struct LoginView: View {
             Alert(title: Text("Log In"), message: Text("Logging in..."), dismissButton: .default(Text("OK")))
         }
     }
-
-    func login() {
-        // Leave empty for now
-    }
 }
