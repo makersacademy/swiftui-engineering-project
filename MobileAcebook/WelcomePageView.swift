@@ -31,6 +31,16 @@ struct WelcomePageView: View {
                 .accessibilityIdentifier("signUpButton")
                 
                 Spacer()
+                
+                NavigationLink(destination: LoginView()) {
+                                    Text("Log In") // Add login button
+                                        .padding()
+                                        .foregroundColor(.white)
+                                        .background(Color.green) // Change color for login button
+                                        .cornerRadius(10)
+                                }
+                                .accessibilityIdentifier("loginButton")
+                Spacer()
             }
             .navigationTitle("Welcome")
         }
