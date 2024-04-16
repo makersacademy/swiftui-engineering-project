@@ -1,18 +1,8 @@
 
 import Foundation
 
-protocol AuthenticationServiceProtocol {
-    func signUp(user: User, completion: @escaping (Bool, String?) -> Void)
-}
-
-struct User: Codable {
-    let username: String
-    let password: String
-    let email: String
-    let imgUrl: String
-}
-
 class AuthenticationService: AuthenticationServiceProtocol {
+    
     func signUp(user: User, completion: @escaping (Bool, String?) -> Void) {
         let url = URL(string: "http://localhost:3000/users")! 
         var request = URLRequest(url: url)

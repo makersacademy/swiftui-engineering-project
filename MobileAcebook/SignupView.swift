@@ -12,9 +12,9 @@ struct SignupView: View {
     @State private var username = ""
     @State private var password = ""
     @State private var email = ""
-    @State private var signingUp = false
+    @State private var isSigningUp = false
     @State private var signUpSuccess = false
-    @State private var signUpMessage = "" 
+    @State private var signUpMessage = ""
 
     var body: some View {
         VStack {
@@ -27,6 +27,7 @@ struct SignupView: View {
             SecureField("Password", text: $password)
                 .padding()
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+            
             if signUpSuccess {
                 Text(signUpMessage)
                     .foregroundColor(.green)
@@ -52,19 +53,14 @@ struct SignupView: View {
 
     func signUp() {
         let user = User(username: username, password: password, email: email, imgUrl: "assets/blank-profile-picture-973460_640.png")
-        isSigningUp = true // Show signing up alert
+        isSigningUp = true
 
         // Call AuthenticationService to sign up the user
-        AuthenticationService().signUp(user: user) { success in
+        AuthenticationService().signUp(user: user) { success, message in
             DispatchQueue.main.async {
-                isSigningUp = false // Dismiss signing up alert
-                if success {
-                    // Handle signup success
-                    print("Signup successful")
-                } else {
-                    // Handle signup failure
-                    print("Signup failed")
-                }
+                isSigningUp = false
+                signUpSuccess = success
+                signUpMessage = message ?? (success ? "Signup successful!" : "Signup failed.")
             }
         }
     }
