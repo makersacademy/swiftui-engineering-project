@@ -32,3 +32,4 @@ class AuthenticationService: AuthenticationServiceProtocol {
         task.resume()
     }
 }
+

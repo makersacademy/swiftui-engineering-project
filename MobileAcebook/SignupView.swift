@@ -18,6 +18,18 @@ struct SignupView: View {
 
     var body: some View {
         VStack {
+            Spacer()
+                .frame(height:225)
+
+            
+            Text("Welcome to Fakebook!")
+                .font(.largeTitle)
+                .padding(.bottom, 20)
+                .multilineTextAlignment(.center)
+                .accessibilityIdentifier("welcomeBackText")
+
+            Spacer()
+            
             TextField("Username", text: $username)
                 .padding()
                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -44,6 +56,9 @@ struct SignupView: View {
                     .cornerRadius(10)
             }
             .padding()
+            
+            Spacer()
+                .frame(height: 225)
         }
         .padding()
         .alert(isPresented: $isSigningUp) {

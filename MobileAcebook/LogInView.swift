@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct LoginView: View {
-    @State private var username = ""
+    @State private var email = ""
     @State private var password = ""
     @State private var isLoggingIn = false
     @State private var loginSuccess = false
@@ -17,7 +17,18 @@ struct LoginView: View {
 
     var body: some View {
         VStack {
-            TextField("Username", text: $username)
+            Spacer()
+
+            Text("Welcome back to Fakebook!")
+                .font(.largeTitle)
+                .padding(.bottom, 20)
+                .multilineTextAlignment(.center)
+                .accessibilityIdentifier("welcomeBackText")
+
+            Spacer()
+            
+            
+            TextField("Email", text: $email)
                 .padding()
                 .textFieldStyle(RoundedBorderTextFieldStyle())
             SecureField("Password", text: $password)
@@ -36,10 +47,13 @@ struct LoginView: View {
                 Text("Log In")
                     .padding()
                     .foregroundColor(.white)
-                    .background(Color.blue)
+                    .background(Color.green)
                     .cornerRadius(10)
             }
             .padding()
+            
+            Spacer()
+                .frame(height: 200)
         }
         .padding()
         .alert(isPresented: $isLoggingIn) {
