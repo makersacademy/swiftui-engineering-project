@@ -20,13 +20,15 @@ struct LoginPageView: View {
                     .font(.largeTitle)
                     .bold()
                 Spacer()
-                TextField("Username", text: $username)
-                    .frame(width: 200, height: 30)
+                Text("Username")
+                TextField("", text: $username)
+                    .frame(width: 220, height: 40)
                     .textFieldStyle(.roundedBorder)
                     .multilineTextAlignment(.center)
                     .accessibilityIdentifier("loginUsername")
-                TextField("Password", text: $password)
-                    .frame(width: 200, height: 30)
+                Text("Password")
+                TextField("", text: $password)
+                    .frame(width: 220, height: 40)
                     .textFieldStyle(.roundedBorder)
                     .multilineTextAlignment(.center)
                     .accessibilityIdentifier("loginPassword")
@@ -34,10 +36,10 @@ struct LoginPageView: View {
                 Button("Submit") {
                     guard !username.isEmpty && !password.isEmpty else { return }
                 }
-                .frame(width: 200, height: 30)
+                .frame(width: 220, height: 40)
                 .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
                 .foregroundColor(.white)
-                .cornerRadius(10)
+                .cornerRadius(5)
                 
                 Spacer()
                 Spacer()
