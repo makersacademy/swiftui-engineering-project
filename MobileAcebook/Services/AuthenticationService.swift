@@ -21,7 +21,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let body = user
-        urlRequest.httpBody = try? JSONEncoder().encode(user)        //JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
+        urlRequest.httpBody = try? JSONEncoder().encode(user)        
         let task = URLSession.shared.dataTask(with : urlRequest) {data, response, error in
             guard let data = data else {return}
             do {
