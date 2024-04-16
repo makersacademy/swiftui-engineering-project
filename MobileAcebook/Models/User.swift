@@ -6,6 +6,11 @@
 //
 
 public struct User {
-    let username: String
+    let email: String
     let password: String
+}
+
+public struct Token: Codable {
+    let message: String
+    let token: String
 }
