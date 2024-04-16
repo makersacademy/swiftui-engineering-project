@@ -20,10 +20,13 @@ struct SignUpPageView: View {
           .accessibilityIdentifier("makers-logo")
         TextField("Email", text: $user.email)
           .padding()
+          .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
         SecureField("Password", text: $user.password)
           .padding()
+          .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
         TextField("Username", text: $user.username)
           .padding()
+          .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
         Button("Sign Up") {
           Task {
             do {
