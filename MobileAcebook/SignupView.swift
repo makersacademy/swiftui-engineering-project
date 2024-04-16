@@ -11,16 +11,29 @@ import SwiftUI
 struct SignupView: View {
     @State private var username = ""
     @State private var password = ""
-    @State private var isSigningUp = false // Track signup process state
+    @State private var email = ""
+    @State private var signingUp = false
+    @State private var signUpSuccess = false
+    @State private var signUpMessage = "" 
 
     var body: some View {
         VStack {
             TextField("Username", text: $username)
                 .padding()
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+            TextField("Email", text: $email)
+                .padding()
+                .textFieldStyle(RoundedBorderTextFieldStyle())
             SecureField("Password", text: $password)
                 .padding()
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+            if signUpSuccess {
+                Text(signUpMessage)
+                    .foregroundColor(.green)
+            } else {
+                Text(signUpMessage)
+                    .foregroundColor(.red)
+            }
 
             Button(action: signUp) {
                 Text("Sign Up")
@@ -38,7 +51,7 @@ struct SignupView: View {
     }
 
     func signUp() {
-        let user = User(username: username, password: password)
+        let user = User(username: username, password: password, email: email, imgUrl: "assets/blank-profile-picture-973460_640.png")
         isSigningUp = true // Show signing up alert
 
         // Call AuthenticationService to sign up the user

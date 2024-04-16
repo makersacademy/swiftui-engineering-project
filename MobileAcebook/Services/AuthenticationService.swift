@@ -14,7 +14,7 @@ struct User: Codable {
 
 class AuthenticationService: AuthenticationServiceProtocol {
     func signUp(user: User, completion: @escaping (Bool, String?) -> Void) {
-        let url = URL(string: "http://localhost:3000/users")! // Use http instead of https if you're not setup for SSL on local
+        let url = URL(string: "http://localhost:3000/users")! 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
