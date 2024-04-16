@@ -7,4 +7,5 @@
 
 public protocol AuthenticationServiceProtocol {
     func signUp(user: User) -> Bool
+    func signIn(username: String, password: String) -> Bool
 }
