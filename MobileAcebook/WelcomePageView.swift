@@ -1,15 +1,8 @@
-//
-//  WelcomePageView.swift
-//  MobileAcebook
-//
-//  Created by Josué Estévez Fernández on 30/09/2023.
-//
-
 import SwiftUI
 
 struct WelcomePageView: View {
     var body: some View {
-        ZStack {
+        NavigationView {
             VStack {
                 Spacer()
 
@@ -28,13 +21,18 @@ struct WelcomePageView: View {
                 
                 Spacer()
 
-                Button("Sign Up") {
-                    // TODO: sign up logic
+                NavigationLink(destination: SignupView()) {
+                    Text("Sign Up")
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(10)
                 }
                 .accessibilityIdentifier("signUpButton")
                 
                 Spacer()
             }
+            .navigationTitle("Welcome")
         }
     }
 }
