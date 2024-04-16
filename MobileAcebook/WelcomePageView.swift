@@ -27,14 +27,23 @@ struct WelcomePageView: View {
                     .accessibilityIdentifier("makers-logo")
                 
                 Spacer()
-
-                Button("Sign Up") {
-                    // TODO: sign up logic
-                }
-                .accessibilityIdentifier("signUpButton")
                 
-                Spacer()
+                NavigationLink(destination: SignUpPageView()) {
+                    Text("Sign Up")
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .cornerRadius(8)
+                        .accessibilityIdentifier("signUpButton")
+//
+           
             }
+                Spacer()
+            
+          
+            }
+                     
         }
     }
 }
