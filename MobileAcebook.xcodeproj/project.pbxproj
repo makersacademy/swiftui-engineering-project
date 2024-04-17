@@ -22,6 +22,7 @@
 		AE5D85E82AC9B29A009680C6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E72AC9B29A009680C6 /* User.swift */; };
 		F46B58B32BCE9B8C00430CBB /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46B58B22BCE9B8C00430CBB /* SignupView.swift */; };
 		F48BBE712BD004750090C82B /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48BBE702BD004750090C82B /* Post.swift */; };
+		F48BBE752BD005350090C82B /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48BBE742BD005350090C82B /* PostService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		AE5D85E72AC9B29A009680C6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F46B58B22BCE9B8C00430CBB /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		F48BBE702BD004750090C82B /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		F48BBE742BD005350090C82B /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				AE5D85E02AC9AFA9009680C6 /* AuthenticationService.swift */,
+				F48BBE742BD005350090C82B /* PostService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				4FA628172BCED56D00EF9696 /* LogInView.swift in Sources */,
 				AE5D85E12AC9AFA9009680C6 /* AuthenticationService.swift in Sources */,
 				F48BBE712BD004750090C82B /* Post.swift in Sources */,
+				F48BBE752BD005350090C82B /* PostService.swift in Sources */,
 				AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */,
 				AE5D85B02AC8A221009680C6 /* MobileAcebookApp.swift in Sources */,
 				AE5D85E82AC9B29A009680C6 /* User.swift in Sources */,
