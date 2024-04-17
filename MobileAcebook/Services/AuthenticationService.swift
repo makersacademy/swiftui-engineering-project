@@ -35,7 +35,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
     }
     
     func login(email: String, password: String, completion: @escaping (Bool, String?, String?) -> Void) {
-        let url = URL(string: "http://localhost:3000/login")!
+        let url = URL(string: "http://localhost:3000/tokens")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -50,40 +50,43 @@ class AuthenticationService: AuthenticationServiceProtocol {
         }
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let data = data else {
-                completion(false, "Failed to log in", nil)
-                return
-            }
-            
             if let error = error {
                 completion(false, "Request error: \(error.localizedDescription)", nil)
                 return
             }
             
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(false, "Invalid response", nil)
+                return
+            }
+            
+            guard (200...299).contains(httpResponse.statusCode) else {
+                completion(false, "HTTP error: \(httpResponse.statusCode)", nil)
+                return
+            }
+            
+            guard let data = data else {
+                completion(false, "No data received", nil)
+                return
+            }
+            
             do {
-                if let tokenDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: String],
-                   let token = tokenDict["token"] {
-                    self.currentToken = token  // Save the token in-memory
-                    completion(true, nil, token)
-                } else {
-                    completion(false, "Token not found", nil)
+                guard let tokenDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: String] else {
+                    completion(false, "Invalid token data", nil)
+                    return
                 }
+                
+                guard let token = tokenDict["token"] else {
+                    completion(false, "Token not found in response", nil)
+                    return
+                }
+                
+                self.currentToken = token
+                completion(true, nil, token)
             } catch {
-                completion(false, "Error decoding response", nil)
+                completion(false, "Error decoding response: \(error.localizedDescription)", nil)
             }
         }
         task.resume()
     }
-    func getUserDetails(userId: String, completion: @escaping (Bool, User?, String?) -> Void) {
-        guard let token = currentToken else {
-            completion(false, nil, "No token found, please log in")
-            return
-        }
-        
-        let url = URL(string: "http://localhost:3000/users/\(userId)/details")!
-        var request = URLRequest(url: url)
-        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-    }
-    
 }
