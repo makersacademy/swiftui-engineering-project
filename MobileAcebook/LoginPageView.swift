@@ -33,20 +33,37 @@ struct LoginPageView: View {
                         .multilineTextAlignment(.center)
                         .accessibilityIdentifier("loginUsername")
                 }.padding()
-                
                 VStack {
                     Text("Password")
                         .frame(maxWidth: 250, alignment: .topLeading)
-                    
-                    TextField("", text: $password)
+                Group {
+                    if isShowingPassword {
+                        TextField("", text: $password)
+                            .frame(width: 250, height: 40)
+                            .multilineTextAlignment(.center)
+                            .overlay(RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray))
+                    }else {
+                        SecureField("", text: $password)
                         .frame(width: 250, height: 40)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.gray)
-                        )
                         .multilineTextAlignment(.center)
-                        .accessibilityIdentifier("loginPassword")
-                }.padding()
+                        .overlay(RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gray))
+                    }
+                    }
+                    .disableAutocorrection(true)
+                    .autocapitalization(.none)
+                    
+                    Button {
+                        isShowingPassword.toggle()
+                    } label: {
+                        if isShowingPassword {
+                            Text("Hide password")
+                        } else {
+                            Text("Show password")
+                        }
+                    }.padding()
+                }
                 
                 
                 Button("Submit") {
@@ -60,6 +77,14 @@ struct LoginPageView: View {
                 
                 Spacer()
                 Spacer()
+                Spacer()
+                HStack(spacing:3){
+                    Text("Don't have an account?")
+                    Text("Sign up here")
+                        .fontWeight(.bold)
+                    //add navigation to login
+                }
+                .padding()
             }
             
         }
