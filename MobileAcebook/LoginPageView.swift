@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginPageView: View {
     @State private var username = ""
     @State private var password = ""
+    @State var isShowingPassword: Bool = false
     
     var body: some View {
         NavigationView {
