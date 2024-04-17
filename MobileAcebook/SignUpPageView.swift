@@ -12,10 +12,14 @@ struct SignUpPageView: View {
     @State private var email = ""
     @State private var fullName = ""
     @State private var password = ""
-    @State private var confirmPassword = ""
     //errors:
     @State private var emailError = ""
-    //let authService: AuthenticationServiceProtocol
+    
+    @State private var signupErrorMessage = ""
+    @State private var isSignupSuccess = false
+    
+    let authService: AuthenticationServiceProtocol
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 30) {
@@ -67,6 +71,20 @@ struct SignUpPageView: View {
                     //placeholder for image upload - format to be defined.
                     VStack{
                         Button("Sign Up"){
+                            if $email.isValidEmail && $password.isValidPassword && password == confirmPassword {
+                            // Create a new user object
+                            let newUser = User(imgUrl: "", email: email, password: password, username: fullName)
+                            
+                            // Call signUp method of AuthenticationService
+                            let success = authService.signUp(user: newUser)
+                            
+                            if success {
+                                // Handle successful signup
+                                isSignupSuccess = true
+                            } else {
+                                // Handle signup failure
+                                signupErrorMessage = "Unable to sign up. Please try again."
+                            }
                             //add logic here
                         }
                         .frame(width: 250)
@@ -74,6 +92,14 @@ struct SignUpPageView: View {
                         .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
                         .foregroundColor(.white)
                         .cornerRadius(50)
+                            
+                            // Error messages...
+                        Text(signupErrorMessage)
+                            .foregroundColor(.red)
+
+                                    // Navigation to login page after successful signup
+                        NavigationLink(destination: LoginPageView(), isActive: $isSignupSuccess) {
+                            EmptyView()
                     }
                     .padding(.top, 40)
                     Spacer()
