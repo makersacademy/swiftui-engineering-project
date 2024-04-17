@@ -14,7 +14,7 @@ struct LoginView: View {
     @State private var isLoggingIn = false
     @State private var loginSuccess = false
     @State private var loginMessage = ""
-    
+
     var body: some View {
         VStack {
             Spacer()
@@ -26,7 +26,6 @@ struct LoginView: View {
                 .accessibilityIdentifier("welcomeBackText")
             
             Spacer()
-            
             
             TextField("Email", text: $email)
                 .padding()
@@ -59,20 +58,19 @@ struct LoginView: View {
         .alert(isPresented: $isLoggingIn) {
             Alert(title: Text("Log In"), message: Text("Logging in..."), dismissButton: .default(Text("OK")))
         }
-        
-        func login() {
-            self.isLoggingIn = true
-            // Assuming AuthenticationService is initialized elsewhere and injected or available globally
-            AuthenticationService().login(email: email, password: password) { success, message, token in
-                DispatchQueue.main.async {
-                    self.isLoggingIn = false
-                    if success {
-                        self.loginSuccess = true
-                        self.loginMessage = "Login Successful!"
-                    } else {
-                        self.loginSuccess = false
-                        self.loginMessage = message ?? "Failed to login"
-                    }
+    }
+    
+    func login() {
+        self.isLoggingIn = true
+        AuthenticationService().login(email: email, password: password) { success, message, token in
+            DispatchQueue.main.async {
+                self.isLoggingIn = false
+                if success {
+                    self.loginSuccess = true
+                    self.loginMessage = "Login Successful!"
+                } else {
+                    self.loginSuccess = false
+                    self.loginMessage = message ?? "Failed to login"
                 }
             }
         }
