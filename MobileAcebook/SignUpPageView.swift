@@ -12,7 +12,8 @@ struct SignUpPageView: View {
     @State private var email = ""
     @State private var fullName = ""
     @State private var password = ""
-    @State private var confirmPassword = ""
+    @State var isShowingPassword: Bool = false
+    
     //errors:
     @State private var emailError = ""
     //let authService: AuthenticationServiceProtocol
@@ -30,6 +31,7 @@ struct SignUpPageView: View {
                         .padding()
                     TextField("", text: $email)
                         .frame(width: 250, height: 40)
+                        .multilineTextAlignment(.center)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
                             .stroke(Color.gray)
@@ -40,6 +42,7 @@ struct SignUpPageView: View {
                         .padding()
                     TextField("", text: $fullName)
                         .frame(width: 250, height: 40)
+                        .multilineTextAlignment(.center)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
                             .stroke(Color.gray)
@@ -48,13 +51,35 @@ struct SignUpPageView: View {
                     Text("Password")
                         .frame(maxWidth: 250, alignment: .topLeading)
                         .padding()
-                    SecureField("", text: $password)
-                        .frame(width: 250, height: 40)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.gray)
-                        )
-                        .accessibilityIdentifier("Password")
+                    VStack {
+                    Group {
+                        if isShowingPassword {
+                            TextField("", text: $password)
+                                .frame(width: 250, height: 40)
+                                .multilineTextAlignment(.center)
+                                .overlay(RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.gray))
+                        }else {
+                            SecureField("", text: $password)
+                            .frame(width: 250, height: 40)
+                            .multilineTextAlignment(.center)
+                            .overlay(RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray))
+                        }
+                        }
+                        .disableAutocorrection(true)
+                        .autocapitalization(.none)
+                        
+                        Button {
+                            isShowingPassword.toggle()
+                        } label: {
+                            if isShowingPassword {
+                                Text("Hide password")
+                            } else {
+                                Text("Show password")
+                            }
+                        }.padding()
+                    }
 
                     VStack{
                         Button("Sign Up"){
