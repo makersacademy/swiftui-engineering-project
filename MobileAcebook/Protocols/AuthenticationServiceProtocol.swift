@@ -6,5 +6,7 @@
 //
 
 public protocol AuthenticationServiceProtocol {
-    func signUp(user: User) -> Bool
+    func signIn( user: User) -> Bool
+    func signUp( user: NewUser) -> Bool
+    
 }
