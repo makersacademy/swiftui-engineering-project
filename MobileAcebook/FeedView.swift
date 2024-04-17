@@ -2,6 +2,8 @@ import SwiftUI
 
 struct FeedView: View {
   @ObservedObject private var postService = PostService()
+  @ObservedObject private var authService = AuthenticationService()
+    
   var body: some View {
     NavigationView {
       VStack {
@@ -34,7 +36,11 @@ struct FeedView: View {
         .padding(10)
         .navigationBarTitle("FakeBook")
         .onAppear {
-          postService.fetchPosts()
+            if let token = authService.getToken() {
+                postService.fetchPosts(token: token)
+            } else {
+                print("Token is nil")
+            }
         }
         Spacer()
       }

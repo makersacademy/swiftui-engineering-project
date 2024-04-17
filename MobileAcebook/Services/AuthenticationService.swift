@@ -1,13 +1,16 @@
 
 import Foundation
 
-class AuthenticationService: AuthenticationServiceProtocol {
+class AuthenticationService: ObservableObject, AuthenticationServiceProtocol {
     
-    private var currentToken: String?
+    @Published private var currentToken: String?
     
-    func getToken() -> String {
+    
+    func getToken() -> String? {
         if let token = currentToken {
             return token
+        } else {
+            return nil
         }
     }
     
