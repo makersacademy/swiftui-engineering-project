@@ -6,11 +6,11 @@ class AuthenticationService: ObservableObject, AuthenticationServiceProtocol {
     @Published private var currentToken: String?
     
     
-    func getToken() -> String? {
+    func getToken(completion: @escaping (String?) -> Void) {
         if let token = currentToken {
-            return token
+            completion(token)
         } else {
-            return nil
+            completion(nil)
         }
     }
     
@@ -80,22 +80,23 @@ class AuthenticationService: ObservableObject, AuthenticationServiceProtocol {
             }
             
             do {
-                guard let tokenDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: String] else {
-                    completion(false, "Invalid token data", nil)
-                    return
+                        guard let tokenDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: String] else {
+                            completion(false, "Invalid token data", nil)
+                            return
+                        }
+                        
+                        guard let token = tokenDict["token"] else {
+                            completion(false, "Token not found in response", nil)
+                            return
+                        }
+                        
+                        self.currentToken = token
+                        completion(true, nil, token)  // Pass token back through completion handler
+                    } catch {
+                        completion(false, "Error decoding response: \(error.localizedDescription)", nil)
+                    }
                 }
-                
-                guard let token = tokenDict["token"] else {
-                    completion(false, "Token not found in response", nil)
-                    return
-                }
-                
-                self.currentToken = token
-                completion(true, nil, token)
-            } catch {
-                completion(false, "Error decoding response: \(error.localizedDescription)", nil)
+                task.resume()
             }
-        }
-        task.resume()
     }
 }

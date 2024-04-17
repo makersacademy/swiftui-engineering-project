@@ -37,10 +37,12 @@ struct FeedView: View {
         .padding(10)
         .navigationBarTitle("FakeBook")
         .onAppear {
-            if let token = authService.getToken() {
-                postService.fetchPosts(token: token)
-            } else {
-                print("Token is nil")
+            authService.getToken() { token in
+                if let token = token {
+                    postService.fetchPosts(token: token)
+                } else {
+                    print("Token is nil")
+                }
             }
         }
         Spacer()
