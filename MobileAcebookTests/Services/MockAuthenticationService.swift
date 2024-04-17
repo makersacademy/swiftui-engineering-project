@@ -6,10 +6,9 @@
 //
 
 @testable import MobileAcebook
-
 class MockAuthenticationService: AuthenticationServiceProtocol {
-    func signUp(user: User) -> Bool {
-        // Mocked logic for unit tests
-        return true // placeholder
-    }
+  func signUp(user: User) async throws {
+    // Mocked logic for unit tests
+    return // placeholder
+  }
 }
