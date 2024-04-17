@@ -5,6 +5,12 @@ class AuthenticationService: AuthenticationServiceProtocol {
     
     private var currentToken: String?
     
+    func getToken() -> String {
+        if let token = currentToken {
+            return token
+        }
+    }
+    
     func signUp(user: User, completion: @escaping (Bool, String?) -> Void) {
         let url = URL(string: "http://localhost:3000/users")!
         var request = URLRequest(url: url)
