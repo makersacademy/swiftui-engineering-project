@@ -20,27 +20,41 @@ struct LoginPageView: View {
                     .font(.largeTitle)
                     .bold()
                 Spacer()
-                Text("Username")                    .frame(maxWidth: 220, alignment: .topLeading)
+                VStack {
+                    Text("Username")                    .frame(maxWidth: 250, alignment: .topLeading)
+                    
+                    TextField("", text: $username)
+                        .frame(width: 250, height: 40)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.gray)
+                        )
+                        .multilineTextAlignment(.center)
+                        .accessibilityIdentifier("loginUsername")
+                }.padding()
                 
-                TextField("", text: $username)
-                    .frame(width: 220, height: 40)
-                    .textFieldStyle(.roundedBorder)
-                    .multilineTextAlignment(.center)
-                    .accessibilityIdentifier("loginUsername")
-                Text("Password")
-                    .frame(maxWidth: 220, alignment: .topLeading)
-                TextField("", text: $password)
-                    .frame(width: 220, height: 40)
-                    .textFieldStyle(.roundedBorder)
-                    .multilineTextAlignment(.center)
-                    .accessibilityIdentifier("loginPassword")
+                VStack {
+                    Text("Password")
+                        .frame(maxWidth: 250, alignment: .topLeading)
+                    
+                    TextField("", text: $password)
+                        .frame(width: 250, height: 40)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.gray)
+                        )
+                        .multilineTextAlignment(.center)
+                        .accessibilityIdentifier("loginPassword")
+                }.padding()
+                
+                
                 Button("Submit") {
                     guard !username.isEmpty && !password.isEmpty else { return }
                 }
-                .frame(width: 220, height: 40)
+                .frame(width: 250, height: 40)
                 .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
                 .foregroundColor(.white)
-                .cornerRadius(5)
+                .cornerRadius(10)
                 .padding()
                 
                 Spacer()
