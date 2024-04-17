@@ -14,6 +14,6 @@ public struct NewUser {
     let imgurl: String?
 }
 
-struct Result: Codable {
+struct SingUpResult: Codable {
     let message: String
 }

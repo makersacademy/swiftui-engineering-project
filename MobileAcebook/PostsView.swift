@@ -8,17 +8,23 @@
 import SwiftUI
 
 struct PostView: View {
-    @State var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYxZDcxZGYzZWQyMDFmMWNjYTIwYzczIiwiaWF0IjoxNzEzMjk0OTAxLCJleHAiOjE3MTMzMDA5MDF9.bngpl5lny9CjgNQA8Ml-acorO01zlugQ5qsmu7CtKF0"
+    @State var token: String = UserDefaults.standard.string(forKey: "AuthToken") ?? ""
+    
     @State private var message: String = ""
     @State private var postsList = [Post]()
    private let postService: PostService = APIService()
     
     var body: some View {
+        
         NavigationView{
+            
             List
             {
+               
                 Section(header: Text("Add new post")){
+                    
                     VStack {
+                        
                         TextField("Add your message here", text: $message)
                         Button("Post") {
                             guard !message.isEmpty else{
@@ -60,10 +66,13 @@ struct PostView: View {
         }
     }
     func handleGetPostsResult(result: Result<PostAPIResponse, PostAPIError>) {
+        print("Handle Get Posts Token")
+        print(self.token)
         switch result {
         case .success(let apiResponse):
             postsList = apiResponse.posts.sorted(by: { $0.createdAt > $1.createdAt })
-            token = apiResponse.token
+//            token = apiResponse.token
+            print("handle Get Posts Token After")
             print ("Posts recieved - new token: \(token)")
         case .failure(let error):
             print("Error getting posts: \(error)")
@@ -75,6 +84,7 @@ struct PostView: View {
         let dateString = dateFormatter.string(from: date)
         return dateString
     }
+    
 }
 
 struct PostView_Previews: PreviewProvider {

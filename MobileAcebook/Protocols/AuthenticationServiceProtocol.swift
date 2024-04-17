@@ -6,7 +6,7 @@
 //
 
 public protocol AuthenticationServiceProtocol {
-    func signIn( user: User) -> Bool
+    func signIn(user: User, completion: @escaping (Result<Token, Error>) -> Void)
     func signUp( user: NewUser) -> Bool
     
 }

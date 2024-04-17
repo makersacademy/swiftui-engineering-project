@@ -6,10 +6,10 @@
 //
 import Foundation
 class AuthenticationService: AuthenticationServiceProtocol {
-
+    
     
     func signUp(user: NewUser ) -> Bool {
-        var results: Result?
+        var results: SingUpResult?
         let url = URL(string: "http://localhost:3000/users")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -37,7 +37,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
                 
                 if let data = data {
                     do {
-                        let decodedResponse = try JSONDecoder().decode(Result.self, from: data)
+                        let decodedResponse = try JSONDecoder().decode(SingUpResult.self, from: data)
                         DispatchQueue.main.async {
                             results = decodedResponse
                             print(decodedResponse.message) // Accessing message from decoded response
@@ -57,53 +57,47 @@ class AuthenticationService: AuthenticationServiceProtocol {
         return true // placeholder
     }
     
-    func signIn(user: User) -> Bool {
-            var results:Token?
+    func signIn(user: User, completion: @escaping (Result<Token, Error>) -> Void) {
             let url = URL(string: "http://localhost:3000/tokens")!
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             
-        let parameters = ["email": user.email,
-                          "password": user.password,
-                              ]
+            let parameters = ["email": user.email,
+                              "password": user.password]
             
             do {
                 request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
                 
                 let task = URLSession.shared.dataTask(with: request) { data, response, error in
                     if let error = error {
-                        print("Error: \(error)")
+                        completion(.failure(error))
                         return
                     }
                     
                     guard let httpResponse = response as? HTTPURLResponse,
                           (200...299).contains(httpResponse.statusCode) else {
-                        print("Invalid response")
+                        completion(.failure(NetworkError.invalidResponse))
                         return
                     }
                     
                     if let data = data {
                         do {
                             let decodedResponse = try JSONDecoder().decode(Token.self, from: data)
-                            DispatchQueue.main.async {
-                                results = decodedResponse
-                                print(decodedResponse.message) // Accessing message from decoded response
-                                print(decodedResponse.token)
-
-                                
-                            }
+                            completion(.success(decodedResponse))
                         } catch {
-                            print("Error decoding JSON: \(error)")
+                            completion(.failure(error))
                         }
                     }
                 }
                 
                 task.resume()
             } catch {
-                print("Error: \(error)")
+                completion(.failure(error))
             }
-        return true
-    }
+        }
 }
 
+enum NetworkError: Error {
+    case invalidResponse
+}
