@@ -15,7 +15,11 @@ class PostService {
             return
         }
         var request = URLRequest(url: url)
-        let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYxZDA5ZDNjMDZjMDViODAwYzkyODVkIiwiaWF0IjoxNzEzNDQ4NTM2LCJleHAiOjE3MTM0NDkxMzZ9.AGDxopqT89NjsFdveD10c8Dh7JhEMXewiOGcfIYIJFw"
+        guard let token = UserDefaults.standard.string(forKey: "accessToken") else {
+                print("Token not found")
+                return
+            }
+        
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         print(token)
 

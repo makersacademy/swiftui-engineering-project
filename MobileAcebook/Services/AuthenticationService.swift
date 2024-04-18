@@ -61,7 +61,10 @@ class AuthenticationService: AuthenticationServiceProtocol {
                     
                     do {
                         if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: String], let token = json["token"] {
-                            completion(.success(token))
+        
+                            UserDefaults.standard.set(token, forKey: "accessToken") // setting the token in the env
+                            
+                            completion(.success(token)) // returning the value of the token
                         } else {
                             completion(.failure(NSError(domain: "MobileAcebookApp", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid response from the server"])))
                         }
