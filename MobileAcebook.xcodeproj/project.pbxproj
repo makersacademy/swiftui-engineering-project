@@ -24,6 +24,9 @@
 		AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E52AC9B077009680C6 /* AuthenticationServiceProtocol.swift */; };
 		AE5D85E82AC9B29A009680C6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85E72AC9B29A009680C6 /* User.swift */; };
 		C1615B992BCFEF2800A7AB81 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1615B982BCFEF2800A7AB81 /* PostService.swift */; };
+		C1615B9D2BD1619500A7AB81 /* GetPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1615B9C2BD1619500A7AB81 /* GetPosts.swift */; };
+		C1615B9F2BD1644100A7AB81 /* CreateComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1615B9E2BD1644100A7AB81 /* CreateComment.swift */; };
+		C1615BA12BD164AC00A7AB81 /* CreateCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1615BA02BD164AC00A7AB81 /* CreateCommentModel.swift */; };
 		D6070C072BD005F5003EFBE5 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6070C062BD005F5003EFBE5 /* UserLogin.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +68,9 @@
 		AE5D85E52AC9B077009680C6 /* AuthenticationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceProtocol.swift; sourceTree = "<group>"; };
 		AE5D85E72AC9B29A009680C6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C1615B982BCFEF2800A7AB81 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		C1615B9C2BD1619500A7AB81 /* GetPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPosts.swift; sourceTree = "<group>"; };
+		C1615B9E2BD1644100A7AB81 /* CreateComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateComment.swift; sourceTree = "<group>"; };
+		C1615BA02BD164AC00A7AB81 /* CreateCommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommentModel.swift; sourceTree = "<group>"; };
 		D6070C062BD005F5003EFBE5 /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,6 +168,8 @@
 			children = (
 				AE5D85E02AC9AFA9009680C6 /* AuthenticationService.swift */,
 				C1615B982BCFEF2800A7AB81 /* PostService.swift */,
+				C1615B9C2BD1619500A7AB81 /* GetPosts.swift */,
+				C1615B9E2BD1644100A7AB81 /* CreateComment.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -180,6 +188,7 @@
 				AE5D85E72AC9B29A009680C6 /* User.swift */,
 				3D9855852BCE82EF007D584D /* Post.swift */,
 				D6070C062BD005F5003EFBE5 /* UserLogin.swift */,
+				C1615BA02BD164AC00A7AB81 /* CreateCommentModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -322,6 +331,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1615B9F2BD1644100A7AB81 /* CreateComment.swift in Sources */,
+				C1615B9D2BD1619500A7AB81 /* GetPosts.swift in Sources */,
 				AE5D85E12AC9AFA9009680C6 /* AuthenticationService.swift in Sources */,
 				AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */,
 				D6070C072BD005F5003EFBE5 /* UserLogin.swift in Sources */,
@@ -331,6 +342,7 @@
 				3D98558C2BD12380007D584D /* FeedPageView.swift in Sources */,
 				0F81A0C72BCED6FD00AED673 /* SignUpPageView.swift in Sources */,
 				AE5D85DA2AC8A337009680C6 /* WelcomePageView.swift in Sources */,
+				C1615BA12BD164AC00A7AB81 /* CreateCommentModel.swift in Sources */,
 				C1615B992BCFEF2800A7AB81 /* PostService.swift in Sources */,
 				0F81A0C52BCE82C200AED673 /* LoginPageView.swift in Sources */,
 			);
