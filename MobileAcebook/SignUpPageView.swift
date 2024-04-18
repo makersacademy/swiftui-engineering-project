@@ -10,13 +10,18 @@ import Foundation
 import SwiftUI
 struct SignUpPageView: View {
     @State private var email = ""
-    @State private var fullName = ""
+    @State private var username = ""
     @State private var password = ""
+    @State private var imgUrl = ""
     @State var isShowingPassword: Bool = false
+    @State private var isSignUpComplete = false
+    
+    @State private var signUpError: String? = nil
+
 
     //errors:
     @State private var emailError = ""
-    //let authService: AuthenticationServiceProtocol
+    let authService = AuthenticationService()
     var body: some View {
         NavigationView {
             VStack(spacing: 30) {
@@ -41,7 +46,7 @@ struct SignUpPageView: View {
                     Text("Full Name")
                         .frame(maxWidth: 250, alignment: .topLeading)
                         .padding()
-                    TextField("", text: $fullName)
+                    TextField("", text: $username)
                         .frame(width: 250, height: 40)
                         .multilineTextAlignment(.center)
                         .overlay(
@@ -85,7 +90,20 @@ struct SignUpPageView: View {
 
                     VStack{
                         Button("Sign Up"){
-                            //add logic here
+                        let newUser = User(imgUrl: imgUrl, email: email, password: password, username: username)
+                        let success = authService.signUp(user: newUser)
+                        if success {
+                            // Clear fields if signup successful
+                            email = ""
+                            username = ""
+                            password = ""
+                            // Show success message
+                            signUpError = "Account created successfully"
+                            isSignUpComplete = true
+                          } else {
+                            // Show error message
+                            signUpError = "Error creating account"
+                          }
                         }
                         .frame(width: 250, height: 40)
                         .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
@@ -96,9 +114,8 @@ struct SignUpPageView: View {
                     Spacer()
                     HStack(spacing:3){
                         Text("Already have an account?")
-                        NavigationLink(destination: LoginPageView()){
-                          Text("Login here")
-                          .fontWeight(.bold)}
+                        NavigationLink(destination: LoginPageView(), isActive: $isSignUpComplete, label: {Text("Login here")
+                            .fontWeight(.bold)})
                       }
                 }
             }
