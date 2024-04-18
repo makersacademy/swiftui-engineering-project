@@ -31,6 +31,7 @@ struct LoginPageView: View {
                                 .stroke(Color.gray)
                         )
                         .multilineTextAlignment(.center)
+                        . autocapitalization(. none)
                         .accessibilityIdentifier("loginUsername")
                 }.padding()
                 VStack {
