@@ -16,6 +16,7 @@ struct SignUpPageView: View {
     @State private var imgUrl = ""
     @State private var username = ""
     @State private var password = ""
+    @State private var isSignUpComplete = false
     @State var isShowingPassword: Bool = false
     @State private var signUpError: String? = nil
     //errors:
@@ -101,9 +102,8 @@ struct SignUpPageView: View {
                                         email = ""
                                         username = ""
                                         password = ""
-                                        
-                                        alertMessage = "Account created successfully"
                                         showAlert = true
+                                        isSignUpComplete = true
                                     }
                                 } else {
                                     DispatchQueue.main.async {
@@ -124,10 +124,9 @@ struct SignUpPageView: View {
                 Spacer()
                 HStack(spacing:3){
                     Text("Already have an account?")
-                    NavigationLink(destination: LoginPageView()){
-                        Text("Login here")
-                        .fontWeight(.bold)}
-                }
+                    NavigationLink(destination: LoginPageView(), isActive: $isSignUpComplete, label: {Text("Login here")
+                      .fontWeight(.bold)})
+                           }
                 .padding()
             }
             .alert(isPresented: $showAlert) {
