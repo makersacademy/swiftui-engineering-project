@@ -11,6 +11,7 @@ struct LoginPageView: View {
     @State private var email = ""
     @State private var password = ""
     @State var isShowingPassword: Bool = false
+    @State private var token = ""
     
     @State private var loginError: String? = nil
     let authService = AuthenticationService()
@@ -72,12 +73,14 @@ struct LoginPageView: View {
 //                    guard !username.isEmpty && !password.isEmpty else { return }
                     let user = UserLogin(email: email, password: password)
                     let success = authService.login(userLogin: user)
+                    
                     if success {
                         email = ""
                         password = ""
                     } else {
                         loginError = "Error logging in"
                     }
+                    
                 }
                 .frame(width: 250, height: 40)
                 .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
