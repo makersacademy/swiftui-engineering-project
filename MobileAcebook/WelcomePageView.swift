@@ -9,7 +9,11 @@ import SwiftUI
 
 struct WelcomePageView: View {
     var body: some View {
+<<<<<<< HEAD
+        NavigationView{
+=======
         NavigationView {
+>>>>>>> bddf4de293ba456171c3682d257fba2a9996240b
             ZStack {
                 VStack {
                     Spacer()
@@ -30,6 +34,28 @@ struct WelcomePageView: View {
                         .accessibilityIdentifier("paw-logo")
                     Spacer()
                     
+<<<<<<< HEAD
+                    NavigationLink(destination: LoginPageView()) {
+                        Button("Login") {
+                            // TODO: login logic
+                        }
+                        .frame(width: 250, height: 40)
+                        .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        .accessibilityIdentifier("loginButton")}
+                    
+                    NavigationLink(destination: SignUpPageView()) {
+                        Button(action: {
+                        }) {
+                            Text("Sign Up")
+                                .frame(width: 250, height: 40)
+                                .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                                .accessibilityIdentifier("signUpButton")
+                        }
+=======
                     NavigationLink(destination: LoginPageView()){
                         Text("Login")
                             .frame(width: 250, height: 40)
@@ -45,6 +71,7 @@ struct WelcomePageView: View {
                             .foregroundColor(.white)
                             .cornerRadius(10)
                             .accessibilityIdentifier("signUpButton")
+>>>>>>> bddf4de293ba456171c3682d257fba2a9996240b
                     }
                     
                     Spacer()
