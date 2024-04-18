@@ -24,9 +24,9 @@ public struct User: Decodable {
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        email = try container.decode(String.self, forKey: .email)
-        username = try container.decode(String.self, forKey: .username)
-        password = try container.decode(String.self, forKey: .password)
+        email = try container.decodeIfPresent(String.self, forKey: .email) ?? "default"
+        username = try container.decodeIfPresent(String.self, forKey: .username) ?? "default"
+        password = try container.decodeIfPresent(String.self, forKey: .password) ?? "default"
     }
     
 

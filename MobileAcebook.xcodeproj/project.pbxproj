@@ -13,7 +13,6 @@
 		35AE2D092BCE8B5300EEB0AD /* PostsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AE2D082BCE8B5300EEB0AD /* PostsService.swift */; };
 		8B9689A22BD10BF700456419 /* SignUpPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9689A12BD10BF700456419 /* SignUpPageView.swift */; };
 		8B9689A42BD10C4800456419 /* LoginPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9689A32BD10C4800456419 /* LoginPageView.swift */; };
-		8B9689A62BD117EC00456419 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9689A52BD117EC00456419 /* TestView.swift */; };
 		AE5D85B02AC8A221009680C6 /* MobileAcebookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D85AF2AC8A221009680C6 /* MobileAcebookApp.swift */; };
 		AE5D85B42AC8A224009680C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE5D85B32AC8A224009680C6 /* Assets.xcassets */; };
 		AE5D85B72AC8A224009680C6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE5D85B62AC8A224009680C6 /* Preview Assets.xcassets */; };
@@ -52,7 +51,6 @@
 		35AE2D082BCE8B5300EEB0AD /* PostsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsService.swift; sourceTree = "<group>"; };
 		8B9689A12BD10BF700456419 /* SignUpPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPageView.swift; sourceTree = "<group>"; };
 		8B9689A32BD10C4800456419 /* LoginPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageView.swift; sourceTree = "<group>"; };
-		8B9689A52BD117EC00456419 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		AE5D85AC2AC8A221009680C6 /* MobileAcebook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileAcebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE5D85AF2AC8A221009680C6 /* MobileAcebookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileAcebookApp.swift; sourceTree = "<group>"; };
 		AE5D85B32AC8A224009680C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,7 +101,6 @@
 				35AE2D062BCDE06500EEB0AD /* PostView.swift */,
 				8B9689A12BD10BF700456419 /* SignUpPageView.swift */,
 				8B9689A32BD10C4800456419 /* LoginPageView.swift */,
-				8B9689A52BD117EC00456419 /* TestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -333,7 +330,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B9689A62BD117EC00456419 /* TestView.swift in Sources */,
 				AE5D85E12AC9AFA9009680C6 /* AuthenticationService.swift in Sources */,
 				AE5D85E62AC9B077009680C6 /* AuthenticationServiceProtocol.swift in Sources */,
 				35AE2D092BCE8B5300EEB0AD /* PostsService.swift in Sources */,

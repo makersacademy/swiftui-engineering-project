@@ -48,7 +48,7 @@ struct SignUpPageView: View {
         if let error = signUpError {
           Text("Error: \(error.localizedDescription)")
         }
-        NavigationLink(destination: WelcomePageView(), isActive: $isSignedUp) {
+        NavigationLink(destination: LoginPageView(), isActive: $isSignedUp) {
           EmptyView()
         }
       }

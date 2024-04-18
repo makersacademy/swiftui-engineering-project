@@ -9,6 +9,11 @@ struct LoginPageView: View {
     var body: some View {
         NavigationView {
             VStack {
+                Image("makers-logo")
+                  .resizable()
+                  .scaledToFit()
+                  .frame(width: 200, height: 200)
+                  .accessibilityIdentifier("makers-logo")
                 TextField("Email", text: $user.email)
                     .padding()
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
@@ -23,16 +28,18 @@ struct LoginPageView: View {
                             case .success(let token):
                                 self.token = token
                                 self.loggedIn = true // Set login status to true
-                                print("TOKEN RECEIVED START")
-                                print(token)
-                                print("TOKEN RECEIVED END")
                             case .failure(let error):
                                 self.errorMessage = error.localizedDescription
                             }
                         }
                     }
                 }
-                NavigationLink(destination: TestView(), isActive: $loggedIn) {
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .font(.headline)
+                .cornerRadius(8)
+                NavigationLink(destination: PostsView(), isActive: $loggedIn) {
                     EmptyView()
                 }
                 .hidden()

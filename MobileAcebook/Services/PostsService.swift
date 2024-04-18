@@ -15,7 +15,7 @@ class PostService {
             return
         }
         var request = URLRequest(url: url)
-        let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYxZDA5ZDNjMDZjMDViODAwYzkyODVkIiwiaWF0IjoxNzEzNDM5MDA4LCJleHAiOjE3MTM0Mzk2MDh9.FYzgxZ3wqfdqKuBhHCTpwVQnxECfyJ5Yp9Tg7SCQCng"
+        let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYxZDA5ZDNjMDZjMDViODAwYzkyODVkIiwiaWF0IjoxNzEzNDQ4NTM2LCJleHAiOjE3MTM0NDkxMzZ9.AGDxopqT89NjsFdveD10c8Dh7JhEMXewiOGcfIYIJFw"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         print(token)
 

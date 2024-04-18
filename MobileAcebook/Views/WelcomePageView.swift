@@ -48,8 +48,8 @@ struct WelcomePageView: View {
                             .cornerRadius(8)
                             .accessibilityIdentifier("loginButton")
                     }
-                }
                 Spacer()
+                }
             }
         }
     }
