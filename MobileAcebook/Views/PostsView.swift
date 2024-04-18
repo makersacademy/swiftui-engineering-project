@@ -48,10 +48,10 @@ struct PostsView: View {
             self.posts = fetchedPosts
         }
     }
-    
+}
     struct PostsFeedView_Previews: PreviewProvider {
         static var previews: some View {
             PostsView()
         }
     }
-}
+
