@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PostView: View {
-    @State var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYxZDcxZGYzZWQyMDFmMWNjYTIwYzczIiwiaWF0IjoxNzEzMzcxNzkzLCJleHAiOjE3MTMzNzc3OTN9.SPlKe097TAT3cobOe8qqdKjCW93XleB5eeDNVe5Xwrg"
+    @Binding var token: String 
     @State private var message: String = ""
     @State private var postsList = [Post]()
    private let postService: PostService = APIService()
@@ -28,7 +28,7 @@ struct PostView: View {
                                 switch result {
                                 case .success(let newToken):
                                     // Use the new token returned by the API
-                                    self.token = newToken
+                                    //self.token = newToken
                                     print("New Post Created - token updated to: \(newToken)")
                                     postService.getPosts(JWTtoken: token, completion: handleGetPostsResult)
                                 case .failure(let error):
@@ -65,11 +65,12 @@ struct PostView: View {
             .navigationTitle("Posts")
         }
     }
+    
     func handleGetPostsResult(result: Result<PostAPIResponse, APIError>) {
         switch result {
         case .success(let apiResponse):
             postsList = apiResponse.posts.sorted(by: { $0.createdAt > $1.createdAt })
-            token = apiResponse.token
+            //token = apiResponse.token
             print ("Posts recieved - new token: \(token)")
         case .failure(let error):
             print("Error getting posts: \(error)")
@@ -83,8 +84,8 @@ struct PostView: View {
     }
 }
 
-struct PostView_Previews: PreviewProvider {
-    static var previews: some View {
-        PostView()
-    }
-}
+//struct PostView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PostView(token:Binding<, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYyMTBiNzk0MGQwZTA5NjhhMjBjNzNlIiwiaWF0IjoxNzEzNDQ5NjIzLCJleHAiOjE3MTM0NTAyMjN9.w6NuRdNF2cWtouT_2jxbD51rkF5I3qMPzj_9UW0nLJI">)
+//    }
+//}
