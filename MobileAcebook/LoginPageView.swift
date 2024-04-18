@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct LoginPageView: View {
-    @State private var username = ""
+    @State private var email = ""
     @State private var password = ""
     @State var isShowingPassword: Bool = false
     
+    @State private var loginError: String? = nil
+    let authService = AuthenticationService()
     var body: some View {
         NavigationView {
-                
             VStack {
                 Spacer()
                 Text("Log in")
@@ -22,9 +23,9 @@ struct LoginPageView: View {
                     .bold()
                 Spacer()
                 VStack {
-                    Text("Username")                    .frame(maxWidth: 250, alignment: .topLeading)
+                    Text("Email")                    .frame(maxWidth: 250, alignment: .topLeading)
                     
-                    TextField("", text: $username)
+                    TextField("", text: $email)
                         .frame(width: 250, height: 40)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
@@ -32,7 +33,7 @@ struct LoginPageView: View {
                         )
                         .multilineTextAlignment(.center)
                         .autocapitalization(. none)
-                        .accessibilityIdentifier("loginUsername")
+                        .accessibilityIdentifier("loginEmail")
                 }.padding()
                 VStack {
                     Text("Password")
@@ -68,7 +69,15 @@ struct LoginPageView: View {
                 
                 
                 Button("Submit") {
-                    guard !username.isEmpty && !password.isEmpty else { return }
+//                    guard !username.isEmpty && !password.isEmpty else { return }
+                    let user = UserLogin(email: email, password: password)
+                    let success = authService.login(userLogin: user)
+                    if success {
+                        email = ""
+                        password = ""
+                    } else {
+                        loginError = "Error logging in"
+                    }
                 }
                 .frame(width: 250, height: 40)
                 .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
