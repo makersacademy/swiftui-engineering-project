@@ -13,7 +13,7 @@ struct SignUpPageView: View {
     @State private var fullName = ""
     @State private var password = ""
     @State var isShowingPassword: Bool = false
-    
+
     //errors:
     @State private var emailError = ""
     //let authService: AuthenticationServiceProtocol
@@ -94,11 +94,10 @@ struct SignUpPageView: View {
                     Spacer()
                     HStack(spacing:3){
                         Text("Already have an account?")
-                        Text("Login here")
-                            .fontWeight(.bold)
-                        //add navigation to login
-                    }
-                    .padding()
+                        NavigationLink(destination: LoginPageView()){
+                          Text("Login here")
+                          .fontWeight(.bold)}
+                      }
                 }
             }
         }
