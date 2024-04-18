@@ -18,6 +18,10 @@ struct SignUpPageView: View {
     @State private var password = ""
     @State var isShowingPassword: Bool = false
     @State private var signUpError: String? = nil
+    @State private var showAlert = false
+    @State private var isSignUpComplete = false
+    
+    
     //errors:
     @State private var emailError = ""
     //let authService: AuthenticationServiceProtocol
@@ -43,23 +47,42 @@ struct SignUpPageView: View {
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(Color.gray)
+                                .stroke(Color.gray)
                         )
+                        .autocapitalization(. none)
                         .accessibilityIdentifier("email")
                     Text("Full Name")
                         .frame(maxWidth: 250, alignment: .topLeading)
                         .padding()
+                    TextField("", text: $username)
                     TextField("", text: $username)
                         .frame(width: 250, height: 40)
                         .multilineTextAlignment(.center)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(Color.gray)
+                                .stroke(Color.gray)
                         )
+                        .autocapitalization(. none)
                         .accessibilityIdentifier("Full Name")
                     Text("Password")
                         .frame(maxWidth: 250, alignment: .topLeading)
                         .padding()
                     VStack {
+                        Group {
+                            if isShowingPassword {
+                                TextField("", text: $password)
+                                    .frame(width: 250, height: 40)
+                                    .multilineTextAlignment(.center)
+                                    .overlay(RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.gray))
+                            }else {
+                                SecureField("", text: $password)
+                                    .frame(width: 250, height: 40)
+                                    .multilineTextAlignment(.center)
+                                    .overlay(RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.gray))
+                            }
                         Group {
                             if isShowingPassword {
                                 TextField("", text: $password)
