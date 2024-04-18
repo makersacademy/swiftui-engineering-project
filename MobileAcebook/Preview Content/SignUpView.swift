@@ -44,7 +44,7 @@ struct SignUpView: View {
                 .padding()
                 
                 Button("Sign Up") {
-                    let newSignUp = NewUser(email: email, password: password, username: username, imgurl: imgurl)
+                    let newSignUp = User(_id: nil, email: email, password: password, username: username, imgurl: imgurl)
                     let authenticate = AuthenticationService()
                     let signUpAction = authenticate.signUp(user: newSignUp)
                     showAlert = true

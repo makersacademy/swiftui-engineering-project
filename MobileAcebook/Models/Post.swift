@@ -10,6 +10,7 @@ import Foundation
 public struct Post: Codable {
     let _id: String
     let message: String
+    var likes: [String]?
     let createdAt: Date
     let imgUrl: String?
     let createdBy: [String:String]
@@ -20,12 +21,20 @@ public struct PostAPIResponse: Codable {
     let posts: [Post]
 }
 
-public enum PostAPIError: Error {
-    case invalidURL
-    case networkError(Error)
-    case invalidResponse
-    case decodingError(Error)
-    case invalidData
+public struct LikeAPIResponse: Codable {
+    let post: LikePost
+    let token: String
+    let message: String
+}
+
+public struct LikePost: Codable {
+    var _id: String
+    var message: String
+    var likes: [String]?
+    var createdAt: String
+    var imgUrl: String?
+    var createdBy: String
+    let __v: Int
 }
 
 extension Post: Equatable {

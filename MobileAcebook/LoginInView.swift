@@ -16,7 +16,7 @@ struct LoginView: View {
                     .padding()
                 
                 Button("Log In") {
-                    let login = User(email: email, password: password)
+                    let login = LoginUser(email: email, password: password)
                     let authenticate = AuthenticationService()
                     let signInAction = authenticate.signIn(user: login)
                     

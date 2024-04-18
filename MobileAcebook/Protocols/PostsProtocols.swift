@@ -7,10 +7,8 @@
 
 import Foundation
 
-//public protocol AuthenticationServiceProtocol {
-//    func signUp(user: User) -> Bool
-
 public protocol PostService {
-    func createPost(token: String, message: String, completion: @escaping (Result<String, Error>) -> Void)
-    func getPosts(JWTtoken: String, completion: @escaping (Result<PostAPIResponse, PostAPIError>) -> Void)
+    func createPost(JWTtoken: String, message: String, completion: @escaping (Result<String, Error>) -> Void)
+    func getPosts(JWTtoken: String, completion: @escaping (Result<PostAPIResponse, APIError>) -> Void)
+    func likePost(JWTtoken: String, postId: String, completion: @escaping (Result<LikeAPIResponse, Error>) -> Void)
 }

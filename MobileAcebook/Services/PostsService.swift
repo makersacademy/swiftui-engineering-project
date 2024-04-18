@@ -9,9 +9,9 @@
 import Foundation
 
 class APIService: PostService {
-    func createPost(token: String, message: String, completion: @escaping (Result<String, Error>) -> Void) {
+    func createPost(JWTtoken: String, message: String, completion: @escaping (Result<String, Error>) -> Void) {
         guard let url = URL(string: "http://localhost:3000/posts") else {
-            completion(.failure(PostAPIError.invalidURL))
+            completion(.failure(APIError.invalidURL))
             return
         }
 
@@ -31,7 +31,7 @@ class APIService: PostService {
 
         // Set headers
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer \(JWTtoken)", forHTTPHeaderField: "Authorization")
 
         // Perform the network request
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -43,12 +43,12 @@ class APIService: PostService {
 
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
-                completion(.failure(PostAPIError.invalidResponse))
+                completion(.failure(APIError.invalidResponse))
                 return
             }
 
             guard let data = data else {
-                completion(.failure(PostAPIError.invalidData))
+                completion(.failure(APIError.invalidData))
                 return
             }
 
@@ -58,7 +58,7 @@ class APIService: PostService {
                    let newToken = json["token"] as? String {
                     completion(.success(newToken))
                 } else {
-                    completion(.failure(PostAPIError.invalidData))
+                    completion(.failure(APIError.invalidData))
                 }
             } catch {
                 completion(.failure(error))
@@ -68,7 +68,7 @@ class APIService: PostService {
         task.resume() // Don't forget to resume the task
     }
     
-    func getPosts(JWTtoken: String, completion: @escaping (Result<PostAPIResponse, PostAPIError>) -> Void) {
+    func getPosts(JWTtoken: String, completion: @escaping (Result<PostAPIResponse, APIError>) -> Void) {
         guard let url = URL(string: "http://localhost:3000/posts") else {
             completion(.failure(.invalidURL))
             return
@@ -103,6 +103,53 @@ class APIService: PostService {
                 completion(.success(apiResponse))
             } catch {
                 completion(.failure(.decodingError(error)))
+            }
+        }
+        
+        task.resume()
+    }
+    func likePost(JWTtoken: String, postId: String, completion: @escaping (Result<LikeAPIResponse, Error>) -> Void){
+        guard let url = URL(string: "http://localhost:3000/posts") else {
+            completion(.failure(APIError.invalidURL))
+            return
+        }
+        print(JWTtoken)
+        print(postId)
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        
+        let jsonBody: [String: String] = ["postId": postId]
+
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: jsonBody, options: [])
+            request.httpBody = jsonData
+        } catch {
+            completion(.failure(error))
+            return
+        }
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(JWTtoken)", forHTTPHeaderField: "Authorization")
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                  httpResponse.statusCode == 201,
+                  let data = data else {
+                print("Invalid response or no data received")
+                return
+            }
+            
+            do {
+                let apiResponse = try JSONDecoder().decode(LikeAPIResponse.self, from: data)
+                print(apiResponse)
+                completion(.success(apiResponse)) // Return apiResponse on success
+            } catch {
+                completion(.failure(error))
             }
         }
         

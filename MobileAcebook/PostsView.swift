@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PostView: View {
-    @State var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYxZDcxZGYzZWQyMDFmMWNjYTIwYzczIiwiaWF0IjoxNzEzMjk0OTAxLCJleHAiOjE3MTMzMDA5MDF9.bngpl5lny9CjgNQA8Ml-acorO01zlugQ5qsmu7CtKF0"
+    @State var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYxZDcxZGYzZWQyMDFmMWNjYTIwYzczIiwiaWF0IjoxNzEzMzcxNzkzLCJleHAiOjE3MTMzNzc3OTN9.SPlKe097TAT3cobOe8qqdKjCW93XleB5eeDNVe5Xwrg"
     @State private var message: String = ""
     @State private var postsList = [Post]()
    private let postService: PostService = APIService()
@@ -24,7 +24,7 @@ struct PostView: View {
                             guard !message.isEmpty else{
                                     return
                                 }
-                            postService.createPost(token: token, message: message) { result in
+                            postService.createPost(JWTtoken: token, message: message) { result in
                                 switch result {
                                 case .success(let newToken):
                                     // Use the new token returned by the API
@@ -43,12 +43,18 @@ struct PostView: View {
                 }
                 Section(header: Text("Posts List")){
                     ForEach(postsList, id: \._id) { post in
-                            VStack {
-                                Text( "\(post.message)").bold()
-                                HStack{
-                                    Text("\(post.createdBy["username"] ?? "")")
-                                    Spacer()
-                                    Text( "\(dateConverter(date: post.createdAt))")}
+                        NavigationLink(destination: CommentsView(post: post))
+                            {
+                                VStack {
+                                    Text( "\(post.message)").font(.headline)
+                                    Spacer(minLength: 1)
+                                    HStack{
+                                        Text("\(post.createdBy["username"] ?? "")") .font(.subheadline)
+                                            .foregroundColor(.gray)
+                                        Spacer()
+                                        Text( "\(dateConverter(date: post.createdAt))") .font(.subheadline)
+                                        .foregroundColor(.gray)}
+                                }
                             }
                             
                         }
@@ -59,7 +65,7 @@ struct PostView: View {
             .navigationTitle("Posts")
         }
     }
-    func handleGetPostsResult(result: Result<PostAPIResponse, PostAPIError>) {
+    func handleGetPostsResult(result: Result<PostAPIResponse, APIError>) {
         switch result {
         case .success(let apiResponse):
             postsList = apiResponse.posts.sorted(by: { $0.createdAt > $1.createdAt })
@@ -71,7 +77,7 @@ struct PostView: View {
     }
     func dateConverter(date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm, dd MMMM YYYY" // change the date format of the posts here
+        dateFormatter.dateFormat = "HH:mm dd MMMM YYYY" // change the date format of the posts here
         let dateString = dateFormatter.string(from: date)
         return dateString
     }

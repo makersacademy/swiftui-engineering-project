@@ -8,8 +8,8 @@ import Foundation
 class AuthenticationService: AuthenticationServiceProtocol {
 
     
-    func signUp(user: NewUser ) -> Bool {
-        var results: Result?
+    func signUp(user: User ) -> Bool {
+        var results: SignupResult?
         let url = URL(string: "http://localhost:3000/users")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -37,7 +37,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
                 
                 if let data = data {
                     do {
-                        let decodedResponse = try JSONDecoder().decode(Result.self, from: data)
+                        let decodedResponse = try JSONDecoder().decode(SignupResult.self, from: data)
                         DispatchQueue.main.async {
                             results = decodedResponse
                             print(decodedResponse.message) // Accessing message from decoded response
@@ -57,7 +57,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
         return true // placeholder
     }
     
-    func signIn(user: User) -> Bool {
+    func signIn(user: LoginUser) -> Bool {
             var results:Token?
             let url = URL(string: "http://localhost:3000/tokens")!
             var request = URLRequest(url: url)

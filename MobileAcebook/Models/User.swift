@@ -1,16 +1,20 @@
 //
-//  User.swift
+//  NewUser.swift
 //  MobileAcebook
 //
-//  Created by Josué Estévez Fernández on 01/10/2023.
+//  Created by Firat Gulmez on 16/04/2024.
 //
 
+import Foundation
+
 public struct User {
+    let _id: String?
     let email: String
     let password: String
+    let username: String
+    let imgurl: String?
 }
 
-public struct Token: Codable {
+struct SignupResult: Codable {
     let message: String
-    let token: String
 }
