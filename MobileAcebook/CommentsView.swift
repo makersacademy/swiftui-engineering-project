@@ -11,7 +11,7 @@ import SwiftUI
 struct CommentsView: View {
     var post: Post
     @State var message = ""
-    @State var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYxZDcxZGYzZWQyMDFmMWNjYTIwYzczIiwiaWF0IjoxNzEzMzcxNzkzLCJleHAiOjE3MTMzNzc3OTN9.SPlKe097TAT3cobOe8qqdKjCW93XleB5eeDNVe5Xwrg"
+    @Binding var token: String
     private let commentService: CommentService = CommentsAPIService()
     @State var commentsList = [Comment]()
     

@@ -43,7 +43,7 @@ struct PostView: View {
                 }
                 Section(header: Text("Posts List")){
                     ForEach(postsList, id: \._id) { post in
-                        NavigationLink(destination: CommentsView(post: post))
+                        NavigationLink(destination: CommentsView(post: post, token: $token ))
                             {
                                 VStack {
                                     Text( "\(post.message)").font(.headline)
@@ -85,7 +85,9 @@ struct PostView: View {
 }
 
 //struct PostView_Previews: PreviewProvider {
+//    @State private static var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYxZjk5MjY2ZDI3ZGFiODkzOTczMmQ1IiwiaWF0IjoxNzEzNDUxMDc1LCJleHAiOjE3MTM0NTE2NzV9.8Qm23P_G4AC-JW6TQ1YLnRQ9rPeGHy1UsKlgS7dakAI"
+//    
 //    static var previews: some View {
-//        PostView(token:Binding<, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYyMTBiNzk0MGQwZTA5NjhhMjBjNzNlIiwiaWF0IjoxNzEzNDQ5NjIzLCJleHAiOjE3MTM0NTAyMjN9.w6NuRdNF2cWtouT_2jxbD51rkF5I3qMPzj_9UW0nLJI">)
+//        PostView(token: $token)
 //    }
 //}
