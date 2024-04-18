@@ -7,17 +7,16 @@
 
 import Foundation
 
-class PostService {
-    
+class FeedService: ObservableObject {
+    @Published var postsData = [Post]()
     // Response returned on successful GET request
     struct Response: Codable {
         let posts: [Post]
         let token: String
     }
     
-    func getPost(token: String, completion: @escaping (([Post], String) -> Void)) {
+    func getPost(token: String, completion: @escaping ((Response) -> Void)) {
         guard let url = URL(string: "http://localhost:3000/posts") else {
-            completion([], "")
             return
         }
         
@@ -28,17 +27,17 @@ class PostService {
         
         let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             guard let data = data else {
-                completion([], "")
                 return
             }
             do {
+                let jsonString = String(data: data, encoding: .utf8)
+                    print("Received JSON: \(jsonString ?? "")")
                 let response = try JSONDecoder().decode(Response.self, from: data)
                 DispatchQueue.main.async {
-                    completion(response.posts, response.token)
+                    completion(response)
                 }
             } catch {
                 print(error)
-                completion([], "")
             }
         }
         task.resume()

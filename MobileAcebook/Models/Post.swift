@@ -7,9 +7,18 @@
 
 import Foundation
 
-public struct Post: Codable {
-    let message: String
-    let date: String
-    let user: String
+public struct CreatedBy: Codable {
+    let _id: String
+    let username: String
     let profilePicture: String
 }
+
+public struct Post: Codable {
+    let id: Int
+    let message: String?
+    let createdAt: String
+    let imgUrl: String?
+    let likes: [String]
+    let createdBy: CreatedBy
+}
+
