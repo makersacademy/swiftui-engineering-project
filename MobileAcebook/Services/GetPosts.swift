@@ -30,11 +30,14 @@ class FeedService: ObservableObject {
                 return
             }
             do {
-                let jsonString = String(data: data, encoding: .utf8)
-                    print("Received JSON: \(jsonString ?? "")")
+                //let jsonString = String(data: data, encoding: .utf8)
+//                    print("Received JSON: \(jsonString ?? "")")
                 let response = try JSONDecoder().decode(Response.self, from: data)
                 DispatchQueue.main.async {
                     completion(response)
+                    for post in response.posts {
+                        print(post.message!)
+                    }
                 }
             } catch {
                 print(error)

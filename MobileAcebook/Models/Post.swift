@@ -14,7 +14,7 @@ public struct CreatedBy: Codable {
 }
 
 public struct Post: Codable {
-    let id: Int
+    let _id: String
     let message: String?
     let createdAt: String
     let imgUrl: String?

@@ -12,7 +12,7 @@ struct FeedPageView: View {
     @State private var text = ""
     @State public var token: String
     @ObservedObject public var posts = FeedService()
-    var testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYxZDE0YWFhYWVhZTI4OTY5MGJjMmYwIiwiaWF0IjoxNzEzNDU3MzM2LCJleHAiOjE3MTM0NTc5MzZ9.rwdRxpEeu0DdXpcG_OhYI9T8QZMlxW8r6hiEnbecaHY"
+    var testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYxZDA4NDVkMDY2N2IzZGM5NDJlMjQyIiwiaWF0IjoxNzEzNDU3ODY0LCJleHAiOjE3MTM0NTg0NjR9.1TiVLhS2lxs2ZGQ1__nNrfvKlO2AsON_d-bPhxYrvNw"
     
     var body: some View {
         
@@ -50,7 +50,7 @@ struct FeedPageView: View {
             Text("Hello")
             
             VStack {
-                List(posts.postsData, id: \.id) { post in
+                List(posts.postsData, id: \._id) { post in
                     Section(header: Text("Posted by \(post.createdBy.username)")) {
                         Text(post.message ?? "No message available")
                             .padding()
