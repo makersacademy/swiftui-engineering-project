@@ -31,6 +31,7 @@ struct LoginPageView: View {
                                 .stroke(Color.gray)
                         )
                         .multilineTextAlignment(.center)
+                        .autocapitalization(. none)
                         .accessibilityIdentifier("loginUsername")
                 }.padding()
                 VStack {
@@ -80,8 +81,11 @@ struct LoginPageView: View {
                 Spacer()
                 HStack(spacing:3){
                     Text("Don't have an account?")
-                    Text("Sign up here")
-                        .fontWeight(.bold)
+                    NavigationLink(destination: SignUpPageView()){
+                        Text("Sign up here")
+                            .fontWeight(.bold)
+                    }
+                    
                     //add navigation to login
                 }
                 .padding()

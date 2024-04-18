@@ -37,7 +37,29 @@ class AuthenticationService: AuthenticationServiceProtocol {
         return true
     }
     
-    
+    func login(userLogin: UserLogin) -> Bool {
+        guard let url = URL(string: "http://localhost:3000/tokens")  else {return false}
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "POST"
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let body = userLogin
+        urlRequest.httpBody = try? JSONEncoder().encode(userLogin)
+        let task = URLSession.shared.dataTask(with : urlRequest) {data, response, error in
+            guard let data = data else {return}
+            do {
+                let response = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                print("Valid user")
+                print(response)
+            }
+            catch {
+                print(error)
+            }
+        }
+        task.resume()
+        return true
+    }
     
     
 

@@ -30,7 +30,7 @@ struct SignUpPageView: View {
     
     //errors:
     @State private var emailError = ""
-    //let authService: AuthenticationServiceProtocol
+    let authService = AuthenticationService()
     var body: some View {
         NavigationView {
             VStack(spacing: 30) {
@@ -50,6 +50,7 @@ struct SignUpPageView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(Color.gray)
                         )
+                        .autocapitalization(. none)
                         .accessibilityIdentifier("email")
                     Text("Full Name")
                         .frame(maxWidth: 250, alignment: .topLeading)
@@ -61,6 +62,7 @@ struct SignUpPageView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(Color.gray)
                         )
+                        .autocapitalization(. none)
                         .accessibilityIdentifier("Full Name")
                     Text("Password")
                         .frame(maxWidth: 250, alignment: .topLeading)
@@ -126,11 +128,9 @@ struct SignUpPageView: View {
                     Spacer()
                     HStack(spacing:3){
                         Text("Already have an account?")
-                        NavigationLink(destination: LoginPageView(), isActive: $isSignUpComplete){
-                            Text("Login here")
-                            .fontWeight(.bold)}
-                    }
-                    .padding()
+                        NavigationLink(destination: LoginPageView(), isActive: $isSignUpComplete, label: {Text("Login here")
+                            .fontWeight(.bold)})
+                      }
                 }
 
                 }
