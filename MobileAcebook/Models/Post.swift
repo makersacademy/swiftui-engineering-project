@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Post {
+public struct Post: Encodable {
     let message: String
     let date: String
     let user: String

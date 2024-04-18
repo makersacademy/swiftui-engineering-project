@@ -12,78 +12,92 @@ struct SignUpPageView: View {
     @State private var email = ""
     @State private var fullName = ""
     @State private var password = ""
-    @State private var confirmPassword = ""
+    @State var isShowingPassword: Bool = false
+
     //errors:
     @State private var emailError = ""
     //let authService: AuthenticationServiceProtocol
     var body: some View {
         NavigationView {
             VStack(spacing: 30) {
+                Spacer()
+                Spacer()
                 Text("Sign Up")
                     .font(.largeTitle)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 VStack(spacing:0) {
                     Text("Email Address")
-                        .multilineTextAlignment(.leading)
-                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                        .frame(maxWidth: 250, alignment: .topLeading)
                         .padding()
                     TextField("", text: $email)
-                        .font(.title3)
-                        .padding()
-                        .frame(maxWidth: 350)
-                    //sure
-                        .border(Color.gray)
+                        .frame(width: 250, height: 40)
+                        .multilineTextAlignment(.center)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray)
+                        )
+                        .accessibilityIdentifier("email")
                     Text("Full Name")
-                        .multilineTextAlignment(.leading)
-                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                        .frame(maxWidth: 250, alignment: .topLeading)
                         .padding()
-                    TextField("Enter your full name", text: $fullName)
-                        .font(.title3)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .border(Color.gray)
+                    TextField("", text: $fullName)
+                        .frame(width: 250, height: 40)
+                        .multilineTextAlignment(.center)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray)
+                        )
+                        .accessibilityIdentifier("Full Name")
                     Text("Password")
-                        .multilineTextAlignment(.leading)
-                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                        .frame(maxWidth: 250, alignment: .topLeading)
                         .padding()
-                    TextField("Enter a password", text: $password)
-                        .font(.title3)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .border(Color.gray)
-                    Text("Confirm Password")
-                        .multilineTextAlignment(.leading)
-                        .frame(maxWidth: .infinity, alignment: .topLeading)
-                        .padding()
-                    TextField("Enter a password", text: $confirmPassword)
-                        .font(.title3)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .border(Color.gray)
-                    Text("Image upload placeholder")
-                        .multilineTextAlignment(.leading)
-                        .frame(maxWidth: .infinity, alignment: .topLeading)
-                        .padding()
-                    //placeholder for image upload - format to be defined.
+                    VStack {
+                    Group {
+                        if isShowingPassword {
+                            TextField("", text: $password)
+                                .frame(width: 250, height: 40)
+                                .multilineTextAlignment(.center)
+                                .overlay(RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.gray))
+                        }else {
+                            SecureField("", text: $password)
+                            .frame(width: 250, height: 40)
+                            .multilineTextAlignment(.center)
+                            .overlay(RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray))
+                        }
+                        }
+                        .disableAutocorrection(true)
+                        .autocapitalization(.none)
+                        
+                        Button {
+                            isShowingPassword.toggle()
+                        } label: {
+                            if isShowingPassword {
+                                Text("Hide password")
+                            } else {
+                                Text("Show password")
+                            }
+                        }.padding()
+                    }
+
                     VStack{
                         Button("Sign Up"){
                             //add logic here
                         }
-                        .frame(width: 250)
-                        .padding()
+                        .frame(width: 250, height: 40)
                         .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
                         .foregroundColor(.white)
-                        .cornerRadius(50)
+                        .cornerRadius(10)
                     }
                     .padding(.top, 40)
                     Spacer()
                     HStack(spacing:3){
                         Text("Already have an account?")
-                        Text("Login here")
-                            .fontWeight(.bold)
-                        //add navigation to login
-                    }
-                    .padding()
+                        NavigationLink(destination: LoginPageView()){
+                          Text("Login here")
+                          .fontWeight(.bold)}
+                      }
                 }
             }
         }
