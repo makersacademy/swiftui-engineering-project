@@ -18,27 +18,10 @@ class PostService: ObservableObject {
             }
             
             do {
-                // Deserialize JSON as a dictionary
-                let json = try JSONDecoder().decode(PostResponse.self, from: data)
-    
-                //                     Assuming posts are stored under the key "posts" in the JSON
-                //                    if let postsArray = json["posts"] as? [[String: Any]] {
-                //                        // Now we need to append each post dictionary to the fetchedPosts array
-                //                        var fetchedPosts: [[String: Any]] = []
-                //                        for postDict in postsArray {
-                //                            fetchedPosts.append(postDict)
-                //                        }
-                //
-                //                        print("posts here", fetchedPosts)
-                //                        print("posts here", postsArray)
-                print("json here", json)
-                // Assign fetchedPosts to self.posts here if needed
-                //                    } else {
-                //                        print("Posts array not found in JSON or has incorrect format")
-                //                    }
-                //            } else {
-                //                    print("Invalid JSON format")
-                
+                let postResponse = try JSONDecoder().decode(PostResponse.self, from: data)
+                DispatchQueue.main.async {
+                    self.posts = postResponse.posts // Update posts array with decoded posts
+                }
             } catch {
                 print("Error decoding JSON:", error)
             }

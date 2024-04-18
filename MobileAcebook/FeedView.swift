@@ -20,19 +20,25 @@ struct FeedView: View {
                                 }) {
                                     Text("Share")
                                 }
-                                List($postService.posts) { fetchedPosts in
-                                                    Text("") // Display fetched posts
-                                                }
-                                                .onAppear {
-                                                    // Fetch posts using token from UserDefaults
-                                                    authService.getToken() { token in
-                                                        if let token = token {
-                                                            postService.fetchPosts(token: token)
-                                                        } else {
-                                                            print("Token is nil")
-                                                        }
-                                                    }
-                                                }
+                List(postService.posts) { post in
+                    VStack(alignment: .leading, spacing: 8) {
+                        // Display the username in a smaller font above the message
+                        Text("Posted by \(post.createdBy.username) at \(post.createdAt)")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                        // Display the post message
+                        Text(post.message)
+                    }
+                }
+                .onAppear {
+                    authService.getToken() { token in
+                        if let token = token {
+                            postService.fetchPosts(token: token)
+                        } else {
+                            print("Token is nil")
+                        }
+                    }
+                }
                 
                                                 // Other views as needed
                                             }
