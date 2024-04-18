@@ -18,12 +18,22 @@ import Foundation
 //    var likes: [Like]
 //    var imgUrl: String?
 //}
+struct PostUser: Decodable {
+    let _id: String
+    let profilePicture: String
+    let username: String
+}
+
+struct PostResponse: Decodable{
+    let posts: [Post]
+    let token: String
+}
 
 struct Post: Identifiable, Equatable, Decodable {
     let id: String // Assuming 'id' is a string in your backend schema
     let message: String
-    let createdAt: Date // Assuming 'createdAt' is a Date in your backend schema
-    let createdBy: String // Assuming 'createdBy' is a string representing user ID
+    let createdAt: String // Assuming 'createdAt' is a Date in your backend schema
+    let createdBy: PostUser // Assuming 'createdBy' is a string representing user ID
     var imgUrl: String? // Assuming 'imgUrl' is a String in your backend schema
     var likes: [String] // Assuming 'likes' is an array of user IDs as strings
 
@@ -31,4 +41,17 @@ struct Post: Identifiable, Equatable, Decodable {
     static func == (lhs: Post, rhs: Post) -> Bool {
         return lhs.id == rhs.id
     }
-}
+    
+    private enum CodingKeys: String, CodingKey {
+            case id = "_id"
+            case message, createdAt, createdBy, imgUrl, likes
+        }
+    }
+
+
+
+
+
+
+
+
