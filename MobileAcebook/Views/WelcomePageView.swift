@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WelcomePageView: View {
     var body: some View {
+        NavigationView{
         ZStack {
             VStack {
                 Spacer()
@@ -28,11 +29,26 @@ struct WelcomePageView: View {
                 
                 Spacer()
 
-                Button("Sign Up") {
-                    // TODO: sign up logic
+                    NavigationLink(destination: SignUpPageView()) {
+                        Text("Sign Up")
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .cornerRadius(8)
+                            .accessibilityIdentifier("signUpButton")
+                        
+                    }
+                    NavigationLink(destination: LoginPageView()) {
+                        Text("Login")
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .cornerRadius(8)
+                            .accessibilityIdentifier("loginButton")
+                    }
                 }
-                .accessibilityIdentifier("signUpButton")
-                
                 Spacer()
             }
         }

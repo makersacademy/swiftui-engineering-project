@@ -6,6 +6,7 @@
 //
 
 public struct User: Decodable {
-    let username: String
-    let password: String?
+    var email: String
+    var username: String
+    var password: String
 }
