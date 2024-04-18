@@ -13,26 +13,40 @@ struct WelcomePageView: View {
             VStack {
                 Spacer()
 
-                Text("Welcome to Acebook!")
+                Text("Welcome to\n Pawbook!")
                     .font(.largeTitle)
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 25)
                     .accessibilityIdentifier("welcomeText")
-
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(Color(red: 0.50, green: 0.71, blue: 0.71))
+                    .bold()
                 Spacer()
-
-                Image("makers-logo")
+                
+                Image("paw-logo")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 200, height: 200)
-                    .accessibilityIdentifier("makers-logo")
-                
+                    .frame(width: 130, height: 130)
+                    .accessibilityIdentifier("paw-logo")
                 Spacer()
-
+                
+                Button("Login") {
+                    // TODO: login logic
+                }
+                    .frame(width: 250, height: 40)
+                    .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    .accessibilityIdentifier("loginButton")
+                    
                 Button("Sign Up") {
                     // TODO: sign up logic
                 }
-                .accessibilityIdentifier("signUpButton")
-                
+                .frame(width: 250, height: 40)
+                .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
+                .foregroundColor(.white)
+                .cornerRadius(10)
+                    .accessibilityIdentifier("signUpButton")
+                    
                 Spacer()
             }
         }
