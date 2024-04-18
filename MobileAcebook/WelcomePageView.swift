@@ -32,9 +32,7 @@ struct WelcomePageView: View {
                 Button("Login") {
                     // TODO: login logic
                 }
-                    .frame(width: 100)
-                    .controlSize(.large)
-                    .buttonStyle(.bordered)
+                    .frame(width: 250, height: 40)
                     .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
                     .foregroundColor(.white)
                     .cornerRadius(10)
@@ -43,12 +41,10 @@ struct WelcomePageView: View {
                 Button("Sign Up") {
                     // TODO: sign up logic
                 }
-                    .frame(width: 100)
-                    .controlSize(.large)
-                    .buttonStyle(.bordered)
-                    .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+                .frame(width: 250, height: 40)
+                .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
+                .foregroundColor(.white)
+                .cornerRadius(10)
                     .accessibilityIdentifier("signUpButton")
                     
                 Spacer()

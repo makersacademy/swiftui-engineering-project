@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginPageView: View {
     @State private var username = ""
     @State private var password = ""
+    @State var isShowingPassword: Bool = false
     
     var body: some View {
         NavigationView {
@@ -20,31 +21,73 @@ struct LoginPageView: View {
                     .font(.largeTitle)
                     .bold()
                 Spacer()
-                Text("Username")                    .frame(maxWidth: 220, alignment: .topLeading)
+                VStack {
+                    Text("Username")                    .frame(maxWidth: 250, alignment: .topLeading)
+                    
+                    TextField("", text: $username)
+                        .frame(width: 250, height: 40)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.gray)
+                        )
+                        .multilineTextAlignment(.center)
+                        .accessibilityIdentifier("loginUsername")
+                }.padding()
+                VStack {
+                    Text("Password")
+                        .frame(maxWidth: 250, alignment: .topLeading)
+                Group {
+                    if isShowingPassword {
+                        TextField("", text: $password)
+                            .frame(width: 250, height: 40)
+                            .multilineTextAlignment(.center)
+                            .overlay(RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray))
+                    }else {
+                        SecureField("", text: $password)
+                        .frame(width: 250, height: 40)
+                        .multilineTextAlignment(.center)
+                        .overlay(RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gray))
+                    }
+                    }
+                    .disableAutocorrection(true)
+                    .autocapitalization(.none)
+                    
+                    Button {
+                        isShowingPassword.toggle()
+                    } label: {
+                        if isShowingPassword {
+                            Text("Hide password")
+                        } else {
+                            Text("Show password")
+                        }
+                    }.padding()
+                }
                 
-                TextField("", text: $username)
-                    .frame(width: 220, height: 40)
-                    .textFieldStyle(.roundedBorder)
-                    .multilineTextAlignment(.center)
-                    .accessibilityIdentifier("loginUsername")
-                Text("Password")
-                    .frame(maxWidth: 220, alignment: .topLeading)
-                TextField("", text: $password)
-                    .frame(width: 220, height: 40)
-                    .textFieldStyle(.roundedBorder)
-                    .multilineTextAlignment(.center)
-                    .accessibilityIdentifier("loginPassword")
+                
                 Button("Submit") {
                     guard !username.isEmpty && !password.isEmpty else { return }
                 }
-                .frame(width: 220, height: 40)
+                .frame(width: 250, height: 40)
                 .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
                 .foregroundColor(.white)
-                .cornerRadius(5)
+                .cornerRadius(10)
                 .padding()
                 
                 Spacer()
                 Spacer()
+                Spacer()
+                HStack(spacing:3){
+                    Text("Don't have an account?")
+                    NavigationLink(destination: SignUpPageView()){
+                        Text("Sign up here")
+                            .fontWeight(.bold)
+                    }
+                    
+                    //add navigation to login
+                }
+                .padding()
             }
             
         }
