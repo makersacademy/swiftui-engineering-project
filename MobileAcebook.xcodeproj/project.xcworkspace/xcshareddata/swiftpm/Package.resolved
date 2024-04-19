@@ -1,4 +1,8 @@
 {
+
+  "originHash" : "b5f3cb06164c22ce8f461ae5386b18b4fbfce538bcb636099a39999dbbfc08e4",
+
+
   "pins" : [
     {
       "identity" : "url-image",
@@ -10,5 +14,6 @@
       }
     }
   ],
-  "version" : 2
+
+  "version" : 3
 }

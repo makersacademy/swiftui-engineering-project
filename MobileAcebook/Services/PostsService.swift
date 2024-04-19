@@ -56,6 +56,7 @@ class APIService: PostService {
                 // Parse JSON response
                 if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                    let newToken = json["token"] as? String {
+                    print (newToken)
                     completion(.success(newToken))
                 } else {
                     completion(.failure(APIError.invalidData))
@@ -70,44 +71,47 @@ class APIService: PostService {
     
     func getPosts(JWTtoken: String, completion: @escaping (Result<PostAPIResponse, APIError>) -> Void) {
         guard let url = URL(string: "http://localhost:3000/posts") else {
-            completion(.failure(.invalidURL))
-            return
+          completion(.failure(.invalidURL))
+          return
         }
-        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer \(JWTtoken)", forHTTPHeaderField: "Authorization")
-        
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let error = error {
-                completion(.failure(.networkError(error)))
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                completion(.failure(.invalidResponse))
-                return
-            }
-            
-            guard let data = data else {
-                completion(.failure(.invalidResponse))
-                return
-            }
-            let decoder = JSONDecoder()
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-            decoder.dateDecodingStrategy = .formatted(dateFormatter)
-            do {
-                let apiResponse = try decoder.decode(PostAPIResponse.self, from: data)
-                completion(.success(apiResponse))
-            } catch {
-                completion(.failure(.decodingError(error)))
-            }
+          if let error = error {
+            completion(.failure(.networkError(error)))
+            return
+          }
+          guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            completion(.failure(.invalidResponse))
+            return
+          }
+          guard let data = data else {
+            completion(.failure(.invalidResponse))
+            return
+          }
+          let decoder = JSONDecoder()
+          let dateFormatter = DateFormatter()
+          dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+          decoder.dateDecodingStrategy = .formatted(dateFormatter)
+          do {
+            let apiResponse = try decoder.decode(PostAPIResponse.self, from: data)
+            completion(.success(apiResponse))
+          } catch {
+            completion(.failure(.decodingError(error)))
+          }
         }
-        
         task.resume()
-    }
+      }
+
+
+
+
+
+
+
+
     func likePost(JWTtoken: String, postId: String, completion: @escaping (Result<LikeAPIResponse, Error>) -> Void){
         guard let url = URL(string: "http://localhost:3000/posts") else {
             completion(.failure(APIError.invalidURL))

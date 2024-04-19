@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct PostView: View {
-    @State var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYxZmQ4MWEyOGMyN2EzOTg1NjgxZWYzIiwiaWF0IjoxNzEzNDUwNjA2LCJleHAiOjE3MTM0NTY2MDZ9.Eso6q6iPP9xiYh5Gwok0ICjiHBDqzfejbd-NXorDg8k"
+
+    @Binding var token: String 
+
     @State private var message: String = ""
     @State private var postsList = [Post]()
    private let postService: PostService = APIService()
@@ -29,7 +31,7 @@ struct PostView: View {
                                 switch result {
                                 case .success(let newToken):
                                     // Use the new token returned by the API
-                                    self.token = newToken
+                                    //self.token = newToken
                                     print("New Post Created - token updated to: \(newToken)")
                                     postService.getPosts(JWTtoken: token, completion: handleGetPostsResult)
                                 case .failure(let error):
@@ -44,7 +46,7 @@ struct PostView: View {
                 }
                 Section(header: Text("Posts List")){
                     ForEach(postsList, id: \._id) { post in
-                        NavigationLink(destination: CommentsView(post: post))
+                        NavigationLink(destination: CommentsView(post: post, token: $token ))
                             {
                                 VStack {
                                     Text( "\(post.message)").font(.headline)
@@ -95,11 +97,12 @@ struct PostView: View {
             .navigationTitle("Posts")
         }
     }
+    
     func handleGetPostsResult(result: Result<PostAPIResponse, APIError>) {
         switch result {
         case .success(let apiResponse):
             postsList = apiResponse.posts.sorted(by: { $0.createdAt > $1.createdAt })
-            token = apiResponse.token
+            //token = apiResponse.token
             print ("Posts recieved - new token: \(token)")
         case .failure(let error):
             print("Error getting posts: \(error)")
@@ -113,8 +116,10 @@ struct PostView: View {
     }
 }
 
-struct PostView_Previews: PreviewProvider {
-    static var previews: some View {
-        PostView()
-    }
-}
+//struct PostView_Previews: PreviewProvider {
+//    @State private static var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYxZjk5MjY2ZDI3ZGFiODkzOTczMmQ1IiwiaWF0IjoxNzEzNDUxMDc1LCJleHAiOjE3MTM0NTE2NzV9.8Qm23P_G4AC-JW6TQ1YLnRQ9rPeGHy1UsKlgS7dakAI"
+//    
+//    static var previews: some View {
+//        PostView(token: $token)
+//    }
+//}
