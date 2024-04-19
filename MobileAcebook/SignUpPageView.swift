@@ -102,25 +102,32 @@ struct SignUpPageView: View {
                                         email = ""
                                         username = ""
                                         password = ""
-                                        showAlert = true
+                                        showAlert = false
+                                        alertMessage = "Account created succesfully"
                                         isSignUpComplete = true
                                     }
                                 } else {
                                     DispatchQueue.main.async {
-                                        
+                                        isSignUpComplete = false
                                         alertMessage = "Error creating account"
                                         showAlert = true
                                     }
                                 }
+                        
                             }
+                            
                         }
                         .frame(width: 250, height: 40)
                         .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
                         .foregroundColor(.white)
                         .cornerRadius(10)
+                        
                     }
+                    NavigationLink(destination: LoginPageView(), isActive: $isSignUpComplete)
+                                    {EmptyView()}
                 }
                 .padding(.top, 40)
+                
                 Spacer()
                 HStack(spacing:3){
                     Text("Already have an account?")
@@ -129,15 +136,15 @@ struct SignUpPageView: View {
                            }
                 .padding()
             }
-            .alert(isPresented: $showAlert) {
-                Alert(
-                    title: Text(alertMessage),
-                    dismissButton: .default(Text("OK"))
-                    
-                )}
             
         }
-    }
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text(alertMessage),
+                dismissButton: .default(Text("OK"))
+                
+            )}
+   }
 }
 #Preview {
     SignUpPageView()
