@@ -16,6 +16,7 @@ struct SignUpPageView: View {
     @State private var imgUrl = ""
     @State private var username = ""
     @State private var password = ""
+    @State private var isSignUpComplete = false
     @State var isShowingPassword: Bool = false
     @State private var signUpError: String? = nil
     //errors:
@@ -101,44 +102,49 @@ struct SignUpPageView: View {
                                         email = ""
                                         username = ""
                                         password = ""
-                                        
-                                        alertMessage = "Account created successfully"
-                                        showAlert = true
+                                        showAlert = false
+                                        alertMessage = "Account created succesfully"
+                                        isSignUpComplete = true
                                     }
                                 } else {
                                     DispatchQueue.main.async {
-                                        
+                                        isSignUpComplete = false
                                         alertMessage = "Error creating account"
                                         showAlert = true
                                     }
                                 }
+                        
                             }
+                            
                         }
                         .frame(width: 250, height: 40)
                         .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
                         .foregroundColor(.white)
                         .cornerRadius(10)
+                        
                     }
+                    NavigationLink(destination: LoginPageView(), isActive: $isSignUpComplete)
+                                    {EmptyView()}
                 }
                 .padding(.top, 40)
+                
                 Spacer()
                 HStack(spacing:3){
                     Text("Already have an account?")
-                    NavigationLink(destination: LoginPageView()){
-                        Text("Login here")
-                        .fontWeight(.bold)}
-                }
+                    NavigationLink(destination: LoginPageView(), isActive: $isSignUpComplete, label: {Text("Login here")
+                      .fontWeight(.bold)})
+                           }
                 .padding()
             }
-            .alert(isPresented: $showAlert) {
-                Alert(
-                    title: Text(alertMessage),
-                    dismissButton: .default(Text("OK"))
-                    
-                )}
             
         }
-    }
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text(alertMessage),
+                dismissButton: .default(Text("OK"))
+                
+            )}
+   }
 }
 #Preview {
     SignUpPageView()
