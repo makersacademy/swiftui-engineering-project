@@ -11,6 +11,10 @@ struct LoginPageView: View {
     @State private var email = ""
     @State private var password = ""
     @State var isShowingPassword: Bool = false
+    @State private var authToken = ""
+    @State private var alertMessage = ""
+    @State private var showAlert = false
+    @State private var isLoggedIn = false
     
     @State private var loginError: String? = nil
     let authService = AuthenticationService()
@@ -65,25 +69,40 @@ struct LoginPageView: View {
                             Text("Show password")
                         }
                     }.padding()
+                    
                 }
                 
-                
-                Button("Submit") {
-//                    guard !username.isEmpty && !password.isEmpty else { return }
-                    let user = UserLogin(email: email, password: password)
-                    let success = authService.login(userLogin: user)
-                    if success {
-                        email = ""
-                        password = ""
-                    } else {
-                        loginError = "Error logging in"
+                NavigationLink(destination: FeedPageView(token: authToken), isActive: $isLoggedIn) {
+                    Button("Submit") {
+                        let user = UserLogin(email: email, password: password)
+                        
+                        authService.login(userLogin: user) {
+                            success, token in
+                            if success {
+                                DispatchQueue.main.async {
+                                    email = ""
+                                    password = ""
+                                    authToken = token
+                                    isLoggedIn = true
+                                    alertMessage = "Success!"
+                                }
+                                
+                            } else {
+                                showAlert = true
+                                alertMessage = "Error logging in"
+                            }
+                            
+                        }
+                        
                     }
-                }
-                .frame(width: 250, height: 40)
-                .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .padding()
+                    .frame(width: 250, height: 40)
+                    .background(Color(red: 0x50/255, green: 0xB7/255, blue: 0xB7/255))
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    .padding()
+                    }
+//                    .hidden()
+                
                 
                 Spacer()
                 Spacer()
@@ -98,7 +117,14 @@ struct LoginPageView: View {
                     //add navigation to login
                 }
                 .padding()
+                
             }
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text(alertMessage),
+                    dismissButton: .default(Text("OK"))
+                    
+                )}
             
         }
     }
