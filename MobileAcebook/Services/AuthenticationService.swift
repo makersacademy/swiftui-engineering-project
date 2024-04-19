@@ -106,5 +106,38 @@ class AuthenticationService: AuthenticationServiceProtocol {
             }
         
     }
+    func getUserInfo(JWTtoken: String, completion: @escaping (Result<GetUserResponse, APIError>) -> Void) {
+        guard let url = URL(string: "http://localhost:3000/users") else {
+            completion(.failure(APIError.invalidURL))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(JWTtoken)", forHTTPHeaderField: "Authorization")
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                completion(.failure(APIError.networkError(error)))
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode),
+                  let data = data else {
+                completion(.failure(APIError.invalidResponse))
+                return
+            }
+            
+            do {
+                let apiResponse = try JSONDecoder().decode(GetUserResponse.self, from: data)
+                completion(.success(apiResponse))
+            } catch {
+                completion(.failure(APIError.decodingError(error)))
+            }
+        }
+        
+        task.resume()
+    }
 }
 

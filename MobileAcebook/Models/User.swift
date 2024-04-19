@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct User {
+public struct User: Codable {
     let _id: String?
     let email: String
     let password: String
@@ -17,4 +17,8 @@ public struct User {
 
 struct SignupResult: Codable {
     let message: String
+}
+public struct GetUserResponse: Codable{
+    let userData: [User]
+    let token: String
 }
