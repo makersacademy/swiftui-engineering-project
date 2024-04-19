@@ -12,7 +12,7 @@ struct FeedPageView: View {
     @State private var text = ""
     @State public var token: String
     @ObservedObject public var posts = FeedService()
-    var testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYxZDA4NDVkMDY2N2IzZGM5NDJlMjQyIiwiaWF0IjoxNzEzNDU3ODY0LCJleHAiOjE3MTM0NTg0NjR9.1TiVLhS2lxs2ZGQ1__nNrfvKlO2AsON_d-bPhxYrvNw"
+    var testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYxZDE0YTc2MTYyOWM4Zjg0YTBhMTY4IiwiaWF0IjoxNzEzNTI1MzgyLCJleHAiOjE3MTM1MjU5ODJ9.CJCnzFU1pWM0BgqZG1-FJejL7_YXy8GL14IDNXKqr8I"
     
     var body: some View {
         
