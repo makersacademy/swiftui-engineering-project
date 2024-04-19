@@ -10,6 +10,7 @@ import SwiftUI
 struct PostView: View {
 
     @Binding var token: String 
+    @Binding var loggedIn: Bool
 
     @State private var message: String = ""
     @State private var postsList = [Post]()
@@ -25,8 +26,8 @@ struct PostView: View {
                         TextField("Add your message here", text: $message)
                         Button("Post") {
                             guard !message.isEmpty else{
-                                    return
-                                }
+                                return
+                            }
                             postService.createPost(JWTtoken: token, message: message) { result in
                                 switch result {
                                 case .success(let newToken):
@@ -47,20 +48,20 @@ struct PostView: View {
                 Section(header: Text("Posts List")){
                     ForEach(postsList, id: \._id) { post in
                         NavigationLink(destination: CommentsView(post: post, token: $token ))
-                            {
-                                VStack {
-                                    Text( "\(post.message)").font(.headline)
-                                    Spacer(minLength: 1)
-                                    HStack{
-                                        Text("\(post.createdBy["username"] ?? "")") .font(.subheadline)
-                                            .foregroundColor(.gray)
-                                        Spacer()
-                                        Text( "\(dateConverter(date: post.createdAt))") .font(.subheadline)
-                                        .foregroundColor(.gray)}
-                                     
-                                }
+                        {
+                            VStack {
+                                Text( "\(post.message)").font(.headline)
+                                Spacer(minLength: 1)
+                                HStack{
+                                    Text("\(post.createdBy["username"] ?? "")") .font(.subheadline)
+                                        .foregroundColor(.gray)
+                                    Spacer()
+                                    Text( "\(dateConverter(date: post.createdAt))") .font(.subheadline)
+                                    .foregroundColor(.gray)}
                                 
                             }
+                            
+                        }
                         
                         Text("Likes: \(post.likes?.count ?? 0)")
                         Button(action: {
@@ -88,14 +89,28 @@ struct PostView: View {
                                     .foregroundColor(.black)
                             }
                         }
-                            
-                        }
+                        
+                    }
                     
-                        .padding()
+                    .padding()
                 }
             }.onAppear {postService.getPosts(JWTtoken: token, completion: handleGetPostsResult)}
-            .navigationTitle("Posts")
-        }
+                .navigationTitle("Posts")
+                .toolbar {
+                                ToolbarItem(placement: .navigationBarTrailing) {
+                                    Button(action: {
+                                        // Clear the token
+                                        token = ""
+                                        // Navigate to the login view
+                                        loggedIn = false
+                                        NavigationLink(destination: LoginView(), isActive: $loggedIn) {
+                                            EmptyView()
+                                        }
+                                    }) {
+                                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                                    }
+                                    
+                    }}}
     }
     
     func handleGetPostsResult(result: Result<PostAPIResponse, APIError>) {

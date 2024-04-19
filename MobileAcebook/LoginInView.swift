@@ -32,6 +32,8 @@ struct LoginView: View {
                             loggedIn = true
                             showAlert = false // Reset alert flag
                             errorMessage = "" // Reset error message
+                            email = ""
+                            password = ""
                         case .failure(let error):
                             // Handle error
                             errorMessage = "Error: \(error.localizedDescription)"
@@ -41,7 +43,7 @@ struct LoginView: View {
                 }
                 .padding()
                 
-                NavigationLink(destination: PostView(token: $userToken), isActive: $loggedIn) {
+                NavigationLink(destination: PostView(token: $userToken, loggedIn: $loggedIn), isActive: $loggedIn) {
                     EmptyView()
                 }
                 .hidden()
