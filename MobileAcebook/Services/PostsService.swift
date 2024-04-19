@@ -21,6 +21,7 @@ class PostService {
             }
         
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        print("OLD TOKEN BELOW")
         print(token)
 
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -31,6 +32,10 @@ class PostService {
 
             do {
                 let decodedResponse = try JSONDecoder().decode(PostResponse.self, from: data)
+                // Update token in UserDefaults with the new token received from backend
+                UserDefaults.standard.set(decodedResponse.token, forKey: "accessToken")
+                print("UPDATED TOKEN BELOW")
+                print(decodedResponse.token)
                 DispatchQueue.main.async {
                     completion(decodedResponse.posts)
                 }
