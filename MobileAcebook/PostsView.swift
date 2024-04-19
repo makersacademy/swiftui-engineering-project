@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct PostView: View {
-    @State var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYxZDcxZGYzZWQyMDFmMWNjYTIwYzczIiwiaWF0IjoxNzEzMzcxNzkzLCJleHAiOjE3MTMzNzc3OTN9.SPlKe097TAT3cobOe8qqdKjCW93XleB5eeDNVe5Xwrg"
+    @State var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYxZmQ4MWEyOGMyN2EzOTg1NjgxZWYzIiwiaWF0IjoxNzEzNDUwNjA2LCJleHAiOjE3MTM0NTY2MDZ9.Eso6q6iPP9xiYh5Gwok0ICjiHBDqzfejbd-NXorDg8k"
     @State private var message: String = ""
     @State private var postsList = [Post]()
    private let postService: PostService = APIService()
+    @State private var likedPosts = Set<String>()
     
     var body: some View {
         NavigationView{
@@ -54,8 +55,37 @@ struct PostView: View {
                                         Spacer()
                                         Text( "\(dateConverter(date: post.createdAt))") .font(.subheadline)
                                         .foregroundColor(.gray)}
+                                     
+                                }
+                                
+                            }
+                        
+                        Text("Likes: \(post.likes?.count ?? 0)")
+                        Button(action: {
+                            postService.likePost(JWTtoken: token, postId: post._id) { result in
+                                switch result {
+                                case .success(let response):
+                                    print("liked the post, \(post._id)")
+                                    // Toggle the liked state of the post
+                                    if likedPosts.contains(post._id) {
+                                        likedPosts.remove(post._id)
+                                    } else {
+                                        likedPosts.insert(post._id)
+                                    }
+                                case .failure(let error):
+                                    // Handle failure
+                                    print("something didn't vibe")
                                 }
                             }
+                        }) {
+                            if likedPosts.contains(post._id) {
+                                Image(systemName: "heart.fill")
+                                    .foregroundColor(.red)
+                            } else {
+                                Image(systemName: "heart.fill")
+                                    .foregroundColor(.black)
+                            }
+                        }
                             
                         }
                     
