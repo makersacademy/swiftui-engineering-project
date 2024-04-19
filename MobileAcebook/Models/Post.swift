@@ -14,11 +14,13 @@ public struct CreatedBy: Codable {
 }
 
 public struct Post: Codable {
-    let _id: String
+    let _id: String?
     let message: String?
     let createdAt: String
     let imgUrl: String?
     let likes: [String]
     let createdBy: CreatedBy
 }
+
+
 

@@ -10,9 +10,14 @@ import SwiftUI
 
 struct FeedPageView: View {
     @State private var text = ""
-    @State public var token: String
+    // @State public var token: String
+    
     @ObservedObject public var posts = FeedService()
-    var testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYxZDE0YTc2MTYyOWM4Zjg0YTBhMTY4IiwiaWF0IjoxNzEzNTI1MzgyLCJleHAiOjE3MTM1MjU5ODJ9.CJCnzFU1pWM0BgqZG1-FJejL7_YXy8GL14IDNXKqr8I"
+
+    let token: String // A new property to hold the token passed from LoginView
+    init(token: String) {
+        self.token = token // Initialize the token property to /GET posts
+    }
     
     var body: some View {
         
@@ -47,7 +52,7 @@ struct FeedPageView: View {
             .cornerRadius(10)
         Spacer()
             
-            Text("Hello")
+            //Text("Hello")
             
             VStack {
                 List(posts.postsData, id: \._id) { post in
@@ -62,9 +67,11 @@ struct FeedPageView: View {
         }
         .onAppear {
             print("fetching")
-            posts.getPost(token: testToken){fetchedPost in
+            // call token being passed from LoginView to /GET posts
+            posts.getPost(token: self.token){fetchedPost in
                 self.posts.postsData = fetchedPost.posts}
             print("fetching2")
+            print(token)
         }
     }
 }
