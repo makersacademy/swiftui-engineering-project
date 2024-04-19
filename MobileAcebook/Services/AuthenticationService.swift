@@ -58,7 +58,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
     }
     
     func signIn(user: LoginUser, completion: @escaping (Result<Token, Error>) -> Void){
-            var results:Token?
+//            var results:Token?
             let url = URL(string: "http://localhost:3000/tokens")!
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
@@ -87,7 +87,7 @@ class AuthenticationService: AuthenticationServiceProtocol {
                         do {
                             let decodedResponse = try JSONDecoder().decode(Token.self, from: data)
                             DispatchQueue.main.async {
-                                results = decodedResponse
+//                                results = decodedResponse
                                 completion(.success(decodedResponse))
                                 print(decodedResponse.message) // Accessing message from decoded response
                                 print(decodedResponse.token)

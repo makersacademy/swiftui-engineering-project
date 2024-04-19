@@ -28,7 +28,7 @@ struct PostView: View {
                                 switch result {
                                 case .success(let newToken):
                                     // Use the new token returned by the API
-                                    //self.token = newToken
+                                    self.token = newToken
                                     print("New Post Created - token updated to: \(newToken)")
                                     postService.getPosts(JWTtoken: token, completion: handleGetPostsResult)
                                 case .failure(let error):
@@ -70,7 +70,7 @@ struct PostView: View {
         switch result {
         case .success(let apiResponse):
             postsList = apiResponse.posts.sorted(by: { $0.createdAt > $1.createdAt })
-            //token = apiResponse.token
+            token = apiResponse.token
             print ("Posts recieved - new token: \(token)")
         case .failure(let error):
             print("Error getting posts: \(error)")
@@ -84,10 +84,10 @@ struct PostView: View {
     }
 }
 
-//struct PostView_Previews: PreviewProvider {
-//    @State private static var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYxZjk5MjY2ZDI3ZGFiODkzOTczMmQ1IiwiaWF0IjoxNzEzNDUxMDc1LCJleHAiOjE3MTM0NTE2NzV9.8Qm23P_G4AC-JW6TQ1YLnRQ9rPeGHy1UsKlgS7dakAI"
-//    
-//    static var previews: some View {
-//        PostView(token: $token)
-//    }
-//}
+struct PostView_Previews: PreviewProvider {
+    @State private static var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjYxZDcxZGYzZWQyMDFmMWNjYTIwYzczIiwiaWF0IjoxNzEzNTE2NTU3LCJleHAiOjE3MTM1MTcxNTd9.54Mp1BU0BDNaZfjoE5050VT7RAuT9meOdsBMX2OM6Y8"
+    
+    static var previews: some View {
+        PostView(token: $token)
+    }
+}
